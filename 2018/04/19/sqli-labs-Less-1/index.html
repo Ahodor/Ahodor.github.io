@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="sqli-labs练习SQL注入（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 手工注入(hackbar)Less-1 Get-Error-Single quotes-String从标题可以知是基于get请求方法的单引号字符报错 页面提示输入数字型参数 id /sqli-labs/Less-1/?id=1 返回正常页面 Welcome">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T07:58:23.724Z">
+<meta property="og:updated_time" content="2018-04-19T13:51:11.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs_Less_1">
 <meta name="twitter:description" content="sqli-labs练习SQL注入（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 手工注入(hackbar)Less-1 Get-Error-Single quotes-String从标题可以知是基于get请求方法的单引号字符报错 页面提示输入数字型参数 id /sqli-labs/Less-1/?id=1 返回正常页面 Welcome">
@@ -367,7 +367,8 @@ Your Password:Dumb
 </code></pre><p>页面报错</p>
 <pre><code>Welcome    Dhakkan
 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos;1&apos;&apos; LIMIT 0,1&apos; at line 1 
-</code></pre><p>从外层依次去掉闭合的单引号可以看到只剩下 <strong>1’</strong>  ,可知为字符型注入（字符型和数字型的区别会在Less-2后区分），在这里使用 # 或– 注释掉多余的部分（当然，这里也可以使用其他方法闭合这个单引号），对#进行了url编码，构造好使其正常返回。</p>
+</code></pre><p>从外层依次去掉闭合的单引号可以看到只剩下 <strong>1’</strong>  ,可知为<strong>字符型注sql注入</strong>（字符型和数字型的区别会在Less-2后区分）。</p>
+<h3 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h3><p>在这里使用 # 或– 注释掉多余的部分（当然，这里也可以使用其他方法闭合这个单引号），对#进行了url编码，构造好使其正常返回。</p>
 <pre><code>sqli-labs/Less-1/?id=1&apos; %23
 </code></pre><p>返回正常</p>
 <h3 id="猜测字段数（order-by-）"><a href="#猜测字段数（order-by-）" class="headerlink" title="猜测字段数（order by ）"></a>猜测字段数（order by ）</h3><p>使用<strong>联合查询 (union select)</strong><br>首先使用<strong>order by</strong> 进行字段数猜测</p>
@@ -378,7 +379,7 @@ You have an error in your SQL syntax; check the manual that corresponds to your 
 <pre><code>sqli-labs/Less-1/?id=1&apos;  order by 6%23
 </code></pre><p>返回错误<br>可知字段数为 5</p>
 <h3 id="找到显示位"><a href="#找到显示位" class="headerlink" title="找到显示位"></a>找到显示位</h3><pre><code>sqli-labs/Less-1/?id=-1&apos;  union select 1,2,3,4,5%23
-</code></pre><p>这里注意把id的值设置为一个错误的，这里设置为了-1可知显示位在 2，3</p>
+</code></pre><p>这里注意<strong>把id的值设置为一个错误的值</strong>，这里设置为了-1可知显示位在 2，3</p>
 <pre><code> Welcome    Dhakkan
 Your Login name:2
 Your Password:3
@@ -618,6 +619,22 @@ Table: users
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/19/sqli-labs-Less-2-4/" rel="prev" title="sqli-labs_Less_2-4">
+                sqli-labs_Less_2-4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
       
@@ -690,21 +707,12 @@ Table: users
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
             
 
             
@@ -712,7 +720,7 @@ Table: users
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -745,7 +753,7 @@ Table: users
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs练习SQL注入（mysql）"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs练习SQL注入（mysql）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#手工注入-hackbar"><span class="nav-number">1.1.</span> <span class="nav-text">手工注入(hackbar)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Less-1-Get-Error-Single-quotes-String"><span class="nav-number">1.1.1.</span> <span class="nav-text">Less-1 Get-Error-Single quotes-String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#猜测字段数（order-by-）"><span class="nav-number">1.1.2.</span> <span class="nav-text">猜测字段数（order by ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到显示位"><span class="nav-number">1.1.3.</span> <span class="nav-text">找到显示位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看目标数据库基本信息"><span class="nav-number">1.1.4.</span> <span class="nav-text">查看目标数据库基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据库中的信息（database，table，column）"><span class="nav-number">1.1.5.</span> <span class="nav-text">获取数据库中的信息（database，table，column）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据库"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">获取数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取表"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">获取表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取列"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">获取列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">获取数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具注入-sqlmap"><span class="nav-number">1.2.</span> <span class="nav-text">工具注入(sqlmap)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单测试-u-url"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">简单测试 (-u url)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库系统的数据库-–dbs"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">列出数据库系统的数据库(–dbs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs练习SQL注入（mysql）"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs练习SQL注入（mysql）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#手工注入-hackbar"><span class="nav-number">1.1.</span> <span class="nav-text">手工注入(hackbar)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Less-1-Get-Error-Single-quotes-String"><span class="nav-number">1.1.1.</span> <span class="nav-text">Less-1 Get-Error-Single quotes-String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload"><span class="nav-number">1.1.2.</span> <span class="nav-text">构造payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#猜测字段数（order-by-）"><span class="nav-number">1.1.3.</span> <span class="nav-text">猜测字段数（order by ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到显示位"><span class="nav-number">1.1.4.</span> <span class="nav-text">找到显示位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看目标数据库基本信息"><span class="nav-number">1.1.5.</span> <span class="nav-text">查看目标数据库基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据库中的信息（database，table，column）"><span class="nav-number">1.1.6.</span> <span class="nav-text">获取数据库中的信息（database，table，column）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据库"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">获取数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取表"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">获取表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取列"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">获取列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">获取数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具注入-sqlmap"><span class="nav-number">1.2.</span> <span class="nav-text">工具注入(sqlmap)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单测试-u-url"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">简单测试 (-u url)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库系统的数据库-–dbs"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">列出数据库系统的数据库(–dbs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
