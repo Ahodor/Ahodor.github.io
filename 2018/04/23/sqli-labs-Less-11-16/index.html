@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-23T06:36:55.062Z">
+<meta property="og:updated_time" content="2018-04-26T00:32:58.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-Less-11-16">
 <meta name="twitter:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
@@ -487,8 +487,7 @@ uname=test &amp;passwd=test&quot;) union select 1,2 %23
 Your Login name:1
 Your Password:2
 同上
-</code></pre><h2 id="Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><a href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist" class="headerlink" title="Less-13 POST-Double Injection-Single quotes-String -with twist"></a>Less-13 POST-Double Injection-Single quotes-String -with twist</h2><p>### </p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>加单引号
+</code></pre><h2 id="Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><a href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist" class="headerlink" title="Less-13 POST-Double Injection-Single quotes-String -with twist"></a>Less-13 POST-Double Injection-Single quotes-String -with twist</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>加单引号
 uname=test &amp;passwd=test&apos;
 报错如下 &apos;&apos;test&apos;&apos;) LIMIT 0,1&apos;
 </code></pre><p>可知是单引号和括号包裹变量</p>
@@ -699,6 +698,10 @@ uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/26/sqli-labs-Less-17-22/" rel="prev" title="sqli-labs-Less-17-22">
+                sqli-labs-Less-17-22 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -774,7 +777,7 @@ uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
