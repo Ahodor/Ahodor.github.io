@@ -283,6 +283,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/DVWA-XSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/08/DVWA-XSS/" itemprop="url">DVWA-XSS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-08T17:48:21+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS(Cross-Site Script)"></a>XSS(Cross-Site Script)</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><strong>攻击者将恶意代码插入到web页面，若服务器端未进行有效过滤，当用户浏览该页面时，插入的代码就会在用户的浏览器中执行</strong></p>
+<p>攻击发生在客户端，攻击目标是最终用户的浏览器</p>
+<p>恶意代码通常为：<strong>危险的HTML标签</strong>、<strong>客户端脚本</strong>、<strong>能执行JS的容器</strong>等</p>
+<p>存在用户输入点的位置，都可能存在跨站漏洞</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="DOM型："><a href="#DOM型：" class="headerlink" title="DOM型："></a>DOM型：</h4><p>页面本身包含一些DOM对象的操作，如果未对输入的参数进行处理，可通过改变DOM结构形成XSS</p>
+<h4 id="反射型："><a href="#反射型：" class="headerlink" title="反射型："></a>反射型：</h4><p>用户输入的数据(html或js代码)经服务端反射回客户端，反射后让浏览器去执行</p>
+<p><img src="https://note.youdao.com/yws/public/resource/d3683fa94232055e03f13336d3062b10/xmlnote/A17DC680B4804465A2A5E98D97552993/24790" alt="image"></p>
+<h4 id="存储型："><a href="#存储型：" class="headerlink" title="存储型："></a>存储型：</h4><p>恶意的脚本代码存储在服务端(文件或数据库)，正常用户请求时，站点从数据库中读取了相应的非法数据，并展示在当前页面</p>
+<p><img src="https://note.youdao.com/yws/public/resource/8db29440a015425652c42a4e14993260/xmlnote/FB73F27BDB4343158F446E21017EBC7E/24801" alt="image"></p>
+<h2 id="Vulnerability-Reflected-Cross-Site-Scripting-XSS"><a href="#Vulnerability-Reflected-Cross-Site-Scripting-XSS" class="headerlink" title="Vulnerability: Reflected Cross Site Scripting (XSS)"></a>Vulnerability: Reflected Cross Site Scripting (XSS)</h2><h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><h4 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h4><h5 id="Reflected-XSS-Source"><a href="#Reflected-XSS-Source" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h5><pre><code>&lt;?php 
+
+// Is there any input? 
+if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apos; ] != NULL ) {
+    // Feedback for end user 
+    echo &apos;&lt;pre&gt;Hello &apos; . $_GET[ &apos;name&apos; ] . &apos;&lt;/pre&gt;&apos;; 
+} 
+
+?&gt;
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>通过GET提交的参数name在没有任何安全验证（过滤）的情况下直接输出</p>
+<h4 id="Payload"><a href="#Payload" class="headerlink" title="Payload:"></a>Payload:</h4><pre><code>&lt;script&gt;alert(/xss/)&lt;/script&gt;
+</code></pre><p>验证成功</p>
+<h4 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h4><h3 id="Medium"><a href="#Medium" class="headerlink" title="Medium"></a>Medium</h3><h4 id="Reflected-XSS-Source-1"><a href="#Reflected-XSS-Source-1" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
+
+// Is there any input? 
+if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apos; ] != NULL ) {
+    // Get input 
+    $name = str_replace( &apos;&lt;script&gt;&apos;, &apos;&apos;, $_GET[ &apos;name&apos; ] ); 
+
+    // Feedback for end user 
+    echo &quot;&lt;pre&gt;Hello ${name}&lt;/pre&gt;&quot;; 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>使用函数str_replace函数(<strong>该函数区分大小写，而且只替换一次</strong>)将参数name中的<script>字符串替换为空，这里使用大小写绕过或者嵌套</p>
+<h4 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h4><pre><code>&lt;Script&gt;alert(/xss/)&lt;/script&gt;
+&lt;scr&lt;script&gt;ipt&gt;alert(/xss/)&lt;/script&gt;
+</code></pre><p>验证成功</p>
+<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><h4 id="Reflected-XSS-Source-2"><a href="#Reflected-XSS-Source-2" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
+
+// Is there any input? 
+if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apos; ] != NULL ) { 
+    // Get input 
+    $name = preg_replace( &apos;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&apos;, &apos;&apos;, $_GET[ &apos;name&apos; ] );
+
+    // Feedback for end user 
+    echo &quot;&lt;pre&gt;Hello ${name}&lt;/pre&gt;&quot;; 
+} 
+
+?&gt; 
+</code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h4><p>使用正则表达式将&lt;script顺序出现的<strong>大小写</strong>或者<strong>嵌套形式</strong>出现的过滤掉,这里只是script标签，可以<strong>使用一些能够执行JavaScript代码的JavaScript事件</strong></p>
+<h4 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h4><pre><code>&lt;img src=# onerror=alert(&quot;xss&quot;)&gt;
+</code></pre><p>通过加载一个不存在的图片出错出发javascript onerror事件，验证存在XSS</p>
+<h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="Reflected-XSS-Source-3"><a href="#Reflected-XSS-Source-3" class="headerlink" title="Reflected XSS Source"></a>Reflected XSS Source</h4><pre><code>&lt;?php 
+
+// Is there any input? 
+if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &apos;name&apos; ] != NULL ) { 
+    // Check Anti-CSRF token 
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Get input 
+    $name = htmlspecialchars( $_GET[ &apos;name&apos; ] ); 
+
+    // Feedback for end user 
+    echo &quot;&lt;pre&gt;Hello ${name}&lt;/pre&gt;&quot;; 
+} 
+
+// Generate Anti-CSRF token 
+generateSessionToken(); 
+
+?&gt; 
+</code></pre><h4 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h4><p>这里对参数name进行了预定义字符实体化</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.freebuf.com/articles/web/157953.html">通过DVWA学习XSS</a></p>
+<p><a href="http://www.freebuf.com/articles/web/129308.html">绕过DVWA所有安全级别的XSS Payload</a></p>
+</script></p>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/Wargame-XSS-game/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3492,7 +3684,7 @@ sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3505,7 +3697,7 @@ sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
