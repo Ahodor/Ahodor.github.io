@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DVWA,practice,Brute-force," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vulnerability: Brute ForceLow 源代码&amp;lt;?php  if( isset( $_GET[ &amp;apos;Login&amp;apos; ] ) ) {     // Get username     $user = $_GET[ &amp;apos;username&amp;apos; ];      // Get password     $pass = $_GET[ &amp;apos;pass">
+<meta name="keywords" content="DVWA,practice,Brute-force">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DVWA-Brute_Force">
+<meta property="og:url" content="http://yoursite.com/2018/07/23/DVWA-Brute_Force/index.html">
+<meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="Vulnerability: Brute ForceLow 源代码&amp;lt;?php  if( isset( $_GET[ &amp;apos;Login&amp;apos; ] ) ) {     // Get username     $user = $_GET[ &amp;apos;username&amp;apos; ];      // Get password     $pass = $_GET[ &amp;apos;pass">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532309062/blog/DVWA/Brute-force/brute-low-0.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308439/blog/DVWA/Brute-force/brute-low-1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308445/blog/DVWA/Brute-force/brute-low-2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308447/blog/DVWA/Brute-force/brute-low-3.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308449/blog/DVWA/Brute-force/brute-low-4.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532310944/blog/DVWA/Brute-force/brute-high-0.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532310946/blog/DVWA/Brute-force/brute-high-1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314470/blog/DVWA/Brute-force/brute-high-2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314471/blog/DVWA/Brute-force/brute-high-3.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314472/blog/DVWA/Brute-force/brute-high-4.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314474/blog/DVWA/Brute-force/brute-high-5.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314477/blog/DVWA/Brute-force/brute-high-6.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314479/blog/DVWA/Brute-force/brute-high-7.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314481/blog/DVWA/Brute-force/brute-high-8.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314855/blog/DVWA/Brute-force/brute-high-9.png">
+<meta property="og:updated_time" content="2018-07-23T07:34:48.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DVWA-Brute_Force">
+<meta name="twitter:description" content="Vulnerability: Brute ForceLow 源代码&amp;lt;?php  if( isset( $_GET[ &amp;apos;Login&amp;apos; ] ) ) {     // Get username     $user = $_GET[ &amp;apos;username&amp;apos; ];      // Get password     $pass = $_GET[ &amp;apos;pass">
+<meta name="twitter:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532309062/blog/DVWA/Brute-force/brute-low-0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/23/DVWA-Brute_Force/"/>
+
+
+
+
+
+  <title>DVWA-Brute_Force | Ahodor'Via</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ahodor'Via</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/DVWA-Brute_Force/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DVWA-Brute_Force</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T15:31:55+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Vulnerability-Brute-Force"><a href="#Vulnerability-Brute-Force" class="headerlink" title="Vulnerability: Brute Force"></a>Vulnerability: Brute Force</h2><h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532309062/blog/DVWA/Brute-force/brute-low-0.png" alt="image"></p>
+<h4 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h4><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Login&apos; ] ) ) {
+    // Get username
+    $user = $_GET[ &apos;username&apos; ];
+
+    // Get password
+    $pass = $_GET[ &apos;password&apos; ];
+    $pass = md5( $pass );
+
+    // Check the database
+    $query  = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) {
+        // Get users details
+        $row    = mysqli_fetch_assoc( $result );
+        $avatar = $row[&quot;avatar&quot;];
+
+        // Login successful
+        echo &quot;&lt;p&gt;Welcome to the password protected area {$user}&lt;/p&gt;&quot;;
+        echo &quot;&lt;img src=\&quot;{$avatar}\&quot; /&gt;&quot;;
+    }
+    else {
+        // Login failed
+        echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt; 
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>正常的登入界面，没有验证码和次数限制，没有任何放爆破机制，且存在SQL注入。</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><h5 id="使用Burpsuit爆破"><a href="#使用Burpsuit爆破" class="headerlink" title="使用Burpsuit爆破"></a>使用Burpsuit爆破</h5><h6 id="1、brupsuit抓包右键发送到Intruder"><a href="#1、brupsuit抓包右键发送到Intruder" class="headerlink" title="1、brupsuit抓包右键发送到Intruder"></a>1、brupsuit抓包右键发送到Intruder</h6><h6 id="2、Attack-type-选-Cluster-bomb"><a href="#2、Attack-type-选-Cluster-bomb" class="headerlink" title="2、Attack type 选 Cluster bomb"></a>2、Attack type 选 Cluster bomb</h6><pre><code>cluster bomb - 每个变量对应一个字典，并且进行交叉式破解，尝试各种组合。适用于用户名+密码的破解
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308439/blog/DVWA/Brute-force/brute-low-1.png" alt="image"></p>
+<h6 id="3、对应变量加"><a href="#3、对应变量加" class="headerlink" title="3、对应变量加$"></a>3、对应变量加$</h6><h6 id="4、设置payload"><a href="#4、设置payload" class="headerlink" title="4、设置payload"></a>4、设置payload</h6><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308445/blog/DVWA/Brute-force/brute-low-2.png" alt="image"></p>
+<h5 id="5、结果"><a href="#5、结果" class="headerlink" title="5、结果"></a>5、结果</h5><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308447/blog/DVWA/Brute-force/brute-low-3.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308449/blog/DVWA/Brute-force/brute-low-4.png" alt="image"></p>
+<h3 id="Middle"><a href="#Middle" class="headerlink" title="Middle"></a>Middle</h3><h4 id="源代码-1"><a href="#源代码-1" class="headerlink" title="源代码"></a>源代码</h4><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Login&apos; ] ) ) {
+    // Sanitise username input
+    $user = $_GET[ &apos;username&apos; ];
+    $user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+
+    // Sanitise password input
+    $pass = $_GET[ &apos;password&apos; ];
+    $pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    $pass = md5( $pass );
+
+    // Check the database
+    $query  = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) {
+        // Get users details
+        $row    = mysqli_fetch_assoc( $result );
+        $avatar = $row[&quot;avatar&quot;];
+
+        // Login successful
+        echo &quot;&lt;p&gt;Welcome to the password protected area {$user}&lt;/p&gt;&quot;;
+        echo &quot;&lt;img src=\&quot;{$avatar}\&quot; /&gt;&quot;;
+    }
+    else {
+        // Login failed
+        sleep( 2 );
+        echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>在Low的基础上加了mysql_real_escape_string函数，对特殊符号转义，最后的sleep(2)对防爆破意义不大。</p>
+<h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>这里使用Burpsuite爆破与Low级别的的方式一样</p>
+<h4 id="High"><a href="#High" class="headerlink" title="High"></a>High</h4><h5 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h5><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Login&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Sanitise username input
+    $user = $_GET[ &apos;username&apos; ];
+    $user = stripslashes( $user );
+    $user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+
+    // Sanitise password input
+    $pass = $_GET[ &apos;password&apos; ];
+    $pass = stripslashes( $pass );
+    $pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    $pass = md5( $pass );
+
+    // Check database
+    $query  = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) {
+        // Get users details
+        $row    = mysqli_fetch_assoc( $result );
+        $avatar = $row[&quot;avatar&quot;];
+
+        // Login successful
+        echo &quot;&lt;p&gt;Welcome to the password protected area {$user}&lt;/p&gt;&quot;;
+        echo &quot;&lt;img src=\&quot;{$avatar}\&quot; /&gt;&quot;;
+    }
+    else {
+        // Login failed
+        sleep( rand( 0, 3 ) );
+        echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt; 
+</code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h4><p>High级别的代码加入了Token，可以抵御CSRF攻击，同时也增加了爆破的难度，通过抓包，可以看到，登录验证时提交了四个参数：username、password、Login以及user_token。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532310944/blog/DVWA/Brute-force/brute-high-0.png" alt="image"></p>
+<p>每次服务器返回的登陆页面中都会包含一个随机的user_token的值，用户每次登录时都要将user_token一起提交。服务器收到请求后，会优先做token的检查，再进行sql查询。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532310946/blog/DVWA/Brute-force/brute-high-1.png" alt="image"></p>
+<p>同时，High级别的代码中，使用了stripslashes（去除字符串中的反斜线字符,如果有两个连续的反斜线,则只去掉一个）、 mysql_real_escape_string对参数username、password进行过滤、转义，进一步抵御sql注入。</p>
+<h4 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><h5 id="方式一-Burpsuit"><a href="#方式一-Burpsuit" class="headerlink" title="方式一 Burpsuit"></a>方式一 Burpsuit</h5><h6 id="1、设置Opsitions和-Attack-type"><a href="#1、设置Opsitions和-Attack-type" class="headerlink" title="1、设置Opsitions和 Attack type"></a>1、设置Opsitions和 Attack type</h6><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314470/blog/DVWA/Brute-force/brute-high-2.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314471/blog/DVWA/Brute-force/brute-high-3.png" alt="image"></p>
+<h6 id="2、设置Payload"><a href="#2、设置Payload" class="headerlink" title="2、设置Payload"></a>2、设置Payload</h6><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314472/blog/DVWA/Brute-force/brute-high-4.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314474/blog/DVWA/Brute-force/brute-high-5.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314477/blog/DVWA/Brute-force/brute-high-6.png" alt="image"></p>
+<h5 id="3、user-token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下："><a href="#3、user-token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下：" class="headerlink" title="3、user_token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下："></a>3、user_token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下：</h5><p>找到option-&gt;grep extract,按照下图进行操作<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314479/blog/DVWA/Brute-force/brute-high-7.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314481/blog/DVWA/Brute-force/brute-high-8.png" alt="image"></p>
+<h5 id="4、结果"><a href="#4、结果" class="headerlink" title="4、结果"></a>4、结果</h5><p>这里用burpsuit爆破比较慢，不能使用多线程，而且有个随机的Tocken，爆破出来的几率很小，但是如果我们知道用户名胡密码中的任意一个，那么只需要跑一个token和密码（用户名）就很轻松，我们可以用攻击类型pitchfork,很容易就可以爆破出来。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532314855/blog/DVWA/Brute-force/brute-high-9.png" alt="image"></p>
+<h5 id="方式二-Python脚本"><a href="#方式二-Python脚本" class="headerlink" title="方式二 Python脚本"></a>方式二 Python脚本</h5><h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><h4 id="源代码-3"><a href="#源代码-3" class="headerlink" title="源代码"></a>源代码</h4><pre><code>&lt;?php
+
+if( isset( $_POST[ &apos;Login&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Sanitise username input
+    $user = $_POST[ &apos;username&apos; ];
+    $user = stripslashes( $user );
+    $user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+
+    // Sanitise password input
+    $pass = $_POST[ &apos;password&apos; ];
+    $pass = stripslashes( $pass );
+    $pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    $pass = md5( $pass );
+
+    // Default values
+    $total_failed_login = 3;
+    $lockout_time       = 15;
+    $account_locked     = false;
+
+    // Check the database (Check user information)
+    $data = $db-&gt;prepare( &apos;SELECT failed_login, last_login FROM users WHERE user = (:user) LIMIT 1;&apos; );
+    $data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );
+    $data-&gt;execute();
+    $row = $data-&gt;fetch();
+
+    // Check to see if the user has been locked out.
+    if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $row[ &apos;failed_login&apos; ] &gt;= $total_failed_login ) )  {
+        // User locked out.  Note, using this method would allow for user enumeration!
+        //echo &quot;&lt;pre&gt;&lt;br /&gt;This account has been locked due to too many incorrect logins.&lt;/pre&gt;&quot;;
+
+        // Calculate when the user would be allowed to login again
+        $last_login = $row[ &apos;last_login&apos; ];
+        $last_login = strtotime( $last_login );
+        $timeout    = strtotime( &quot;{$last_login} +{$lockout_time} minutes&quot; );
+        $timenow    = strtotime( &quot;now&quot; );
+
+        // Check to see if enough time has passed, if it hasn&apos;t locked the account
+        if( $timenow &gt; $timeout )
+            $account_locked = true;
+    }
+
+    // Check the database (if username matches the password)
+    $data = $db-&gt;prepare( &apos;SELECT * FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );
+    $data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR);
+    $data-&gt;bindParam( &apos;:password&apos;, $pass, PDO::PARAM_STR );
+    $data-&gt;execute();
+    $row = $data-&gt;fetch();
+
+    // If its a valid login...
+    if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $account_locked == false ) ) {
+        // Get users details
+        $avatar       = $row[ &apos;avatar&apos; ];
+        $failed_login = $row[ &apos;failed_login&apos; ];
+        $last_login   = $row[ &apos;last_login&apos; ];
+
+        // Login successful
+        echo &quot;&lt;p&gt;Welcome to the password protected area &lt;em&gt;{$user}&lt;/em&gt;&lt;/p&gt;&quot;;
+        echo &quot;&lt;img src=\&quot;{$avatar}\&quot; /&gt;&quot;;
+
+        // Had the account been locked out since last login?
+        if( $failed_login &gt;= $total_failed_login ) {
+            echo &quot;&lt;p&gt;&lt;em&gt;Warning&lt;/em&gt;: Someone might of been brute forcing your account.&lt;/p&gt;&quot;;
+            echo &quot;&lt;p&gt;Number of login attempts: &lt;em&gt;{$failed_login}&lt;/em&gt;.&lt;br /&gt;Last login attempt was at: &lt;em&gt;${last_login}&lt;/em&gt;.&lt;/p&gt;&quot;;
+        }
+
+        // Reset bad login count
+        $data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = &quot;0&quot; WHERE user = (:user) LIMIT 1;&apos; );
+        $data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );
+        $data-&gt;execute();
+    }
+    else {
+        // Login failed
+        sleep( rand( 2, 4 ) );
+
+        // Give the user some feedback
+        echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;br /&gt;&lt;br/&gt;Alternative, the account has been locked because of too many failed logins.&lt;br /&gt;If this is the case, &lt;em&gt;please try again in {$lockout_time} minutes&lt;/em&gt;.&lt;/pre&gt;&quot;;
+
+        // Update bad login count
+        $data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = (failed_login + 1) WHERE user = (:user) LIMIT 1;&apos; );
+        $data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );
+        $data-&gt;execute();
+    }
+
+    // Set the last login time
+    $data = $db-&gt;prepare( &apos;UPDATE users SET last_login = now() WHERE user = (:user) LIMIT 1;&apos; );
+    $data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );
+    $data-&gt;execute();
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt; 
+</code></pre><h4 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h4><p>Impossible级别的代码加入了可靠的防爆破机制，当检测到频繁的错误登录后，系统会将账户锁定，爆破也就无法继续。</p>
+<p>同时采用了更为安全的PDO（PHP Data Object）机制防御sql注入，这是因为不能使用PDO扩展本身执行任何数据库操作，而sql注入的关键就是通过破坏sql语句结构执行恶意的sql命令。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DVWA/" rel="tag"># DVWA</a>
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+            <a href="/tags/Brute-force/" rel="tag"># Brute-force</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/08/DVWA-XSS/" rel="next" title="DVWA-XSS">
+                <i class="fa fa-chevron-left"></i> DVWA-XSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ahodor</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vulnerability-Brute-Force"><span class="nav-number">1.</span> <span class="nav-text">Vulnerability: Brute Force</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Low"><span class="nav-number">1.1.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码"><span class="nav-number">1.1.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">1.1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.1.3.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用Burpsuit爆破"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">使用Burpsuit爆破</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、brupsuit抓包右键发送到Intruder"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">1、brupsuit抓包右键发送到Intruder</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、Attack-type-选-Cluster-bomb"><span class="nav-number">1.1.3.1.2.</span> <span class="nav-text">2、Attack type 选 Cluster bomb</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3、对应变量加"><span class="nav-number">1.1.3.1.3.</span> <span class="nav-text">3、对应变量加$</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4、设置payload"><span class="nav-number">1.1.3.1.4.</span> <span class="nav-text">4、设置payload</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、结果"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">5、结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Middle"><span class="nav-number">1.2.</span> <span class="nav-text">Middle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#High"><span class="nav-number">1.2.4.</span> <span class="nav-text">High</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#源代码-2"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">源代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-2"><span class="nav-number">1.2.5.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-2"><span class="nav-number">1.2.6.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方式一-Burpsuit"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">方式一 Burpsuit</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、设置Opsitions和-Attack-type"><span class="nav-number">1.2.6.1.1.</span> <span class="nav-text">1、设置Opsitions和 Attack type</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、设置Payload"><span class="nav-number">1.2.6.1.2.</span> <span class="nav-text">2、设置Payload</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、user-token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下："><span class="nav-number">1.2.6.2.</span> <span class="nav-text">3、user_token就不是单纯的使用字典了，而是需要从我们的页面中获取，burpsuite正好提供了这个功能，方法如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、结果"><span class="nav-number">1.2.6.3.</span> <span class="nav-text">4、结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式二-Python脚本"><span class="nav-number">1.2.6.4.</span> <span class="nav-text">方式二 Python脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impossible"><span class="nav-number">1.3.</span> <span class="nav-text">Impossible</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码-3"><span class="nav-number">1.3.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-3"><span class="nav-number">1.3.2.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ahodor</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
