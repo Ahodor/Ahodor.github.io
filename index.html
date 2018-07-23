@@ -428,7 +428,7 @@ if( isset( $_GET[ &apos;Login&apos; ] ) ) {
 }
 </code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>在Low的基础上加了mysql_real_escape_string函数，对特殊符号转义，最后的sleep(2)对防爆破意义不大。</p>
 <h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>这里使用Burpsuite爆破与Low级别的的方式一样</p>
-<h4 id="High"><a href="#High" class="headerlink" title="High"></a>High</h4><h5 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h5><pre><code>&lt;?php
+<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><h4 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h4><pre><code>&lt;?php
 
 if( isset( $_GET[ &apos;Login&apos; ] ) ) {
     // Check Anti-CSRF token
