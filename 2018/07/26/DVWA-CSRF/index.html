@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574869/blog/CSRF/csrf_high_1.png">
 <meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574871/blog/CSRF/csrf_high_2.png">
 <meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574875/blog/CSRF/csrf_impossible_0.png">
-<meta property="og:updated_time" content="2018-07-26T03:32:24.188Z">
+<meta property="og:updated_time" content="2018-07-27T02:58:32.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DVWA-CSRF">
 <meta name="twitter:description" content="IntroductionCSRF（Cross-site request forgery）跨站请求伪造:    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。 跨站脚本（XSS）与跨站请求伪造(CSRF)区别XSS利用站点内的">
@@ -366,6 +366,7 @@
       
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>CSRF（Cross-site request forgery）跨站请求伪造:</strong><br>    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。</p>
 <h3 id="跨站脚本（XSS）与跨站请求伪造-CSRF-区别"><a href="#跨站脚本（XSS）与跨站请求伪造-CSRF-区别" class="headerlink" title="跨站脚本（XSS）与跨站请求伪造(CSRF)区别"></a>跨站脚本（XSS）与跨站请求伪造(CSRF)区别</h3><p>XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。CSRF与XSS最大的区别就在于，CSRF并没有盗取cookie而是直接利用。</p>
+<p>&lt; !–more–&gt;</p>
 <h2 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h2><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532574859/blog/CSRF/csrf_low_0.png" alt="image"></p>
 <h3 id="服务端源代码"><a href="#服务端源代码" class="headerlink" title="服务端源代码"></a>服务端源代码</h3><pre><code>&lt;?php
 
