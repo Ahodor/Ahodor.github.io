@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Less-8 GET-Blind-Boolian Based - Single Quotes布尔型单引号GET盲注盲注当不能通过直接显示来获取数据库数据时，使用盲注的方式，根据其返回页面的不同来判断信息(页面内容不同，响应时间)；一般分为布尔型盲注，时间性盲注，报错盲注。 盲注常用函数   函数 功能     length(str) 返回str字符串的长度。   substr(str, pos,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-27T02:57:17.245Z">
+<meta property="og:updated_time" content="2018-07-27T03:09:03.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-Less-8-10">
 <meta name="twitter:description" content="Less-8 GET-Blind-Boolian Based - Single Quotes布尔型单引号GET盲注盲注当不能通过直接显示来获取数据库数据时，使用盲注的方式，根据其返回页面的不同来判断信息(页面内容不同，响应时间)；一般分为布尔型盲注，时间性盲注，报错盲注。 盲注常用函数   函数 功能     length(str) 返回str字符串的长度。   substr(str, pos,">
@@ -402,7 +402,7 @@
 </tbody>
 </table>
 <p>常见的ASCII，A:65,Z:90 a:97,z:122, 0:48, 9:57</p>
-<p>&lt; !–more–&gt;</p>
+<a id="more"></a>
 <h3 id="布尔型盲注"><a href="#布尔型盲注" class="headerlink" title="布尔型盲注"></a>布尔型盲注</h3><h4 id="盲注固定式"><a href="#盲注固定式" class="headerlink" title="盲注固定式:"></a>盲注固定式:</h4><pre><code>and ascii(substr(A,1,1))&gt;B
 and if(ascii(substr(A,1,1))&gt;B,1,0)
 </code></pre><p>A 通过是一个select语句，B则是字符串或数字的ascii码，中心思想是通过substr等截取函数以二分法的形式逐个查询匹配想要的信息，过程耗时繁琐。</p>
