@@ -283,6 +283,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/DVWA-File_Upload/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/30/DVWA-File_Upload/" itemprop="url">DVWA-File_Upload</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-30T15:06:39+08:00">
+                2018-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Vulnerability-File-Upload"><a href="#Vulnerability-File-Upload" class="headerlink" title="Vulnerability: File Upload"></a>Vulnerability: File Upload</h2><h3 id="Intruduce"><a href="#Intruduce" class="headerlink" title="Intruduce"></a>Intruduce</h3><p>文件上传漏洞</p>
+<h4 id="形成的主因："><a href="#形成的主因：" class="headerlink" title="形成的主因："></a>形成的主因：</h4><p>由于对上传文件类型未验证或过滤机制不严，导致恶意用户可以上传脚本文件，通过上传文件可达到控制网站权限的目的</p>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害:"></a>危害:</h4><p>攻击者可获得网站控制权限,查看、修改、删除网站数据,通过提权漏洞可获得主机权限</p>
+<h4 id="上传点："><a href="#上传点：" class="headerlink" title="上传点："></a>上传点：</h4><p>头像、附件、后台新闻编辑等等</p>
+<h4 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h4><pre><code>成功上传木马文件
+木马文件能够执行
+上传路径可知
+</code></pre><h4 id="上传检查方式"><a href="#上传检查方式" class="headerlink" title="上传检查方式"></a>上传检查方式</h4><pre><code>A 客户端javascript 检测(通常为检测文件扩展名)
+B 服务端MIME 类型检测(检测Content-Type 内容)
+C 服务端目录路径检测(检测跟path 参数相关的内容)
+D 服务端文件扩展名检测(检测跟文件extension 相关的内容)
+E 服务端文件内容检测(检测内容是否合法或含有恶意代码)
+</code></pre><h4 id="常见上传漏洞"><a href="#常见上传漏洞" class="headerlink" title="常见上传漏洞"></a>常见上传漏洞</h4><h5 id="对文件类型无任何验证"><a href="#对文件类型无任何验证" class="headerlink" title="对文件类型无任何验证"></a>对文件类型无任何验证</h5><p>可直接上传相应脚本文件</p>
+<h5 id="本地javascript扩展名校验"><a href="#本地javascript扩展名校验" class="headerlink" title="本地javascript扩展名校验"></a>本地javascript扩展名校验</h5><p>一切在客户端的校验都是伪校验</p>
+<h5 id="使用黑名单or白名单"><a href="#使用黑名单or白名单" class="headerlink" title="使用黑名单or白名单"></a>使用黑名单or白名单</h5><p>扩展名定义方式对比</p>
+<h5 id="上传文件未进行重命名"><a href="#上传文件未进行重命名" class="headerlink" title="上传文件未进行重命名"></a>上传文件未进行重命名</h5><p>结合web应用解析漏洞</p>
+<h5 id="客户端可控制上传参数"><a href="#客户端可控制上传参数" class="headerlink" title="客户端可控制上传参数"></a>客户端可控制上传参数</h5><p>部分敏感上传参数在客户端可控</p>
+<h5 id="数据库备份"><a href="#数据库备份" class="headerlink" title="数据库备份"></a>数据库备份</h5><p>可通过备份功能修改文件后缀</p>
+<h4 id="检测绕过"><a href="#检测绕过" class="headerlink" title="检测绕过"></a>检测绕过</h4><pre><code>检测绕过
+停止客户端检测脚本
+MIME类型检测绕过
+黑名单列表绕过
+特殊文件名绕过
+利用截断
+利用解析漏洞
+利用.htaccess文件
+可修改上传文件
+</code></pre><h5 id="黑名单检测绕过"><a href="#黑名单检测绕过" class="headerlink" title="黑名单检测绕过"></a>黑名单检测绕过</h5><h6 id="1-文件名大小写绕过"><a href="#1-文件名大小写绕过" class="headerlink" title="1. 文件名大小写绕过"></a>1. 文件名大小写绕过</h6><p>用AsP，pHp之类的文件名绕过黑名单检测。</p>
+<h6 id="2-名单列表绕过"><a href="#2-名单列表绕过" class="headerlink" title="2. 名单列表绕过"></a>2. 名单列表绕过</h6><p>用黑名单里没有的名单进行攻击，比如黑名单里面没有asa或者cer之类。</p>
+<h6 id="3-0x00截断绕过"><a href="#3-0x00截断绕过" class="headerlink" title="3. 0x00截断绕过"></a>3. 0x00截断绕过</h6><p>例如：help.asp .jpg(asp后面为0x00)，在判断时，大多函数取后缀名是从后往前取，故能够通过，但是在保存时，却被保存为help.asp。</p>
+<h6 id="4-htaccess文件攻击"><a href="#4-htaccess文件攻击" class="headerlink" title="4. .htaccess文件攻击"></a>4. .htaccess文件攻击</h6><p>配合名单列表绕过，上传一个自定义的.htaccess。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/30/DVWA-File_Upload/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/DVWA-File_Inclusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1589,193 +1743,6 @@ admin&apos; OR 1=1/*
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/20/sqli-labs-Less-5-6/" itemprop="url">sqli-labs-Less-5-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T15:03:06+08:00">
-                2018-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Less-5-GET-Double-Query-Single-Quotes-String"><a href="#Less-5-GET-Double-Query-Single-Quotes-String" class="headerlink" title="Less-5 GET- Double Query-Single Quotes -String"></a>Less-5 GET- Double Query-Single Quotes -String</h2><h3 id="基于get请求的双查询的单引号字符型注入"><a href="#基于get请求的双查询的单引号字符型注入" class="headerlink" title="基于get请求的双查询的单引号字符型注入"></a>基于get请求的双查询的单引号字符型注入</h3><h3 id="什么叫双查询？"><a href="#什么叫双查询？" class="headerlink" title="什么叫双查询？"></a>什么叫双查询？</h3><p>双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询</p>
-<pre><code>select(select)
-</code></pre><h3 id="双查询你注入"><a href="#双查询你注入" class="headerlink" title="双查询你注入"></a>双查询你注入</h3><p>当在一个<strong>聚合函数</strong>，比如count函数后面如果使用<strong>分组语句</strong>就会把查询的一部分<strong>以错误的形式</strong>显示出来。</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>count(*)</td>
-<td>统计表中所有记录的个数 </td>
-</tr>
-<tr>
-<td>count(列名)</td>
-<td>统计一列中值的个数，其中重复的记录也会被当做有效的记录。 </td>
-</tr>
-<tr>
-<td>count(distinct 列名)</td>
-<td>统计一列中值的个数，其中重复的记录只会被记录一次。 </td>
-</tr>
-<tr>
-<td>sum(列名)</td>
-<td>计算一列值的总和。 </td>
-</tr>
-<tr>
-<td>avg(列名)</td>
-<td>计算一列值的平均值。 </td>
-</tr>
-<tr>
-<td>max(列名)</td>
-<td>计算一列值中的最大值。 </td>
-</tr>
-<tr>
-<td>min(列名)</td>
-<td>计算一列值中的最小值。</td>
-</tr>
-<tr>
-<td>rand()</td>
-<td>生成0-1之间的小数随机值</td>
-</tr>
-<tr>
-<td>floor()</td>
-<td>只返回整数部分，小数部分舍弃</td>
-</tr>
-<tr>
-<td>round()</td>
-<td>函数四舍五入，大于0.5的部分进位，不到则舍弃</td>
-</tr>
-<tr>
-<td>concat()</td>
-<td>连接函数，可以连接多个字符</td>
-</tr>
-<tr>
-<td>group by</td>
-<td>将结果以分组的形式返回</td>
-</tr>
-</tbody>
-</table>
-<h3 id="什么时候使用双查询注入？"><a href="#什么时候使用双查询注入？" class="headerlink" title="什么时候使用双查询注入？"></a>什么时候使用双查询注入？</h3><p>适用于<strong>注入时没有显示位</strong>，但是在有显示位的时候同样适用，有显示位时不建议。<br>双查询注入语句的固定格式</p>
-<pre><code>union select 1 from (select+count(*),concat(floor(rand(0)*2),( 注入爆数据语句))a from information_schema.tables group by a)b
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/20/sqli-labs-Less-5-6/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1826,7 +1793,7 @@ admin&apos; OR 1=1/*
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1839,7 +1806,7 @@ admin&apos; OR 1=1/*
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

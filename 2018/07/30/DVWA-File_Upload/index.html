@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="practice,XSS,File_Upload," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vulnerability: File UploadIntruduce文件上传漏洞 形成的主因：由于对上传文件类型未验证或过滤机制不严，导致恶意用户可以上传脚本文件，通过上传文件可达到控制网站权限的目的 危害:攻击者可获得网站控制权限,查看、修改、删除网站数据,通过提权漏洞可获得主机权限 上传点：头像、附件、后台新闻编辑等等 利用条件成功上传木马文件 木马文件能够执行 上传路径可知 上传检查方式A">
+<meta name="keywords" content="practice,XSS,File_Upload">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DVWA-File_Upload">
+<meta property="og:url" content="http://yoursite.com/2018/07/30/DVWA-File_Upload/index.html">
+<meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="Vulnerability: File UploadIntruduce文件上传漏洞 形成的主因：由于对上传文件类型未验证或过滤机制不严，导致恶意用户可以上传脚本文件，通过上传文件可达到控制网站权限的目的 危害:攻击者可获得网站控制权限,查看、修改、删除网站数据,通过提权漏洞可获得主机权限 上传点：头像、附件、后台新闻编辑等等 利用条件成功上传木马文件 木马文件能够执行 上传路径可知 上传检查方式A">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931038/blog/DVWA/File_Upload/File_upload_low_0.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931037/blog/DVWA/File_Upload/File_upload_low_1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931033/blog/DVWA/File_Upload/File_upload_low_2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931032/blog/DVWA/File_Upload/File_upload_middle_1.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931031/blog/DVWA/File_Upload/File_upload_middle_2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931043/blog/DVWA/File_Upload/File_upload_high_0.png">
+<meta property="og:updated_time" content="2018-07-30T07:13:26.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DVWA-File_Upload">
+<meta name="twitter:description" content="Vulnerability: File UploadIntruduce文件上传漏洞 形成的主因：由于对上传文件类型未验证或过滤机制不严，导致恶意用户可以上传脚本文件，通过上传文件可达到控制网站权限的目的 危害:攻击者可获得网站控制权限,查看、修改、删除网站数据,通过提权漏洞可获得主机权限 上传点：头像、附件、后台新闻编辑等等 利用条件成功上传木马文件 木马文件能够执行 上传路径可知 上传检查方式A">
+<meta name="twitter:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931038/blog/DVWA/File_Upload/File_upload_low_0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/30/DVWA-File_Upload/"/>
+
+
+
+
+
+  <title>DVWA-File_Upload | Ahodor'Via</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ahodor'Via</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/DVWA-File_Upload/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DVWA-File_Upload</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-30T15:06:39+08:00">
+                2018-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Vulnerability-File-Upload"><a href="#Vulnerability-File-Upload" class="headerlink" title="Vulnerability: File Upload"></a>Vulnerability: File Upload</h2><h3 id="Intruduce"><a href="#Intruduce" class="headerlink" title="Intruduce"></a>Intruduce</h3><p>文件上传漏洞</p>
+<h4 id="形成的主因："><a href="#形成的主因：" class="headerlink" title="形成的主因："></a>形成的主因：</h4><p>由于对上传文件类型未验证或过滤机制不严，导致恶意用户可以上传脚本文件，通过上传文件可达到控制网站权限的目的</p>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害:"></a>危害:</h4><p>攻击者可获得网站控制权限,查看、修改、删除网站数据,通过提权漏洞可获得主机权限</p>
+<h4 id="上传点："><a href="#上传点：" class="headerlink" title="上传点："></a>上传点：</h4><p>头像、附件、后台新闻编辑等等</p>
+<h4 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h4><pre><code>成功上传木马文件
+木马文件能够执行
+上传路径可知
+</code></pre><h4 id="上传检查方式"><a href="#上传检查方式" class="headerlink" title="上传检查方式"></a>上传检查方式</h4><pre><code>A 客户端javascript 检测(通常为检测文件扩展名)
+B 服务端MIME 类型检测(检测Content-Type 内容)
+C 服务端目录路径检测(检测跟path 参数相关的内容)
+D 服务端文件扩展名检测(检测跟文件extension 相关的内容)
+E 服务端文件内容检测(检测内容是否合法或含有恶意代码)
+</code></pre><h4 id="常见上传漏洞"><a href="#常见上传漏洞" class="headerlink" title="常见上传漏洞"></a>常见上传漏洞</h4><h5 id="对文件类型无任何验证"><a href="#对文件类型无任何验证" class="headerlink" title="对文件类型无任何验证"></a>对文件类型无任何验证</h5><p>可直接上传相应脚本文件</p>
+<h5 id="本地javascript扩展名校验"><a href="#本地javascript扩展名校验" class="headerlink" title="本地javascript扩展名校验"></a>本地javascript扩展名校验</h5><p>一切在客户端的校验都是伪校验</p>
+<h5 id="使用黑名单or白名单"><a href="#使用黑名单or白名单" class="headerlink" title="使用黑名单or白名单"></a>使用黑名单or白名单</h5><p>扩展名定义方式对比</p>
+<h5 id="上传文件未进行重命名"><a href="#上传文件未进行重命名" class="headerlink" title="上传文件未进行重命名"></a>上传文件未进行重命名</h5><p>结合web应用解析漏洞</p>
+<h5 id="客户端可控制上传参数"><a href="#客户端可控制上传参数" class="headerlink" title="客户端可控制上传参数"></a>客户端可控制上传参数</h5><p>部分敏感上传参数在客户端可控</p>
+<h5 id="数据库备份"><a href="#数据库备份" class="headerlink" title="数据库备份"></a>数据库备份</h5><p>可通过备份功能修改文件后缀</p>
+<h4 id="检测绕过"><a href="#检测绕过" class="headerlink" title="检测绕过"></a>检测绕过</h4><pre><code>检测绕过
+停止客户端检测脚本
+MIME类型检测绕过
+黑名单列表绕过
+特殊文件名绕过
+利用截断
+利用解析漏洞
+利用.htaccess文件
+可修改上传文件
+</code></pre><h5 id="黑名单检测绕过"><a href="#黑名单检测绕过" class="headerlink" title="黑名单检测绕过"></a>黑名单检测绕过</h5><h6 id="1-文件名大小写绕过"><a href="#1-文件名大小写绕过" class="headerlink" title="1. 文件名大小写绕过"></a>1. 文件名大小写绕过</h6><p>用AsP，pHp之类的文件名绕过黑名单检测。</p>
+<h6 id="2-名单列表绕过"><a href="#2-名单列表绕过" class="headerlink" title="2. 名单列表绕过"></a>2. 名单列表绕过</h6><p>用黑名单里没有的名单进行攻击，比如黑名单里面没有asa或者cer之类。</p>
+<h6 id="3-0x00截断绕过"><a href="#3-0x00截断绕过" class="headerlink" title="3. 0x00截断绕过"></a>3. 0x00截断绕过</h6><p>例如：help.asp .jpg(asp后面为0x00)，在判断时，大多函数取后缀名是从后往前取，故能够通过，但是在保存时，却被保存为help.asp。</p>
+<h6 id="4-htaccess文件攻击"><a href="#4-htaccess文件攻击" class="headerlink" title="4. .htaccess文件攻击"></a>4. .htaccess文件攻击</h6><p>配合名单列表绕过，上传一个自定义的.htaccess。</p>
+<a id="more"></a>
+<h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931038/blog/DVWA/File_Upload/File_upload_low_0.png" alt="image"></p>
+<h4 id="File-Upload-Source"><a href="#File-Upload-Source" class="headerlink" title="File Upload Source"></a>File Upload Source</h4><pre><code>&lt;?php
+if( isset( $_POST[ &apos;Upload&apos; ] ) ) {
+    // Where are we going to be writing to?
+    $target_path  = DVWA_WEB_PAGE_TO_ROOT . &quot;hackable/uploads/&quot;;
+    $target_path .= basename( $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ] );
+    // Can we move the file to the upload folder?
+    if( !move_uploaded_file( $_FILES[ &apos;uploaded&apos; ][ &apos;tmp_name&apos; ], $target_path ) ) {
+        // No
+        echo &apos;&lt;pre&gt;Your image was not uploaded.&lt;/pre&gt;&apos;;
+    }
+    else {
+        // Yes!
+        echo &quot;&lt;pre&gt;{$target_path} succesfully uploaded!&lt;/pre&gt;&quot;;
+    }
+}
+?&gt; 
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><pre><code>basename() 函数返回路径中的文件名部分。
+PHP 的全局数组 $_FILES，你可以从客户计算机向远程服务器上传文件。
+第一个参数是表单的 input name，第二个下标可以是 &quot;name&quot;、&quot;type&quot;、&quot;size&quot;、&quot;tmp_name&quot; 或 &quot;error&quot;。如下所示：
+$_FILES[&quot;file&quot;][&quot;name&quot;] - 上传文件的名称
+$_FILES[&quot;file&quot;][&quot;type&quot;] - 上传文件的类型
+$_FILES[&quot;file&quot;][&quot;size&quot;] - 上传文件的大小，以字节计
+$_FILES[&quot;file&quot;][&quot;tmp_name&quot;] - 存储在服务器的文件的临时副本的名称
+$_FILES[&quot;file&quot;][&quot;error&quot;] - 由文件上传导致的错误代码
+</code></pre><p>对于上传的文件没有做任何过滤</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>直接上传一句话<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931037/blog/DVWA/File_Upload/File_upload_low_1.png" alt="image"></p>
+<pre><code>../../hackable/uploads/shell_exe.php
+http://192.168.10.11/dvwa/hackable/uploads/shell_exe.php
+http://192.168.10.11/dvwa/hackable/uploads/shell_exe.php?cmd=ipconfig
+</code></pre><p>找到路径并利用</p>
+<p>传一句话连接菜刀<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931033/blog/DVWA/File_Upload/File_upload_low_2.png" alt="image"></p>
+<h3 id="Middle"><a href="#Middle" class="headerlink" title="Middle"></a>Middle</h3><h4 id="File-Upload-Source-1"><a href="#File-Upload-Source-1" class="headerlink" title="File Upload Source"></a>File Upload Source</h4><pre><code>&lt;?php
+
+if( isset( $_POST[ &apos;Upload&apos; ] ) ) {
+    // Where are we going to be writing to?
+    $target_path  = DVWA_WEB_PAGE_TO_ROOT . &quot;hackable/uploads/&quot;;
+    $target_path .= basename( $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ] );
+
+    // File information
+    $uploaded_name = $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ];
+    $uploaded_type = $_FILES[ &apos;uploaded&apos; ][ &apos;type&apos; ];
+    $uploaded_size = $_FILES[ &apos;uploaded&apos; ][ &apos;size&apos; ];
+
+    // Is it an image?
+    if( ( $uploaded_type == &quot;image/jpeg&quot; || $uploaded_type == &quot;image/png&quot; ) &amp;&amp;
+        ( $uploaded_size &lt; 100000 ) ) {
+
+        // Can we move the file to the upload folder?
+        if( !move_uploaded_file( $_FILES[ &apos;uploaded&apos; ][ &apos;tmp_name&apos; ], $target_path ) ) {
+            // No
+            echo &apos;&lt;pre&gt;Your image was not uploaded.&lt;/pre&gt;&apos;;
+        }
+        else {
+            // Yes!
+            echo &quot;&lt;pre&gt;{$target_path} succesfully uploaded!&lt;/pre&gt;&quot;;
+        }
+    }
+    else {
+        // Invalid file
+        echo &apos;&lt;pre&gt;Your image was not uploaded. We can only accept JPEG or PNG images.&lt;/pre&gt;&apos;;
+    }
+}
+
+?&gt; 
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>关键代码部分    </p>
+<pre><code>( $uploaded_type == &quot;image/jpeg&quot; || $uploaded_type == &quot;image/png&quot; ) &amp;&amp;
+    ( $uploaded_size &lt; 100000 )
+</code></pre><p>这里对文件类型了文件大小做了检查，要求Content-Type字段为image/jpeg 或 image/png ，内容的大小小于 100000 </p>
+<h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931032/blog/DVWA/File_Upload/File_upload_middle_1.png" alt="image"><br>抓包后将Content_Type字段改为image/jpeg即可<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931031/blog/DVWA/File_Upload/File_upload_middle_2.png" alt="image"></p>
+<p>采用%00截断<br>在php版本小于5.3.4的版本中，当Magic_quote_gpc选项为off时，可以在文件名中使用%00截断，所以可以把上传文件命名a1.php%00.png进行绕过</p>
+<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><h4 id="File-Upload-Source-2"><a href="#File-Upload-Source-2" class="headerlink" title="File Upload Source"></a>File Upload Source</h4><pre><code>&lt;?php
+
+if( isset( $_POST[ &apos;Upload&apos; ] ) ) {
+    // Where are we going to be writing to?
+    $target_path  = DVWA_WEB_PAGE_TO_ROOT . &quot;hackable/uploads/&quot;;
+    $target_path .= basename( $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ] );
+
+    // File information
+    $uploaded_name = $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ];
+    $uploaded_ext  = substr( $uploaded_name, strrpos( $uploaded_name, &apos;.&apos; ) + 1);
+    $uploaded_size = $_FILES[ &apos;uploaded&apos; ][ &apos;size&apos; ];
+    $uploaded_tmp  = $_FILES[ &apos;uploaded&apos; ][ &apos;tmp_name&apos; ];
+
+    // Is it an image?
+    if( ( strtolower( $uploaded_ext ) == &quot;jpg&quot; || strtolower( $uploaded_ext ) == &quot;jpeg&quot; || strtolower( $uploaded_ext ) == &quot;png&quot; ) &amp;&amp;
+        ( $uploaded_size &lt; 100000 ) &amp;&amp;
+        getimagesize( $uploaded_tmp ) ) {
+
+        // Can we move the file to the upload folder?
+        if( !move_uploaded_file( $uploaded_tmp, $target_path ) ) {
+            // No
+            echo &apos;&lt;pre&gt;Your image was not uploaded.&lt;/pre&gt;&apos;;
+        }
+        else {
+            // Yes!
+            echo &quot;&lt;pre&gt;{$target_path} succesfully uploaded!&lt;/pre&gt;&quot;;
+        }
+    }
+    else {
+        // Invalid file
+        echo &apos;&lt;pre&gt;Your image was not uploaded. We can only accept JPEG or PNG images.&lt;/pre&gt;&apos;;
+    }
+}
+
+?&gt; 
+</code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h4><p>关键代码分析</p>
+<pre><code>$uploaded_ext  = substr( $uploaded_name, strrpos( $uploaded_name, &apos;.&apos; ) + 1);
+strrpos() 函数查找字符串在另一字符串中最后一次出现的位置(对大小写敏感）。
+
+substr(string,start,length) 函数返回字符串的一部分(如果 start 参数是负数且 length 小于或等于 start，则 length 为 0)。
+
+( strtolower( $uploaded_ext ) == &quot;jpg&quot; || strtolower( $uploaded_ext ) == &quot;jpeg&quot; || strtolower( $uploaded_ext ) == &quot;png&quot; ) &amp;&amp;
+    ( $uploaded_size &lt; 100000 ) &amp;&amp;
+    getimagesize( $uploaded_tmp )
+
+getimagesize(string filename)
+函数会通过读取文件头，返回图片的长、宽等信息，如果没有相关的图片文件头，函数会报错。
+</code></pre><p>可以看到先读取文件名中最后一个”.”后的字符串，期望通过文件名来限制文件类型，因此要求上传文件名形式必须是”<em>.jpg”、”</em>.jpeg” 、”*.png”之一。同时，getimagesize函数更是限制了上传文件的文件头必须为图像类型。</p>
+<h4 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>直接上传一个图片马</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532931043/blog/DVWA/File_Upload/File_upload_high_0.png" alt="image"></p>
+<h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><h3 id="File-Upload-Source-3"><a href="#File-Upload-Source-3" class="headerlink" title="File Upload Source"></a>File Upload Source</h3><pre><code>&lt;?php
+
+if( isset( $_POST[ &apos;Upload&apos; ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );
+
+
+    // File information
+    $uploaded_name = $_FILES[ &apos;uploaded&apos; ][ &apos;name&apos; ];
+    $uploaded_ext  = substr( $uploaded_name, strrpos( $uploaded_name, &apos;.&apos; ) + 1);
+    $uploaded_size = $_FILES[ &apos;uploaded&apos; ][ &apos;size&apos; ];
+    $uploaded_type = $_FILES[ &apos;uploaded&apos; ][ &apos;type&apos; ];
+    $uploaded_tmp  = $_FILES[ &apos;uploaded&apos; ][ &apos;tmp_name&apos; ];
+
+    // Where are we going to be writing to?
+    $target_path   = DVWA_WEB_PAGE_TO_ROOT . &apos;hackable/uploads/&apos;;
+    //$target_file   = basename( $uploaded_name, &apos;.&apos; . $uploaded_ext ) . &apos;-&apos;;
+    $target_file   =  md5( uniqid() . $uploaded_name ) . &apos;.&apos; . $uploaded_ext;
+    $temp_file     = ( ( ini_get( &apos;upload_tmp_dir&apos; ) == &apos;&apos; ) ? ( sys_get_temp_dir() ) : ( ini_get( &apos;upload_tmp_dir&apos; ) ) );
+    $temp_file    .= DIRECTORY_SEPARATOR . md5( uniqid() . $uploaded_name ) . &apos;.&apos; . $uploaded_ext;
+
+    // Is it an image?
+    if( ( strtolower( $uploaded_ext ) == &apos;jpg&apos; || strtolower( $uploaded_ext ) == &apos;jpeg&apos; || strtolower( $uploaded_ext ) == &apos;png&apos; ) &amp;&amp;
+        ( $uploaded_size &lt; 100000 ) &amp;&amp;
+        ( $uploaded_type == &apos;image/jpeg&apos; || $uploaded_type == &apos;image/png&apos; ) &amp;&amp;
+        getimagesize( $uploaded_tmp ) ) {
+
+        // Strip any metadata, by re-encoding image (Note, using php-Imagick is recommended over php-GD)
+        if( $uploaded_type == &apos;image/jpeg&apos; ) {
+            $img = imagecreatefromjpeg( $uploaded_tmp );
+            imagejpeg( $img, $temp_file, 100);
+        }
+        else {
+            $img = imagecreatefrompng( $uploaded_tmp );
+            imagepng( $img, $temp_file, 9);
+        }
+        imagedestroy( $img );
+
+        // Can we move the file to the web root from the temp folder?
+        if( rename( $temp_file, ( getcwd() . DIRECTORY_SEPARATOR . $target_path . $target_file ) ) ) {
+            // Yes!
+            echo &quot;&lt;pre&gt;&lt;a href=&apos;${target_path}${target_file}&apos;&gt;${target_file}&lt;/a&gt; succesfully uploaded!&lt;/pre&gt;&quot;;
+        }
+        else {
+            // No
+            echo &apos;&lt;pre&gt;Your image was not uploaded.&lt;/pre&gt;&apos;;
+        }
+
+        // Delete any temp files
+        if( file_exists( $temp_file ) )
+            unlink( $temp_file );
+    }
+    else {
+        // Invalid file
+        echo &apos;&lt;pre&gt;Your image was not uploaded. We can only accept JPEG or PNG images.&lt;/pre&gt;&apos;;
+    }
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?&gt; 
+</code></pre><h4 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h4><pre><code>magecreatefromjpeg ( filename )
+函数返回图片文件的图像标识，失败返回false
+
+imagecreatefromjpeg — 由文件或 URL 创建一个新图象。
+imagejpeg ( image , filename , quality)
+
+从image图像以filename为文件名创建一个JPEG图像，可选参数quality，范围从 0（最差质量，文件更小）到 100（最佳质量，文件最大）。
+
+ imagedestroy( img )
+
+函数销毁图像资源
+</code></pre><p>可以看到，Impossible级别的代码对上传文件进行了重命名（为md5值，导致%00截断无法绕过过滤规则），加入Anti-CSRF token防护CSRF攻击，同时对文件的内容作了严格的检查，导致攻击者无法上传含有恶意脚本的文件</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.freebuf.com/column/142921.html" target="_blank" rel="noopener">渗透测试方法论之文件上传</a></p>
+<p><a href="https://blog.csdn.net/SKI_12/article/details/54669614" target="_blank" rel="noopener">DVWA之PHP文件上传漏洞（File Upload）</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+            <a href="/tags/XSS/" rel="tag"># XSS</a>
+          
+            <a href="/tags/File-Upload/" rel="tag"># File_Upload</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/29/DVWA-File_Inclusion/" rel="next" title="DVWA-File_Inclusion">
+                <i class="fa fa-chevron-left"></i> DVWA-File_Inclusion
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ahodor</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vulnerability-File-Upload"><span class="nav-number">1.</span> <span class="nav-text">Vulnerability: File Upload</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intruduce"><span class="nav-number">1.1.</span> <span class="nav-text">Intruduce</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#形成的主因："><span class="nav-number">1.1.1.</span> <span class="nav-text">形成的主因：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#危害"><span class="nav-number">1.1.2.</span> <span class="nav-text">危害:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传点："><span class="nav-number">1.1.3.</span> <span class="nav-text">上传点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用条件"><span class="nav-number">1.1.4.</span> <span class="nav-text">利用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传检查方式"><span class="nav-number">1.1.5.</span> <span class="nav-text">上传检查方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见上传漏洞"><span class="nav-number">1.1.6.</span> <span class="nav-text">常见上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对文件类型无任何验证"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">对文件类型无任何验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#本地javascript扩展名校验"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">本地javascript扩展名校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用黑名单or白名单"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">使用黑名单or白名单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#上传文件未进行重命名"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">上传文件未进行重命名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#客户端可控制上传参数"><span class="nav-number">1.1.6.5.</span> <span class="nav-text">客户端可控制上传参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库备份"><span class="nav-number">1.1.6.6.</span> <span class="nav-text">数据库备份</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测绕过"><span class="nav-number">1.1.7.</span> <span class="nav-text">检测绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#黑名单检测绕过"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">黑名单检测绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-文件名大小写绕过"><span class="nav-number">1.1.7.1.1.</span> <span class="nav-text">1. 文件名大小写绕过</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-名单列表绕过"><span class="nav-number">1.1.7.1.2.</span> <span class="nav-text">2. 名单列表绕过</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-0x00截断绕过"><span class="nav-number">1.1.7.1.3.</span> <span class="nav-text">3. 0x00截断绕过</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-htaccess文件攻击"><span class="nav-number">1.1.7.1.4.</span> <span class="nav-text">4. .htaccess文件攻击</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Low"><span class="nav-number">1.2.</span> <span class="nav-text">Low</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#File-Upload-Source"><span class="nav-number">1.2.1.</span> <span class="nav-text">File Upload Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.2.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Middle"><span class="nav-number">1.3.</span> <span class="nav-text">Middle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#File-Upload-Source-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">File Upload Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High"><span class="nav-number">1.4.</span> <span class="nav-text">High</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#File-Upload-Source-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">File Upload Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impossible"><span class="nav-number">1.5.</span> <span class="nav-text">Impossible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-Upload-Source-3"><span class="nav-number">1.6.</span> <span class="nav-text">File Upload Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.7.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ahodor</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

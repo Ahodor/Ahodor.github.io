@@ -283,6 +283,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/sqli-labs-Less-5-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/20/sqli-labs-Less-5-6/" itemprop="url">sqli-labs-Less-5-7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T15:03:06+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Less-5-GET-Double-Query-Single-Quotes-String"><a href="#Less-5-GET-Double-Query-Single-Quotes-String" class="headerlink" title="Less-5 GET- Double Query-Single Quotes -String"></a>Less-5 GET- Double Query-Single Quotes -String</h2><h3 id="基于get请求的双查询的单引号字符型注入"><a href="#基于get请求的双查询的单引号字符型注入" class="headerlink" title="基于get请求的双查询的单引号字符型注入"></a>基于get请求的双查询的单引号字符型注入</h3><h3 id="什么叫双查询？"><a href="#什么叫双查询？" class="headerlink" title="什么叫双查询？"></a>什么叫双查询？</h3><p>双查询又可以叫做嵌套子查询，相当于在select语句中还有一个select语句，而里面的select语句称为子查询</p>
+<pre><code>select(select)
+</code></pre><h3 id="双查询你注入"><a href="#双查询你注入" class="headerlink" title="双查询你注入"></a>双查询你注入</h3><p>当在一个<strong>聚合函数</strong>，比如count函数后面如果使用<strong>分组语句</strong>就会把查询的一部分<strong>以错误的形式</strong>显示出来。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count(*)</td>
+<td>统计表中所有记录的个数 </td>
+</tr>
+<tr>
+<td>count(列名)</td>
+<td>统计一列中值的个数，其中重复的记录也会被当做有效的记录。 </td>
+</tr>
+<tr>
+<td>count(distinct 列名)</td>
+<td>统计一列中值的个数，其中重复的记录只会被记录一次。 </td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>计算一列值的总和。 </td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>计算一列值的平均值。 </td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>计算一列值中的最大值。 </td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>计算一列值中的最小值。</td>
+</tr>
+<tr>
+<td>rand()</td>
+<td>生成0-1之间的小数随机值</td>
+</tr>
+<tr>
+<td>floor()</td>
+<td>只返回整数部分，小数部分舍弃</td>
+</tr>
+<tr>
+<td>round()</td>
+<td>函数四舍五入，大于0.5的部分进位，不到则舍弃</td>
+</tr>
+<tr>
+<td>concat()</td>
+<td>连接函数，可以连接多个字符</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>将结果以分组的形式返回</td>
+</tr>
+</tbody>
+</table>
+<h3 id="什么时候使用双查询注入？"><a href="#什么时候使用双查询注入？" class="headerlink" title="什么时候使用双查询注入？"></a>什么时候使用双查询注入？</h3><p>适用于<strong>注入时没有显示位</strong>，但是在有显示位的时候同样适用，有显示位时不建议。<br>双查询注入语句的固定格式</p>
+<pre><code>union select 1 from (select+count(*),concat(floor(rand(0)*2),( 注入爆数据语句))a from information_schema.tables group by a)b
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/20/sqli-labs-Less-5-6/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqlmap使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -737,7 +924,7 @@ Your Password:root@localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -750,7 +937,7 @@ Your Password:root@localhost
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
