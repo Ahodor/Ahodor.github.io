@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-03T07:58:27.357Z">
+<meta property="og:updated_time" content="2018-08-03T08:03:31.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS Base">
 <meta name="twitter:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
@@ -358,7 +358,8 @@
 &lt;select&gt; &lt;textarea&gt; &lt;keygen&gt; &lt;frameset&gt; &lt;embed&gt; &lt;svg&gt; &lt;math&gt; &lt;video&gt; &lt;audio&gt;
 </code></pre><h3 id="所有的event事件都可以执行js"><a href="#所有的event事件都可以执行js" class="headerlink" title="所有的event事件都可以执行js"></a>所有的event事件都可以执行js</h3><pre><code>onload onunload onchange onchange onsubmit onreset onselect onblur onfocus onabort onkeydown onkeypress onkeyup onclick ondbclick onmouseover onmousemove onmouseout onmouseup onforminput onformchange ondrag ondrop
 </code></pre><h3 id="可以执行js的属性"><a href="#可以执行js的属性" class="headerlink" title="可以执行js的属性"></a>可以执行js的属性</h3><pre><code>formaction action href xlink:href autofocus src content data
-</code></pre><h2 id="xss绕过方式"><a href="#xss绕过方式" class="headerlink" title="xss绕过方式"></a>xss绕过方式</h2><h3 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h3><pre><code>&lt;M/onclick=&quot;alert(1)&quot;&gt;M
+</code></pre><a id="more"></a>
+<h2 id="xss绕过方式"><a href="#xss绕过方式" class="headerlink" title="xss绕过方式"></a>xss绕过方式</h2><h3 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h3><pre><code>&lt;M/onclick=&quot;alert(1)&quot;&gt;M
 </code></pre><h3 id="代替-空格"><a href="#代替-空格" class="headerlink" title="/ 代替 空格"></a>/ 代替 空格</h3><p>在标签和属性之间不一定只能出现空格,使用/代替空格</p>
 <pre><code>&lt;img/src=x onerror=alert(1)&gt;
 </code></pre><h3 id="最短字符"><a href="#最短字符" class="headerlink" title="最短字符"></a>最短字符</h3><h3 id="a标签"><a href="#a标签" class="headerlink" title="a标签"></a>a标签</h3><p>1、通过JavaScript伪造协议来调用js</p>
@@ -535,8 +536,8 @@ _    　　　　&amp;lowbar;    &amp;#95;                   &amp;#x5F
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/31/DVWA-Command_Injection/" rel="next" title="DVWA-File_Injection">
-                <i class="fa fa-chevron-left"></i> DVWA-File_Injection
+              <a href="/2018/08/03/Wargame-alert(1)-haozi/" rel="next" title="Wargame-XSS-game">
+                <i class="fa fa-chevron-left"></i> Wargame-XSS-game
               </a>
             
           </div>
@@ -544,10 +545,6 @@ _    　　　　&amp;lowbar;    &amp;#95;                   &amp;#x5F
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/03/Wargame-alert(1)-haozi/" rel="prev" title="Wargame-XSS-game">
-                Wargame-XSS-game <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

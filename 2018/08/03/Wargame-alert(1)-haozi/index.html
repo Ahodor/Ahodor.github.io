@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="Wargame XSS-alert(1)0x00 没有任何过滤server codefunction render (input) {   return &amp;apos;&amp;lt;div&amp;gt;&amp;apos; + input + &amp;apos;&amp;lt;/div&amp;gt;&amp;apos; } 分析对输入 input没有做任何的过滤，直接在div标签之间输出了 input code&amp;lt;script&amp;gt;aler">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-03T07:57:15.449Z">
+<meta property="og:updated_time" content="2018-08-03T08:03:14.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wargame-XSS-game">
 <meta name="twitter:description" content="Wargame XSS-alert(1)0x00 没有任何过滤server codefunction render (input) {   return &amp;apos;&amp;lt;div&amp;gt;&amp;apos; + input + &amp;apos;&amp;lt;/div&amp;gt;&amp;apos; } 分析对输入 input没有做任何的过滤，直接在div标签之间输出了 input code&amp;lt;script&amp;gt;aler">
@@ -359,7 +359,8 @@
 }
 </code></pre><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>对输入 input没有做任何的过滤，直接在div标签之间输出了</p>
 <h3 id="input-code"><a href="#input-code" class="headerlink" title="input code"></a>input code</h3><pre><code>&lt;script&gt;alert(1)&lt;/script&gt;
-</code></pre><h2 id="0x01-textarea标签"><a href="#0x01-textarea标签" class="headerlink" title="0x01 textarea标签"></a>0x01 textarea标签</h2><h3 id="server-code-1"><a href="#server-code-1" class="headerlink" title="server code"></a>server code</h3><pre><code>function render (input) {
+</code></pre><a id="more"></a>
+<h2 id="0x01-textarea标签"><a href="#0x01-textarea标签" class="headerlink" title="0x01 textarea标签"></a>0x01 textarea标签</h2><h3 id="server-code-1"><a href="#server-code-1" class="headerlink" title="server code"></a>server code</h3><pre><code>function render (input) {
   return &apos;&lt;textarea&gt;&apos; + input + &apos;&lt;/textarea&gt;&apos;
 }
 </code></pre><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>对于输出input没有做任何的过滤，将input输出在了 textarea标签里,使用”“闭合前面的标签即可</p>
@@ -615,8 +616,8 @@ function escape (s) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/03/XSS-base/" rel="next" title="XSS Base">
-                <i class="fa fa-chevron-left"></i> XSS Base
+              <a href="/2018/07/31/DVWA-Command_Injection/" rel="next" title="DVWA-File_Injection">
+                <i class="fa fa-chevron-left"></i> DVWA-File_Injection
               </a>
             
           </div>
@@ -624,6 +625,10 @@ function escape (s) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/03/XSS-base/" rel="prev" title="XSS Base">
+                XSS Base <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
