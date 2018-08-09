@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/XSS-base/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/Python-01-Requests/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ahodor">
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/03/XSS-base/" itemprop="url">XSS Base</a></h1>
+                <a class="post-title-link" href="/2018/08/09/Python-01-Requests/" itemprop="url">Python安全之Requests学习</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T15:53:10+08:00">
-                2018-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T13:34:38+08:00">
+                2018-08-09
               </time>
             
 
@@ -353,14 +353,33 @@
 
       
         
-          <h1 id="XSS-Base"><a href="#XSS-Base" class="headerlink" title="XSS Base"></a>XSS Base</h1><h2 id="能够执行js的标签、事件、属性"><a href="#能够执行js的标签、事件、属性" class="headerlink" title="能够执行js的标签、事件、属性"></a>能够执行js的标签、事件、属性</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><pre><code>&lt;script&gt; &lt;a&gt; &lt;p&gt; &lt;img&gt; &lt;body&gt; &lt;button&gt; &lt;var&gt; &lt;div&gt; &lt;iframe&gt; &lt;object&gt; &lt;input&gt;
-&lt;select&gt; &lt;textarea&gt; &lt;keygen&gt; &lt;frameset&gt; &lt;embed&gt; &lt;svg&gt; &lt;math&gt; &lt;video&gt; &lt;audio&gt;
-</code></pre><h3 id="所有的event事件都可以执行js"><a href="#所有的event事件都可以执行js" class="headerlink" title="所有的event事件都可以执行js"></a>所有的event事件都可以执行js</h3><pre><code>onload onunload onchange onchange onsubmit onreset onselect onblur onfocus onabort onkeydown onkeypress onkeyup onclick ondbclick onmouseover onmousemove onmouseout onmouseup onforminput onformchange ondrag ondrop
-</code></pre><h3 id="可以执行js的属性"><a href="#可以执行js的属性" class="headerlink" title="可以执行js的属性"></a>可以执行js的属性</h3><pre><code>formaction action href xlink:href autofocus src content data
+          <h1 id="Python安全-Requests学习"><a href="#Python安全-Requests学习" class="headerlink" title="Python安全 Requests学习"></a>Python安全 Requests学习</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="开发哲学"><a href="#开发哲学" class="headerlink" title="开发哲学"></a>开发哲学</h3><pre><code>Beautiful is better than ugly.(美丽优于丑陋)
+Explicit is better than implicit.(直白优于含蓄)
+Simple is better than complex.(简单优于复杂)
+Complex is better than complicated.(复杂优于繁琐)
+Readability counts.(可读性很重要)
+</code></pre><h3 id="Apache2-协议"><a href="#Apache2-协议" class="headerlink" title="Apache2 协议"></a>Apache2 协议</h3><h3 id="Requests-协议"><a href="#Requests-协议" class="headerlink" title="Requests 协议"></a>Requests 协议</h3><h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><p>Requests 完全满足今日 web 的需求。</p>
+<pre><code>Keep-Alive &amp; 连接池
+国际化域名和 URL
+带持久 Cookie 的会话
+浏览器式的 SSL 认证
+自动内容解码
+基本/摘要式的身份认证
+优雅的 key/value Cookie
+自动解压
+Unicode 响应体
+HTTP(S) 代理支持
+文件分块上传
+流下载
+连接超时
+分块请求
+支持 .netrc
+</code></pre><p>Requests 支持 Python 2.6—2.7以及3.3—3.7，而且能在 PyPy 下完美运行。</p>
+<h2 id="安装Requests"><a href="#安装Requests" class="headerlink" title="安装Requests"></a>安装Requests</h2><pre><code>pip install requests -i https://mirror.aliyun.com/pypi/simple
 </code></pre>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/03/XSS-base/#more" rel="contents">
+            <a class="btn" href="/2018/08/09/Python-01-Requests/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -490,6 +509,134 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/03/Wargame-alert(1)-haozi/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/XSS-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/03/XSS-base/" itemprop="url">XSS Base</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T15:53:10+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="XSS-Base"><a href="#XSS-Base" class="headerlink" title="XSS Base"></a>XSS Base</h1><h2 id="能够执行js的标签、事件、属性"><a href="#能够执行js的标签、事件、属性" class="headerlink" title="能够执行js的标签、事件、属性"></a>能够执行js的标签、事件、属性</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><pre><code>&lt;script&gt; &lt;a&gt; &lt;p&gt; &lt;img&gt; &lt;body&gt; &lt;button&gt; &lt;var&gt; &lt;div&gt; &lt;iframe&gt; &lt;object&gt; &lt;input&gt;
+&lt;select&gt; &lt;textarea&gt; &lt;keygen&gt; &lt;frameset&gt; &lt;embed&gt; &lt;svg&gt; &lt;math&gt; &lt;video&gt; &lt;audio&gt;
+</code></pre><h3 id="所有的event事件都可以执行js"><a href="#所有的event事件都可以执行js" class="headerlink" title="所有的event事件都可以执行js"></a>所有的event事件都可以执行js</h3><pre><code>onload onunload onchange onchange onsubmit onreset onselect onblur onfocus onabort onkeydown onkeypress onkeyup onclick ondbclick onmouseover onmousemove onmouseout onmouseup onforminput onformchange ondrag ondrop
+</code></pre><h3 id="可以执行js的属性"><a href="#可以执行js的属性" class="headerlink" title="可以执行js的属性"></a>可以执行js的属性</h3><pre><code>formaction action href xlink:href autofocus src content data
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/03/XSS-base/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1504,169 +1651,6 @@ if( isset( $_GET[ &apos;Login&apos; ] ) ) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/" itemprop="url">sqli-labs-Summarize-Less-1-22_Basic-Injections</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T11:09:55+08:00">
-                2018-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="sqli-labs-Summarize-Less-1-22-Basic-Injections"><a href="#sqli-labs-Summarize-Less-1-22-Basic-Injections" class="headerlink" title="sqli-labs-Summarize-Less-1-22(Basic-Injections)"></a>sqli-labs-Summarize-Less-1-22(Basic-Injections)</h1><h2 id="重要的系统数据库"><a href="#重要的系统数据库" class="headerlink" title="重要的系统数据库"></a>重要的系统数据库</h2><pre><code>mysql.user 存储MySQL数据库的用户及用户权限信息
-and (select count(*) from mysql.user)&gt; 判断是否具有读写权限
-
-information_schema.user_privileges存储mysql中所有数据库的权限信息
-
-information_schema.schemate 存储mysql中所有的数据库
-遍历查询系统中所有数据库名
-select schema_name from information_schema.schemata limit 0,1
-
-information_schema.tables 存储mysql中所有数据库的表
-遍历查询数据库中所有的表名
-select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 0,1
-
-information_schema.columns存储mysql中所有数据库的列
-遍历查询表中所有的列名
-select column_name form information_schema.columns where table_name=&apos;users&apos; limit 0,1
-
-遍历查询表中的数据
-select password from security.users limit 0,1
-</code></pre><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h3><p><strong>select</strong> 用于输出信息</p>
-<pre><code>select 列名|（数字|字符串|函数）as 别名（as可以省略）[from ...]
-</code></pre><p><strong>union</strong> 联合操作符，要求前后列数相同，数据类型相差不大</p>
-<p><strong>group by</strong> 分组</p>
-<p><strong>order by</strong> 排序，常用于猜解字段数</p>
-<pre><code>order by 列名|序列号 
-</code></pre><p><strong>sql的switch</strong>语句</p>
-<pre><code>case expr when a then a** when b then b* else c* end 
-</code></pre><p><strong>if 函数</strong>，当expr1为真返回expr2否则返回expr3</p>
-<pre><code>if(expr1,expr2,expr3) 
-</code></pre><h3 id="常用函数（获取系统信息）"><a href="#常用函数（获取系统信息）" class="headerlink" title="常用函数（获取系统信息）"></a>常用函数（获取系统信息）</h3><pre><code>system_user()        /*系统用户名
-user()               /*用户名
-current_user()       /*当前用户名
-session_user()       /*连接数据库的用户名
-database()           /*数据库名
-version()            /*MYSQL数据库版本
-load_file()          /*MYSQL读取本地文件的函数
-@@datadir            /*读取数据库路径
-@@basedir MYSQL      /*安装路径
-@@version_compile_os /*操作系统
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/sqli-labs-Summarize-Less-1-22-Basic-Injections/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1717,7 +1701,7 @@ load_file()          /*MYSQL读取本地文件的函数
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1730,7 +1714,7 @@ load_file()          /*MYSQL读取本地文件的函数
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
