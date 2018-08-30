@@ -283,6 +283,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/DVWA-Brute_Force/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/23/DVWA-Brute_Force/" itemprop="url">DVWA-Brute_Force</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T15:31:55+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Vulnerability-Brute-Force"><a href="#Vulnerability-Brute-Force" class="headerlink" title="Vulnerability: Brute Force"></a>Vulnerability: Brute Force</h2><h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532309062/blog/DVWA/Brute-force/brute-low-0.png" alt="image"></p>
+<h4 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h4><pre><code>&lt;?php
+
+if( isset( $_GET[ &apos;Login&apos; ] ) ) {
+    // Get username
+    $user = $_GET[ &apos;username&apos; ];
+
+    // Get password
+    $pass = $_GET[ &apos;password&apos; ];
+    $pass = md5( $pass );
+
+    // Check the database
+    $query  = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;
+    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );
+
+    if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) {
+        // Get users details
+        $row    = mysqli_fetch_assoc( $result );
+        $avatar = $row[&quot;avatar&quot;];
+
+        // Login successful
+        echo &quot;&lt;p&gt;Welcome to the password protected area {$user}&lt;/p&gt;&quot;;
+        echo &quot;&lt;img src=\&quot;{$avatar}\&quot; /&gt;&quot;;
+    }
+    else {
+        // Login failed
+        echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;
+    }
+
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);
+}
+
+?&gt; 
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>正常的登入界面，没有验证码和次数限制，没有任何放爆破机制，且存在SQL注入。</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><h5 id="使用Burpsuit爆破"><a href="#使用Burpsuit爆破" class="headerlink" title="使用Burpsuit爆破"></a>使用Burpsuit爆破</h5><h6 id="1、brupsuit抓包右键发送到Intruder"><a href="#1、brupsuit抓包右键发送到Intruder" class="headerlink" title="1、brupsuit抓包右键发送到Intruder"></a>1、brupsuit抓包右键发送到Intruder</h6><h6 id="2、Attack-type-选-Cluster-bomb"><a href="#2、Attack-type-选-Cluster-bomb" class="headerlink" title="2、Attack type 选 Cluster bomb"></a>2、Attack type 选 Cluster bomb</h6><pre><code>cluster bomb - 每个变量对应一个字典，并且进行交叉式破解，尝试各种组合。适用于用户名+密码的破解
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308439/blog/DVWA/Brute-force/brute-low-1.png" alt="image"></p>
+<h6 id="3、对应变量加"><a href="#3、对应变量加" class="headerlink" title="3、对应变量加$"></a>3、对应变量加$</h6><h6 id="4、设置payload"><a href="#4、设置payload" class="headerlink" title="4、设置payload"></a>4、设置payload</h6><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308445/blog/DVWA/Brute-force/brute-low-2.png" alt="image"></p>
+<h5 id="5、结果"><a href="#5、结果" class="headerlink" title="5、结果"></a>5、结果</h5><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308447/blog/DVWA/Brute-force/brute-low-3.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1532308449/blog/DVWA/Brute-force/brute-low-4.png" alt="image"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/23/DVWA-Brute_Force/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/DVWA-XSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1817,7 +1979,7 @@ Your Password:root@localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1830,7 +1992,7 @@ Your Password:root@localhost
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
