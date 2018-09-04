@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="File_Upload,practice," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="upload-labs简介漏洞环境源码下载https://github.com/c0ny1/upload-labs 参考Upload-labs通关手册 配置一般直接将源码放在  www hdocs wwwroot 网站目录下  文件上传思维导图文件上传分类文件上传思路">
+<meta name="keywords" content="File_Upload,practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload-labs">
+<meta property="og:url" content="http://yoursite.com/2018/09/04/ upload-labs/index.html">
+<meta property="og:site_name" content="Ahodor&#39;Via">
+<meta property="og:description" content="upload-labs简介漏洞环境源码下载https://github.com/c0ny1/upload-labs 参考Upload-labs通关手册 配置一般直接将源码放在  www hdocs wwwroot 网站目录下  文件上传思维导图文件上传分类文件上传思路">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553964/blog/upload-labs/upload-labs-00.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553983/blog/upload-labs/upload-labs-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553992/blog/upload-labs/upload-labs-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554188/blog/upload-labs/pass-01-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554186/blog/upload-labs/pass-01-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554184/blog/upload-labs/pass-01-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554178/blog/upload-labs/pass-01-04.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554175/blog/upload-labs/pass-01-05.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554170/blog/upload-labs/pass-01-06.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554167/blog/upload-labs/pass-01-07.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554165/blog/upload-labs/pass-01-08.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554164/blog/upload-labs/pass-01-09.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554163/blog/upload-labs/pass-01-10.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554161/blog/upload-labs/pass-01-11.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554154/blog/upload-labs/pass-02-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554151/blog/upload-labs/pass-02-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554148/blog/upload-labs/pass-02-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554146/blog/upload-labs/pass-02-04.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554142/blog/upload-labs/pass-03-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554138/blog/upload-labs/pass-03-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554135/blog/upload-labs/pass-03-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554131/blog/upload-labs/pass-03-04.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554129/blog/upload-labs/pass-04-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554126/blog/upload-labs/pass-04-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554123/blog/upload-labs/pass-04-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554120/blog/upload-labs/pass-04-04.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554118/blog/upload-labs/pass-05-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554112/blog/upload-labs/pass-06-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554110/blog/upload-labs/pass-06-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554107/blog/upload-labs/pass-07-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554104/blog/upload-labs/pass-07-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554101/blog/upload-labs/pass-08-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554098/blog/upload-labs/pass-08-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554096/blog/upload-labs/pass-08-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554093/blog/upload-labs/pass-08-04.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554090/blog/upload-labs/pass-08-05.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554087/blog/upload-labs/pass-08-06.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554085/blog/upload-labs/pass-08-07.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554083/blog/upload-labs/pass-08-08.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554081/blog/upload-labs/pass-08-09.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554068/blog/upload-labs/pass-09-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554063/blog/upload-labs/pass-09-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554060/blog/upload-labs/pass-10-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554057/blog/upload-labs/pass-10-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554055/blog/upload-labs/pass-11-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554053/blog/upload-labs/pass-11-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554047/blog/upload-labs/pass-11-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554041/blog/upload-labs/pass-12-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554039/blog/upload-labs/pass-12-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554036/blog/upload-labs/pass-13-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554035/blog/upload-labs/pass-13-02.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554033/blog/upload-labs/pass-13-03.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554027/blog/upload-labs/pass-14-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554023/blog/upload-labs/pass-15-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554009/blog/upload-labs/pass-16-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554003/blog/upload-labs/pass-17-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1536069597/blog/upload-labs/pass-18-01.png">
+<meta property="og:updated_time" content="2018-09-04T14:26:54.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="upload-labs">
+<meta name="twitter:description" content="upload-labs简介漏洞环境源码下载https://github.com/c0ny1/upload-labs 参考Upload-labs通关手册 配置一般直接将源码放在  www hdocs wwwroot 网站目录下  文件上传思维导图文件上传分类文件上传思路">
+<meta name="twitter:image" content="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553964/blog/upload-labs/upload-labs-00.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/04/ upload-labs/"/>
+
+
+
+
+
+  <title>upload-labs | Ahodor'Via</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ahodor'Via</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/ upload-labs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">upload-labs</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-04T22:16:53+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="upload-labs"><a href="#upload-labs" class="headerlink" title="upload-labs"></a>upload-labs</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="漏洞环境源码下载"><a href="#漏洞环境源码下载" class="headerlink" title="漏洞环境源码下载"></a>漏洞环境源码下载</h4><pre><code>https://github.com/c0ny1/upload-labs
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://xz.aliyun.com/t/2435" target="_blank" rel="noopener">Upload-labs通关手册</a></p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code>一般直接将源码放在  www hdocs wwwroot 网站目录下
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553964/blog/upload-labs/upload-labs-00.png" alt="image"></p>
+<h4 id="文件上传思维导图"><a href="#文件上传思维导图" class="headerlink" title="文件上传思维导图"></a>文件上传思维导图</h4><p>文件上传分类<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553983/blog/upload-labs/upload-labs-01.png" alt="image"><br>文件上传思路<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535553992/blog/upload-labs/upload-labs-02.png" alt="image"></p>
+<a id="more"></a>
+<h3 id="Pass-01-客户端JS验证绕过"><a href="#Pass-01-客户端JS验证绕过" class="headerlink" title="Pass-01 客户端JS验证绕过"></a>Pass-01 客户端JS验证绕过</h3><h4 id="初步测试"><a href="#初步测试" class="headerlink" title="初步测试"></a>初步测试</h4><p>上传界面<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554188/blog/upload-labs/pass-01-01.png" alt="image"><br>提示说：该文件不允许上传，请上传.jpg|.png|.gif类型的文件,当前文件类型为：.php<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554186/blog/upload-labs/pass-01-02.png" alt="image"><br>通过调试判断为本地验证<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554184/blog/upload-labs/pass-01-03.png" alt="image"></p>
+<h4 id="源代码分析（客户端js代码）"><a href="#源代码分析（客户端js代码）" class="headerlink" title="源代码分析（客户端js代码）"></a>源代码分析（客户端js代码）</h4><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    function checkFile() {
+        var file = document.getElementsByName(&apos;upload_file&apos;)[0].value;
+        if (file == null || file == &quot;&quot;) {
+            alert(&quot;请选择要上传的文件!&quot;);
+            return false;
+        }
+        //定义允许上传的文件类型
+        var allow_ext = &quot;.jpg|.png|.gif&quot;;
+        //提取上传文件的类型
+        var ext_name = file.substring(file.lastIndexOf(&quot;.&quot;));
+        //判断上传文件类型是否允许上传
+        if (allow_ext.indexOf(ext_name) == -1) {
+            var errMsg = &quot;该文件不允许上传，请上传&quot; + allow_ext + &quot;类型的文件,当前文件类型为：&quot; + ext_name;
+            alert(errMsg);
+            return false;
+        }
+    }
+&lt;/script&gt;
+</code></pre><p>关键代码 </p>
+<pre><code>var allow_ext = &quot;.jpg|.png|.gif&quot;;
+</code></pre><p>只允许上传 jpg  png  gif </p>
+<h4 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h4><h5 id="1、burpsuit抓包改包"><a href="#1、burpsuit抓包改包" class="headerlink" title="1、burpsuit抓包改包"></a>1、burpsuit抓包改包</h5><p>1、更改后缀，然后burpsuit抓包<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554178/blog/upload-labs/pass-01-04.png" alt="image"><br>抓包<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554175/blog/upload-labs/pass-01-05.png" alt="image"><br>2、改包上传成功<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554170/blog/upload-labs/pass-01-06.png" alt="image"><br>3、测试能否执行和连接<br><a href="http://192.168.10.11/upload-labs/upload/ma.php" target="_blank" rel="noopener">http://192.168.10.11/upload-labs/upload/ma.php</a><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554167/blog/upload-labs/pass-01-07.png" alt="image"><br>菜刀连接<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554165/blog/upload-labs/pass-01-08.png" alt="image"></p>
+<h5 id="2、更改本地js上传或者直接禁用JS"><a href="#2、更改本地js上传或者直接禁用JS" class="headerlink" title="2、更改本地js上传或者直接禁用JS"></a>2、更改本地js上传或者直接禁用JS</h5><p>1、Firefox禁用js<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554164/blog/upload-labs/pass-01-09.png" alt="image"><br>2、打开调试修改<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554163/blog/upload-labs/pass-01-10.png" alt="image"></p>
+<h5 id="3、上传图片马"><a href="#3、上传图片马" class="headerlink" title="3、上传图片马"></a>3、上传图片马</h5><p>直接上传图片马<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554161/blog/upload-labs/pass-01-11.png" alt="image"></p>
+<h3 id="Pass-02-绕过MIME检查（白名单）"><a href="#Pass-02-绕过MIME检查（白名单）" class="headerlink" title="Pass-02 绕过MIME检查（白名单）"></a>Pass-02 绕过MIME检查（白名单）</h3><h4 id="初步尝试"><a href="#初步尝试" class="headerlink" title="初步尝试"></a>初步尝试</h4><p>尝试上传文件，可以看到是在服务端进行验证<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554154/blog/upload-labs/pass-02-01.png" alt="image"></p>
+<h4 id="查看源代码"><a href="#查看源代码" class="headerlink" title="查看源代码"></a>查看源代码</h4><p>服务端代码</p>
+<pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        if (($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/jpeg&apos;) || ($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/png&apos;) || ($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/gif&apos;)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+                $is_upload = true;
+
+            }
+        } else {
+            $msg = &apos;文件类型不正确，请重新上传！&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH.&apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>关键代码</p>
+<pre><code>if (($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/jpeg&apos;) || ($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/png&apos;) || ($_FILES[&apos;upload_file&apos;][&apos;type&apos;] == &apos;image/gif&apos;)) 
+</code></pre><p>在服务端对数据包的MIME进行检查，即判断content-type ；修改content-type绕过：</p>
+<pre><code>image/jpeg
+image/png
+image/gif
+</code></pre><h4 id="Payload-1"><a href="#Payload-1" class="headerlink" title="Payload"></a>Payload</h4><p>1、上传一句话，burpsuite抓包改包<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554151/blog/upload-labs/pass-02-02.png" alt="image"><br>2、抓包后修改content-type为 image/gif<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554148/blog/upload-labs/pass-02-03.png" alt="image"><br>3、上传成功，执行成功，菜刀连接<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554146/blog/upload-labs/pass-02-04.png" alt="image"></p>
+<h4 id="知识点之-MIME"><a href="#知识点之-MIME" class="headerlink" title="知识点之 MIME"></a>知识点之 MIME</h4><h5 id="MIME简介"><a href="#MIME简介" class="headerlink" title="MIME简介"></a>MIME简介</h5><p>全名叫多用途互联网邮件扩展（Multipurpose Internet Mail Extensions），最初是为了将纯文本格式的电子邮件扩展到可以支持多种信息格式而定制的。后来被应用到多种协议里，包括我们常用的HTTP协议。</p>
+<p>MIME的常见形式是一个主类型加一个子类型，用斜线分隔。比如text/html、application/javascript、image/png等。</p>
+<p>在访问网页时，MIME type帮助浏览器识别一个HTTP请求返回的是什么内容的数据，应该如何打开、如何显示。</p>
+<p>文件后缀与MIMU的区别<br>一个是操作系统中标注文件的，一个是邮件和HTTP协议中用来标注网络数据的。</p>
+<h5 id="分类（独立请求和Multipart-类型）"><a href="#分类（独立请求和Multipart-类型）" class="headerlink" title="分类（独立请求和Multipart 类型）"></a>分类（独立请求和Multipart 类型）</h5><h6 id="独立请求"><a href="#独立请求" class="headerlink" title="独立请求"></a>独立请求</h6><pre><code>类型    描述    典型示例
+text    表明文件是普通文本，理论上是可读的语言    text/plain, text/html, text/css, text/javascript
+image    表明是某种图像。不包括视频，但是动态图（比如动态gif）也使用image类型    image/gif, image/png, image/jpeg, image/bmp, image/webp
+audio    表明是某种音频文件    audio/midi, audio/mpeg, audio/webm, audio/ogg, audio/wav
+video    表明是某种视频文件    video/webm, video/ogg
+application    表明是某种二进制数据    
+application/octet-stream, application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml,  application/pdf,
+application/json
+</code></pre><h6 id="Multipart-类型"><a href="#Multipart-类型" class="headerlink" title="Multipart 类型"></a>Multipart 类型</h6><pre><code>multipart/form-data
+multipart/byteranges
+</code></pre><h5 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h5><h6 id="图片类型"><a href="#图片类型" class="headerlink" title="图片类型"></a>图片类型</h6><p>图片类型是在网页中使用的，唯一被广泛识别以及考虑过web安全的类型：</p>
+<pre><code>MIME 类型    图片类型
+image/gif    GIF 图片 (无损耗压缩方面被PNG所替代)
+image/jpeg    JPEG 图片
+image/png    PNG 图片
+image/svg+xml    SVG图片 (矢量图)
+</code></pre><h6 id="application-octet-stream"><a href="#application-octet-stream" class="headerlink" title="application/octet-stream"></a>application/octet-stream</h6><p>这是应用程序文件的默认值。意思是 未知的应用程序文件 ，浏览器一般不会自动执行或询问执行</p>
+<h6 id="text-plain"><a href="#text-plain" class="headerlink" title="text/plain"></a>text/plain</h6><p>文本文件默认值。意思是 未知的文本文件 ，浏览器认为是可以直接展示的</p>
+<h6 id="text-css"><a href="#text-css" class="headerlink" title="text/css"></a>text/css</h6><p>任何一个CSS文件想要在网页上被解释执行就必须为text/css 文件。但是服务器经常不会分辨出使用.css后缀的CSS文件</p>
+<h6 id="text-html"><a href="#text-html" class="headerlink" title="text/html"></a>text/html</h6><p>所有的HTML内容都应该使用这种类型。XHTML的其他MIME类型（如application/xml+html）现在基本不再使用（HTML5统一了这些格式）。</p>
+<h6 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h6><p>multipart/form-data 可用于HTML表单从浏览器发送信息给服务器。作为多部分文档格式，它由边界线（一个由’–’开始的字符串）划分出的不同部分组成。每一部分有自己的实体，以及自己的 HTTP 请求头，Content-Disposition和 Content-Type 用于文件上传领域，最常用的 (Content-Length 因为边界线作为分隔符而被忽略）。</p>
+<h6 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h6><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME 类型</a></p>
+<h3 id="Pass-03-上传特殊可解析后缀文件（黑名单）"><a href="#Pass-03-上传特殊可解析后缀文件（黑名单）" class="headerlink" title="Pass-03 上传特殊可解析后缀文件（黑名单）"></a>Pass-03 上传特殊可解析后缀文件（黑名单）</h3><h4 id="初步测试-1"><a href="#初步测试-1" class="headerlink" title="初步测试"></a>初步测试</h4><p>1、上传phpinfo.php失败，服务端对图片进行了后缀验证<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554142/blog/upload-labs/pass-03-01.png" alt="image"><br>2、上传houzui.xxx成功，可以判断使用了黑名单策略（不能上传.asp .aspx .php .jsp 后缀的文件），但是执行失败。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554138/blog/upload-labs/pass-03-02.png" alt="image"><br>3、尝试上传 phtml php3 php4 php5 PHP phtm后缀的文件<br>成功上传 houzui.php3 ,测试能够执行，菜刀连接成功。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554135/blog/upload-labs/pass-03-03.png" alt="image"></p>
+<p>注意：<br>例如phtml php3 php4 php5 PHP phtm这些后缀名首先得让服务器支持这些解析为php脚本运行，httpd.conf配置文件（apache/conf/hpptd.conf）中可以查看设置。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554131/blog/upload-labs/pass-03-04.png" alt="image"></p>
+<h4 id="服务端代码分析"><a href="#服务端代码分析" class="headerlink" title="服务端代码分析"></a>服务端代码分析</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&apos;.asp&apos;,&apos;.aspx&apos;,&apos;.php&apos;,&apos;.jsp&apos;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //收尾去空
+
+        if(!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH. &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                 $img_path = UPLOAD_PATH .&apos;/&apos;. $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+                 $is_upload = true;
+            }
+        } else {
+            $msg = &apos;不允许上传.asp,.aspx,.php,.jsp后缀文件！&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>分析</p>
+<p>关键代码<br>黑名单</p>
+<pre><code>$deny_ext = array(&apos;.asp&apos;,&apos;.aspx&apos;,&apos;.php&apos;,&apos;.jsp&apos;);
+</code></pre><p>文件名后缀在黑名单中则不允许上传</p>
+<pre><code>if(!in_array($file_ext, $deny_ext)) 
+</code></pre><p>strrchr() 函数查找字符串在另一个字符串中最后一次出现的位置，并返回从该位置到字符串结尾的所有字符</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><p>服务器端检查流程</p>
+<p>服务端先去除文件名后面的点，然后取最后面的点后面的字符（即后缀），将其转换为小写（此处避免了大小写绕过黑名单），去除字符串::$DATA（此处见pass-8）,最后去除该后缀首尾的空字符。</p>
+<p>服务端采用黑名单机制不允许上传一些特定后缀的文件，本关是通过上传一些特殊可解析后缀( php3 php4 php5 phtml phtm)文件来绕过检查。</p>
+<h3 id="Pass-04-上传-htaccess绕过（黑名单）"><a href="#Pass-04-上传-htaccess绕过（黑名单）" class="headerlink" title="Pass-04 上传.htaccess绕过（黑名单）"></a>Pass-04 上传.htaccess绕过（黑名单）</h3><h4 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h4><p>1、上传 houzui.php失败。<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554129/blog/upload-labs/pass-04-01.png" alt="image"></p>
+<p>2、上传houzui.xxx成功，但不能执行；可以判断是黑名单机制</p>
+<p>3、上传houzui.php3失败，黑名单可能覆盖了几乎所有的特殊后缀</p>
+<p>4、看提示，几乎将所有特殊可执行后缀文件全部过滤掉了<br>本pass禁止上传</p>
+<pre><code>.php|.php5|.php4|.php3|.php2|php1|.html|.htm|.phtml|.pHp|.pHp5|.pHp4|.pHp3|.pHp2|pHp1|.Html|.Htm|.pHtml|.jsp|.jspa|.jspx|.jsw|.jsv|.jspf|.jtml|.jSp|.jSpx|.jSpa|.jSw|.jSv|.jSpf|.jHtml|.asp|.aspx|.asa|.asax|.ascx|.ashx|.asmx|.cer|.aSp|.aSpx|.aSa|.aSax|.aScx|.aShx|.aSmx|.cEr|.sWf|.swf
+</code></pre><p>后缀文件！</p>
+<p>5、尝试上传 .htaccess文件，文件内容如下:</p>
+<pre><code>SetHandler application/x-httpd-php
+</code></pre><p>这样使得所有文件都会解析为php</p>
+<p>6、成功上传 houzui.xxx,且执行成功<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554126/blog/upload-labs/pass-04-02.png" alt="image"></p>
+<h4 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;php1&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;pHp1&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //收尾去空
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传!&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>与pass-03相似，只是黑名单包含了更多特殊可执行文件</p>
+<h4 id="知识点之-htaccess文件"><a href="#知识点之-htaccess文件" class="headerlink" title="知识点之 .htaccess文件"></a>知识点之 .htaccess文件</h4><p>参拷: <a href="https://www.jianshu.com/p/81305ca91ebd" target="_blank" rel="noopener">apache的.htaccess文件作用和相关浅析</a></p>
+<h5 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h5><p>在我们不能修改httpd.conf文件时，我们可以通过修改.htaccess文件；<br>.htaccess可以看作是httpd.conf的衍生品，它起着和httpd.conf相同的作用，</p>
+<p>.htaccess是一个纯文本文件，它里面存放着Apache服务器配置相关的指令。</p>
+<p>.htaccess的基本作用</p>
+<pre><code>URL重写、自定义错误页面
+MIME类型配置
+访问权限控制等
+主要体现在伪静态的应用
+图片防盗链
+自定义404错误页面
+阻止/允许特定IP/IP段
+目录浏览与主页
+禁止访问指定文件类型
+文件密码保护
+</code></pre><h5 id="启用方式"><a href="#启用方式" class="headerlink" title="启用方式:"></a>启用方式:</h5><p>1、<strong>找到httpd.conf,查找AllowOverride。启用AllowOverride</strong><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554123/blog/upload-labs/pass-04-03.png" alt="image"><br>改为     </p>
+<pre><code>AllowOverride all
+</code></pre><p>2、<strong>打开mod_rewrite机制，即还是在.httpd.conf中查找mod_rewrite.so；作用是在httpd.conf外重写配置</strong>；<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554120/blog/upload-labs/pass-04-04.png" alt="image"></p>
+<h3 id="Pass-05-后缀大小写绕过（黑名单）"><a href="#Pass-05-后缀大小写绕过（黑名单）" class="headerlink" title="Pass-05 后缀大小写绕过（黑名单）"></a>Pass-05 后缀大小写绕过（黑名单）</h3><h4 id="测试过程-1"><a href="#测试过程-1" class="headerlink" title="测试过程"></a>测试过程</h4><p>1、上传houzui.php 失败</p>
+<p>2、上传houzui.xxx成功，但执行失败，应该是采用了黑名单机制；</p>
+<p>3、上传 .htaccess失败</p>
+<p>4、上传 houzui1.Php成功，执行成功，菜刀连接<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554118/blog/upload-labs/pass-05-01.png" alt="image"></p>
+<h4 id="服务端代码分析-1"><a href="#服务端代码分析-1" class="headerlink" title="服务端代码分析"></a>服务端代码分析</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //首尾去空
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>分析 与前面相比<br>缺少  </p>
+<pre><code>$file_ext = strtolower($file_ext); //转换为小写
+</code></pre><p>没有将后缀转为小写</p>
+<h3 id="Pass-06-后缀加空格绕过（黑名单）"><a href="#Pass-06-后缀加空格绕过（黑名单）" class="headerlink" title="Pass-06 后缀加空格绕过（黑名单）"></a>Pass-06 后缀加空格绕过（黑名单）</h3><h4 id="测试过程-2"><a href="#测试过程-2" class="headerlink" title="测试过程"></a>测试过程</h4><p>1、上传houzui.php失败</p>
+<p>2、上传houzui.xxx成功，但执行失败，猜测是黑名单机制</p>
+<p>3、.htaccess houzui.pHp，过滤了所有特殊可执行文件</p>
+<p>4、后缀名后面添加空格绕过<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554112/blog/upload-labs/pass-06-01.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554110/blog/upload-labs/pass-06-02.png" alt="image"></p>
+<h4 id="服务端代码-1"><a href="#服务端代码-1" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>分析：与之前相比<br>缺少  </p>
+<pre><code>$file_ext = trim($file_ext); //首尾去空
+</code></pre><h4 id="Pass-07-后缀加点绕过-黑名单"><a href="#Pass-07-后缀加点绕过-黑名单" class="headerlink" title="Pass-07 后缀加点绕过(黑名单)"></a>Pass-07 后缀加点绕过(黑名单)</h4><h5 id="初步测试过程"><a href="#初步测试过程" class="headerlink" title="初步测试过程"></a>初步测试过程</h5><p>1、上传 houzui.php失败</p>
+<p>2、上传houzui.xxx成功，但执行失败；应该是黑名单机制</p>
+<p>3、上传 .htaccess houzui1.Php失败，特殊可解析文件被过滤</p>
+<h5 id="服务端代码-2"><a href="#服务端代码-2" class="headerlink" title="服务端代码"></a>服务端代码</h5><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //首尾去空
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>分析与之前不同在于 </p>
+<pre><code>$file_name = deldot($file_name);//删除文件名末尾的点
+</code></pre><p>没有对后缀名进行去”.”处理，利用windows特性，会自动去掉后缀名中最后的”.”，可在后缀名中加”.”绕过：<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554107/blog/upload-labs/pass-07-01.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554104/blog/upload-labs/pass-07-02.png" alt="image"></p>
+<h3 id="Pass-08-DATA绕过（黑名单）"><a href="#Pass-08-DATA绕过（黑名单）" class="headerlink" title="Pass-08 ::$DATA绕过（黑名单）"></a>Pass-08 ::$DATA绕过（黑名单）</h3><h4 id="初步测试过程-1"><a href="#初步测试过程-1" class="headerlink" title="初步测试过程"></a>初步测试过程</h4><p>1、上传houzhui.php失败,上传houzhui.xxx成功，但执行失败，猜测是黑名单机制。</p>
+<p>2、.htaccess houzui.Php 后缀加空格 后缀加点 失败</p>
+<h4 id="服务端源代码"><a href="#服务端源代码" class="headerlink" title="服务端源代码"></a>服务端源代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = trim($file_ext); //首尾去空
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>与前面不同之处在没有</p>
+<pre><code>$file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+</code></pre><p>没有对后缀名进行去”::$DATA”处理，利用windows特性，可在后缀名中加” ::$DATA”绕过：<br>houzuidata.php::$DATA  生成houzuidata.php &lt;?php @eval($_POST[‘test’]); echo “success”;?&gt;</p>
+<h4 id="Payload-2"><a href="#Payload-2" class="headerlink" title="Payload"></a>Payload</h4><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554101/blog/upload-labs/pass-08-01.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554098/blog/upload-labs/pass-08-02.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554096/blog/upload-labs/pass-08-03.png" alt="image"></p>
+<h4 id="知识点之-NTFS-ADS简介"><a href="#知识点之-NTFS-ADS简介" class="headerlink" title="知识点之 NTFS ADS简介"></a>知识点之 NTFS ADS简介</h4><h5 id="NTFS-ADS简介"><a href="#NTFS-ADS简介" class="headerlink" title="NTFS ADS简介"></a>NTFS ADS简介</h5><p>NTFS流全称为NTFS交换数据流（NTFS Alternate Data Streams）,ADS的诞生是为了兼容Hierarchical File System 。</p>
+<p>HFS–分层文件系统，是由苹果公司推出的文件系统，其工作模式是将不同数据存在在不同的分支文件，文件数据存放在数据分支而文件参数存在资源分支。类似的，NTFS流使用资源派生来维持宿主文件相关的信息。ADS有点类似文件的属性信息一样，依附于文件的传统边界之外。</p>
+<h5 id="ADS实列"><a href="#ADS实列" class="headerlink" title="ADS实列"></a>ADS实列</h5><p>新建一个文件，命名为 test.txt,该文件即是宿主文件；打开文件，输入内容 “test”.在该目录下执行命令 </p>
+<pre><code>echo &quot;This is a stream&quot; &gt; test.txt:stream.txt
+</code></pre><p>建立后，cmd不会有任何提示且对于Windows资源管理器来说宿主文件没有发生任何变化，包括其大小，修改时间。这是因为windos下不是所有程序都能支持ADS导致的。同样 dir、type等也不能看到。Notepad能够部分支持ADS,可以打开 test.txt:stream.txt，但是notepad也不能完全支持，另存为时会出现参数错误。</p>
+<p>**注意<br>1、修改宿主文件的内容不会影响流的内容</p>
+<p>2、修改流的内容不会影响宿主文件的内容<br><strong><br>在测试中发现，如果上传的文件名字为：test.php::$DATA，会在服务器上生成一个test.php的文件，其中内容和所上传文件内容相同，并被解析。假设我们需要上传的文件内容为：</strong>&lt;?php phpinfo();?&gt;**下面是上传是会出现的现象：<br>上传的文件名  服务器表面现象    生成的文件内容</p>
+<p><strong>Test.php:a.jpg     生成Test.php  空</strong><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554093/blog/upload-labs/pass-08-04.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554090/blog/upload-labs/pass-08-05.png" alt="image"></p>
+<p><strong>Test.php::$DATA  生成test.php  &lt;?php phpinfo();?&gt;</strong></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554087/blog/upload-labs/pass-08-06.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554085/blog/upload-labs/pass-08-07.png" alt="image"></p>
+<p><strong>Test.php::$INDEX_ALLOCATION  生成test.php文件夹  </strong><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554083/blog/upload-labs/pass-08-08.png" alt="image"></p>
+<p><strong>Test.php::$DATA\0.jpg  生成0.jpg  &lt;?php phpinfo();?&gt;</strong><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554081/blog/upload-labs/pass-08-09.png" alt="image"></p>
+<p> PS: 上传test.php:a.jpg的时候其实是在服务器上正常生成了一个数据流文件，可以通过notepad test.php:a.jpg查看内容，而test.php为空也是正常的。</p>
+<p>  根据第二个现象，我们可以bypass一些黑名单验证。</p>
+<p>  后面我加\0测试的时候是想截断后面的东西，但是发现windows会无视”/””\”这两个符号前面的东西，只识别这俩符号后的字符串。(由于windows把\ /当成了目录，而上传只认识文件名所导致的)</p>
+<p>参考 <a href="https://bbs.pediy.com/thread-246118.htm" target="_blank" rel="noopener">在上传文件后缀名加上::$DATA绕过检测，这个::$DATA是什么东西啊</a></p>
+<h3 id="Pass-09"><a href="#Pass-09" class="headerlink" title="Pass-09"></a>Pass-09</h3><h4 id="测试过程-3"><a href="#测试过程-3" class="headerlink" title="测试过程"></a>测试过程</h4><p>1、上传houzui.php失败，上传houzui.xxx成功，但是执行失败；猜测是黑名单机制</p>
+<p>2、上传 .htaccess houzui1.Php houzui.php空格 houzui.php. houzuidata.php::$DATA失败</p>
+<h4 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &apos;.&apos;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&apos;::$DATA&apos;, &apos;&apos;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //首尾去空
+
+        if (!in_array($file_ext, $deny_ext)) {
+            if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $_FILES[&apos;upload_file&apos;][&apos;name&apos;])) {
+                $img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+                $is_upload = true;
+            }
+        } else {
+            $msg = &apos;此文件不允许上传&apos;;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>分析关键不同之处在于<br>这里再相关判断后，保存时使用的文件名称是 $file_name(去除末尾的点后)</p>
+<pre><code>$img_path = UPLOAD_PATH . &apos;/&apos; . $file_name;
+</code></pre><p>上传文件名为<strong> houzui.php. .</strong><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554068/blog/upload-labs/pass-09-01.png" alt="image"><br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554063/blog/upload-labs/pass-09-02.png" alt="image"></p>
+<h3 id="Pass-10-双写绕过（黑名单）"><a href="#Pass-10-双写绕过（黑名单）" class="headerlink" title="Pass-10 双写绕过（黑名单）"></a>Pass-10 双写绕过（黑名单）</h3><h4 id="初步测试-2"><a href="#初步测试-2" class="headerlink" title="初步测试"></a>初步测试</h4><p>1、上传houzui.php成功，但是发现后缀的php被替换为了空<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554060/blog/upload-labs/pass-10-01.png" alt="image"><br>2、上传houzui.pphphp成功<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554057/blog/upload-labs/pass-10-02.png" alt="image"></p>
+<h4 id="服务端代码-3"><a href="#服务端代码-3" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array(&quot;php&quot;,&quot;php5&quot;,&quot;php4&quot;,&quot;php3&quot;,&quot;php2&quot;,&quot;html&quot;,&quot;htm&quot;,&quot;phtml&quot;,&quot;jsp&quot;,&quot;jspa&quot;,&quot;jspx&quot;,&quot;jsw&quot;,&quot;jsv&quot;,&quot;jspf&quot;,&quot;jtml&quot;,&quot;asp&quot;,&quot;aspx&quot;,&quot;asa&quot;,&quot;asax&quot;,&quot;ascx&quot;,&quot;ashx&quot;,&quot;asmx&quot;,&quot;cer&quot;,&quot;swf&quot;,&quot;htaccess&quot;);
+
+        $file_name = trim($_FILES[&apos;upload_file&apos;][&apos;name&apos;]);
+        $file_name = str_ireplace($deny_ext,&quot;&quot;, $file_name);
+        if (move_uploaded_file($_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], UPLOAD_PATH . &apos;/&apos; . $file_name)) {
+            $img_path = UPLOAD_PATH . &apos;/&apos; .$file_name;
+            $is_upload = true;
+        }
+    } else {
+        $msg = UPLOAD_PATH . &apos;文件夹不存在,请手工创建！&apos;;
+    }
+}
+</code></pre><p>如果文件名在黑名单中，则替换其中的字符串为空</p>
+<pre><code>$file_name = str_ireplace($deny_ext,&quot;&quot;, $file_name);
+</code></pre><h3 id="Pass-11-00截断绕过-（白名单）"><a href="#Pass-11-00截断绕过-（白名单）" class="headerlink" title="Pass-11 %00截断绕过 （白名单）"></a>Pass-11 %00截断绕过 （白名单）</h3><h4 id="初步测试-3"><a href="#初步测试-3" class="headerlink" title="初步测试"></a>初步测试</h4><p>上传houzui.php，houzui.xxx失败，应该是采用了白名单机制</p>
+<h4 id="服务端代码-4"><a href="#服务端代码-4" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if(isset($_POST[&apos;submit&apos;])){
+    $ext_arr = array(&apos;jpg&apos;,&apos;png&apos;,&apos;gif&apos;);
+    $file_ext = substr($_FILES[&apos;upload_file&apos;][&apos;name&apos;],strrpos($_FILES[&apos;upload_file&apos;][&apos;name&apos;],&quot;.&quot;)+1);
+    if(in_array($file_ext,$ext_arr)){
+        $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+        $img_path = $_GET[&apos;save_path&apos;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path)){
+            $is_upload = true;
+        }
+        else{
+            $msg = &apos;上传失败！&apos;;
+        }
+    }
+    else{
+        $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+    }
+}
+</code></pre><p>关键代码</p>
+<pre><code>$ext_arr = array(&apos;jpg&apos;,&apos;png&apos;,&apos;gif&apos;);//采用了白名单机制
+
+$file_ext = substr($_FILES[&apos;upload_file&apos;][&apos;name&apos;],strrpos($_FILES[&apos;upload_file&apos;][&apos;name&apos;],&quot;.&quot;)+1);
+
+ $img_path = $_GET[&apos;save_path&apos;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+move_uploaded_file($temp_file,$img_path)
+</code></pre><p>文件名直接连接在后面</p>
+<pre><code>strrpos() 函数查找字符串在另一字符串中最后一次出现的位置。
+注释：strrpos() 函数对大小写敏感。
+substr() 函数返回字符串的一部分。
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554055/blog/upload-labs/pass-11-01.png" alt="image"></p>
+<pre><code>抓包看到上传路径在url中，在 &lt;php 5.3.4版本中可以添加 %00 截断
+</code></pre><p>后面加houzui.php%00截断</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554053/blog/upload-labs/pass-11-02.png" alt="image"><br>由于本地环境是PHP Version 5.6.28，未能成功上传</p>
+<h4 id="知识点之00截断"><a href="#知识点之00截断" class="headerlink" title="知识点之00截断"></a>知识点之00截断</h4><p>%00原理 参考 <a href="https://www.jianshu.com/p/dad4df0e0bf4" target="_blank" rel="noopener">https://www.jianshu.com/p/dad4df0e0bf4</a><br>burpsuite上传截断</p>
+<h5 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h5><p>截断的产生核心，就是chr(0)字符 。<br>下面是用 URL 编码形式表示的 ASCII 字符<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554047/blog/upload-labs/pass-11-03.png" alt="image"></p>
+<p>在url中%00表示ascll码中的0，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束</p>
+<p>比如</p>
+<pre><code>https://mp.csdn.net/upfiles/?filename=test.txt                                此时输出的是test.txt
+</code></pre><p>加上%00</p>
+<pre><code>https://mp.csdn.net/upfiles/?filename=test.php%00.txt                   此时输出的是test.php
+</code></pre><p>这个字符即不为空(Null)，也不是空字符(“”)，更不是空格！</p>
+<p>当程序在输出含有chr(0)变量时，chr(0)后面的数据会被停止，换句话说，就是误把它当成结束符，后面的数据直接忽略，这就导致漏洞产生的原因。</p>
+<h5 id="二、影响"><a href="#二、影响" class="headerlink" title="二、影响"></a>二、影响</h5><h6 id="2-1-PHP"><a href="#2-1-PHP" class="headerlink" title="2.1 PHP"></a>2.1 PHP</h6><p>在php 5.3.4中修复了0字符，但是在之前的版本中仍然危害巨大。</p>
+<pre><code>简单测试一下 (PHP 版本&lt;5.3.4)
+
+    &lt;?php
+    $data = $_GET[&quot;filename&quot;]`;
+    echo $data;
+    ?&gt;
+</code></pre><p>url中输入xx.php?filename=test.php%00.txt，实际输出为test.php.</p>
+<p>常见利用方法：</p>
+<pre><code>1.上传时路径可控，使用00截断
+2.文件下载时，00截断绕过白名单检查
+3.文件包含时，00截断后面限制(主要是本地包含时)
+4.其它与文件操作有关的地方都可能使用00截断。
+</code></pre><h6 id="2-2-ASP"><a href="#2-2-ASP" class="headerlink" title="2.2 ASP"></a>2.2 ASP</h6><p>在文件上传路径可控时出现：</p>
+<pre><code>&lt;%
+response.write(request(&quot;Filename&quot;))
+%&gt; 
+</code></pre><p>传入filename=test.asp%00.txt， 获得参数值是test.asp，asp 会自动截断 %00 后面的内容。</p>
+<h6 id="2-3-JSP"><a href="#2-3-JSP" class="headerlink" title="2.3 JSP"></a>2.3 JSP</h6><pre><code>&lt;%
+String temp=request.getRealPath(&quot;/&quot;)+request.getParameter(&quot;path&quot;);
+ out.println(temp);
+ String ext = temp.substring(temp.lastIndexOf(&quot;.&quot;) + 1);
+ out.println(ext);
+%&gt;
+</code></pre><p>传入path=shell.jsp%00.txt 获得后缀是txt，但是操作文件的api是使用 C 实现会导致00截断。因此这个与php相似，利用场景是文件上传 文件下载等。</p>
+<h3 id="Pass-12-0x00截断（白名单）"><a href="#Pass-12-0x00截断（白名单）" class="headerlink" title="Pass-12 0x00截断（白名单）"></a>Pass-12 0x00截断（白名单）</h3><h4 id="初步测试-4"><a href="#初步测试-4" class="headerlink" title="初步测试"></a>初步测试</h4><p>1、上传houzui.php houzui.xxx失败，猜测使用白名单机制；<br>2、抓包查看</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554041/blog/upload-labs/pass-12-01.png" alt="image"></p>
+<p>通过post传进来的，还是利用00截断，但这次需要在二进制中进行修改，因为post不会像get对%00进行自动解码。</p>
+<p>0x开头表示16进制，0在十六进制中是00, 0x00就是%00解码成的16进制<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554039/blog/upload-labs/pass-12-02.png" alt="image"></p>
+<p>这里还是有版本的原因未能成功上传。</p>
+<h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><pre><code>$is_upload = false;
+$msg = null;
+if(isset($_POST[&apos;submit&apos;])){
+    $ext_arr = array(&apos;jpg&apos;,&apos;png&apos;,&apos;gif&apos;);
+    $file_ext = substr($_FILES[&apos;upload_file&apos;][&apos;name&apos;],strrpos($_FILES[&apos;upload_file&apos;][&apos;name&apos;],&quot;.&quot;)+1);
+    if(in_array($file_ext,$ext_arr)){
+        $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+        $img_path = $_POST[&apos;save_path&apos;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path)){
+            $is_upload = true;
+        }
+        else{
+            $msg = &quot;上传失败&quot;;
+        }
+    }
+    else{
+        $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+    }
+}
+</code></pre><p>与上一关不同的是，这里面的文件上传路径是通过post请求</p>
+<pre><code>$img_path = $_POST[&apos;save_path&apos;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+</code></pre><h3 id="pass-13-文件头检查绕过（检查内容）"><a href="#pass-13-文件头检查绕过（检查内容）" class="headerlink" title="pass-13 文件头检查绕过（检查内容）"></a>pass-13 文件头检查绕过（检查内容）</h3><h4 id="初步测试-5"><a href="#初步测试-5" class="headerlink" title="初步测试"></a>初步测试</h4><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554036/blog/upload-labs/pass-13-01.png" alt="image"><br>1、上传houzui.php houzui.xxx失败，猜测使用了白名单</p>
+<h4 id="服务端代码-5"><a href="#服务端代码-5" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>function getReailFileType($filename){
+    $file = fopen($filename, &quot;rb&quot;);
+    $bin = fread($file, 2); //只读2字节
+    fclose($file);
+    $strInfo = @unpack(&quot;C2chars&quot;, $bin);    
+    $typeCode = intval($strInfo[&apos;chars1&apos;].$strInfo[&apos;chars2&apos;]);    
+    $fileType = &apos;&apos;;    
+    switch($typeCode){      
+        case 255216:            
+            $fileType = &apos;jpg&apos;;
+            break;
+        case 13780:            
+            $fileType = &apos;png&apos;;
+            break;        
+        case 7173:            
+            $fileType = &apos;gif&apos;;
+            break;
+        default:            
+            $fileType = &apos;unknown&apos;;
+        }    
+        return $fileType;
+}
+
+$is_upload = false;
+$msg = null;
+if(isset($_POST[&apos;submit&apos;])){
+    $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+    $file_type = getReailFileType($temp_file);
+
+    if($file_type == &apos;unknown&apos;){
+        $msg = &quot;文件未知，上传失败！&quot;;
+    }else{
+        $img_path = UPLOAD_PATH.&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_type;
+        if(move_uploaded_file($temp_file,$img_path)){
+            $is_upload = true;
+        }
+        else{
+            $msg = &quot;上传失败&quot;;
+        }
+    }
+}
+</code></pre><p>分析：通过读文件的前2个字节判断文件类型，因此直接上传图片马即可，制作方法：</p>
+<pre><code>copy normal.jpg /b + shell.php /a webshell.jpg
+</code></pre><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554035/blog/upload-labs/pass-13-02.png" alt="image"></p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554033/blog/upload-labs/pass-13-03.png" alt="image"></p>
+<h3 id="pass-14-突破getimagesize-检查内容）"><a href="#pass-14-突破getimagesize-检查内容）" class="headerlink" title="pass-14 突破getimagesize() (检查内容）"></a>pass-14 突破getimagesize() (检查内容）</h3><h4 id="初步测试-6"><a href="#初步测试-6" class="headerlink" title="初步测试"></a>初步测试</h4><p>1、直接上传图片马<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554027/blog/upload-labs/pass-14-01.png" alt="image"></p>
+<h4 id="服务端代码-6"><a href="#服务端代码-6" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>function isImage($filename){
+    $types = &apos;.jpeg|.png|.gif&apos;;
+    if(file_exists($filename)){
+        $info = getimagesize($filename);
+        $ext = image_type_to_extension($info[2]);
+        if(stripos($types,$ext)){
+            return $ext;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+$is_upload = false;
+$msg = null;
+if(isset($_POST[&apos;submit&apos;])){
+    $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+    $res = isImage($temp_file);
+    if(!$res){
+        $msg = &quot;文件未知，上传失败！&quot;;
+    }else{
+        $img_path = UPLOAD_PATH.&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).$res;
+        if(move_uploaded_file($temp_file,$img_path)){
+            $is_upload = true;
+        }
+        else{
+            $msg = &quot;上传失败&quot;;
+        }
+    }
+}
+</code></pre><p>关键代码：</p>
+<pre><code>$info = getimagesize($filename);
+</code></pre><p>如果不能访问 filename 指定的图像或者其不是有效的图像，getimagesize() 将返回 FALSE 并产生一条 E_WARNING 级的错误。</p>
+<pre><code>$ext = image_type_to_extension($info[2]);
+image_type_to_extension — 取得图像类型的文件后缀
+</code></pre><p>这里用getimagesize获取文件类型，还是直接就可以利用图片马就可进行绕过</p>
+<h3 id="Pass-15-突破exif-imagetype-检查内容"><a href="#Pass-15-突破exif-imagetype-检查内容" class="headerlink" title="Pass-15 突破exif_imagetype() (检查内容)"></a>Pass-15 突破exif_imagetype() (检查内容)</h3><h4 id="初步测试-7"><a href="#初步测试-7" class="headerlink" title="初步测试"></a>初步测试</h4><p>直接上传图片木马<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554023/blog/upload-labs/pass-15-01.png" alt="image"></p>
+<h4 id="服务端代码-7"><a href="#服务端代码-7" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>function isImage($filename){
+    //需要开启php_exif模块
+    $image_type = exif_imagetype($filename);
+    switch ($image_type) {
+        case IMAGETYPE_GIF:
+            return &quot;gif&quot;;
+            break;
+        case IMAGETYPE_JPEG:
+            return &quot;jpg&quot;;
+            break;
+        case IMAGETYPE_PNG:
+            return &quot;png&quot;;
+            break;    
+        default:
+            return false;
+            break;
+    }
+}
+
+$is_upload = false;
+$msg = null;
+if(isset($_POST[&apos;submit&apos;])){
+    $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+    $res = isImage($temp_file);
+    if(!$res){
+        $msg = &quot;文件未知，上传失败！&quot;;
+    }else{
+        $img_path = UPLOAD_PATH.&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$res;
+        if(move_uploaded_file($temp_file,$img_path)){
+            $is_upload = true;
+        }
+        else{
+            $msg = &quot;上传失败&quot;;
+        }
+    }
+}
+</code></pre><p>关键代码</p>
+<pre><code>$image_type = exif_imagetype($filename);
+</code></pre><p>exif_imagetype() 读取一个图像的第一个字节并检查其签名。</p>
+<h3 id="Pass-16-二次渲染（检查内容）"><a href="#Pass-16-二次渲染（检查内容）" class="headerlink" title="Pass-16 二次渲染（检查内容）"></a>Pass-16 二次渲染（检查内容）</h3><h4 id="初步测试-8"><a href="#初步测试-8" class="headerlink" title="初步测试"></a>初步测试</h4><p>直接上传图片马<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554009/blog/upload-labs/pass-16-01.png" alt="image"></p>
+<h4 id="服务端代码-8"><a href="#服务端代码-8" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;])){
+    // 获得上传文件的基本信息，文件名，类型，大小，临时文件路径
+    $filename = $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+    $filetype = $_FILES[&apos;upload_file&apos;][&apos;type&apos;];
+    $tmpname = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+
+    $target_path=UPLOAD_PATH.basename($filename);
+
+    // 获得上传文件的扩展名
+    $fileext= substr(strrchr($filename,&quot;.&quot;),1);
+
+    //判断文件后缀与类型，合法才进行上传操作
+    if(($fileext == &quot;jpg&quot;) &amp;&amp; ($filetype==&quot;image/jpeg&quot;)){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //使用上传的图片生成新的图片
+            $im = imagecreatefromjpeg($target_path);
+
+            if($im == false){
+                $msg = &quot;该文件不是jpg格式的图片！&quot;;
+            }else{
+                //给新图片指定文件名
+                srand(time());
+                $newfilename = strval(rand()).&quot;.jpg&quot;;
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagejpeg($im,$newimagepath);
+                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;
+            }
+        }
+        else
+        {
+            $msg = &quot;上传失败！&quot;;
+        }
+
+    }else if(($fileext == &quot;png&quot;) &amp;&amp; ($filetype==&quot;image/png&quot;)){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //使用上传的图片生成新的图片
+            $im = imagecreatefrompng($target_path);
+
+            if($im == false){
+                $msg = &quot;该文件不是png格式的图片！&quot;;
+            }else{
+                 //给新图片指定文件名
+                srand(time());
+                $newfilename = strval(rand()).&quot;.png&quot;;
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagepng($im,$newimagepath);
+                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;               
+            }
+        }
+        else
+        {
+            $msg = &quot;上传失败！&quot;;
+        }
+
+    }else if(($fileext == &quot;gif&quot;) &amp;&amp; ($filetype==&quot;image/gif&quot;)){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //使用上传的图片生成新的图片
+            $im = imagecreatefromgif($target_path);
+            if($im == false){
+                $msg = &quot;该文件不是gif格式的图片！&quot;;
+            }else{
+                //给新图片指定文件名
+                srand(time());
+                $newfilename = strval(rand()).&quot;.gif&quot;;
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagegif($im,$newimagepath);
+                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;
+            }
+        }
+        else
+        {
+            $msg = &quot;上传失败！&quot;;
+        }
+    }else{
+        $msg = &quot;只允许上传后缀为.jpg|.png|.gif的图片文件！&quot;;
+    }
+}
+</code></pre><p>关键部分</p>
+<pre><code>imagecreatefromjpeg — 由文件或 URL 创建一个新图象。
+imagecreatefrompng
+imagecreatefromgif
+
+imagejpeg
+bool imagejpeg ( resource $image [, string $filename [, int $quality ]] )
+imagejpeg() 从 image 图像以 filename 为文件名创建一个 JPEG 图像
+imagepng
+imagegif
+</code></pre><p>unlink() 函数删除文件。若成功，则返回 true，失败则返回 false。</p>
+<p>判断了后缀名、content-type，以及利用imagecreatefromgif判断是否为gif图片，最后再做了一次二次渲染。但是在代码审计后发现其实后面的</p>
+<p>参考 </p>
+<pre><code>https://xz.aliyun.com/t/2657
+</code></pre><h3 id="Pass-17"><a href="#Pass-17" class="headerlink" title="Pass-17"></a>Pass-17</h3><h4 id="服务端源代码-1"><a href="#服务端源代码-1" class="headerlink" title="服务端源代码"></a>服务端源代码</h4><pre><code>$is_upload = false;
+$msg = null;
+
+if(isset($_POST[&apos;submit&apos;])){
+    $ext_arr = array(&apos;jpg&apos;,&apos;png&apos;,&apos;gif&apos;);
+    $file_name = $_FILES[&apos;upload_file&apos;][&apos;name&apos;];
+    $temp_file = $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;];
+    $file_ext = substr($file_name,strrpos($file_name,&quot;.&quot;)+1);
+    $upload_file = UPLOAD_PATH . &apos;/&apos; . $file_name;
+
+    if(move_uploaded_file($temp_file, $upload_file)){
+        if(in_array($file_ext,$ext_arr)){
+             $img_path = UPLOAD_PATH . &apos;/&apos;. rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+             rename($upload_file, $img_path);
+             $is_upload = true;
+        }else{
+            $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+            unlink($upload_file);
+        }
+    }else{
+        $msg = &apos;上传失败！&apos;;
+    }
+}
+</code></pre><p>关键部分</p>
+<pre><code>rename — 重命名一个文件或目录
+unlink - 删除文件
+</code></pre><p>分析、获取文件名、临时文件名文件后缀、采用白名单验证文件后缀是否为图片，然后重命名文件。</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>直接上传图片马<br><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1535554003/blog/upload-labs/pass-17-01.png" alt="image"></p>
+<h4 id="知识点之php中-FILES变量的用法"><a href="#知识点之php中-FILES变量的用法" class="headerlink" title="知识点之php中$_FILES变量的用法"></a>知识点之php中$_FILES变量的用法</h4><h5 id="FILES变量简介"><a href="#FILES变量简介" class="headerlink" title="$_FILES变量简介"></a>$_FILES变量简介</h5><p>$_FILES: 经由 HTTP POST 文件上传而提交至脚本的变量。类似于旧数组 $HTTP_POST_FILES 数组（依然有效，但反对使用）。详细信息可参阅 POST 方法上传。</p>
+<h5 id="FILES数组内容"><a href="#FILES数组内容" class="headerlink" title="$_FILES数组内容"></a>$_FILES数组内容</h5><p>$_FILES[‘myFile’][‘name’] 客户端文件的原名称。</p>
+<p>$_FILES[‘myFile’][‘type’] 文件的 MIME 类型，需要浏览器提供该信息的支持，例如”image/gif”。</p>
+<p>$_FILES[‘myFile’][‘size’] 已上传文件的大小，单位为字节。</p>
+<p>$_FILES[‘myFile’][‘tmp_name’] 文件被上传后在服务端储存的临时文件名，一般是系统默认。可以在php.ini的upload_tmp_dir 指定。</p>
+<p>$_FILES[‘myFile’][‘error’] 和该文件上传相关的错误代码。[‘error’] 是在 PHP 4.2.0 版本中增加的。<br>下面是它的说明：(它们在PHP3.0以后成了常量) </p>
+<pre><code>UPLOAD_ERR_OK 值：0; 没有错误发生，文件上传成功。
+UPLOAD_ERR_INI_SIZE 值：1; 上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值。
+UPLOAD_ERR_FORM_SIZE 值：2; 上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。（我们可以在form表单中指定input type=&apos;hidden&apos; name=&apos;MAX_FILE_SIZE&apos; value=&apos;附件的最大字节数&apos;）
+UPLOAD_ERR_PARTIAL 值：3; 文件只有部分被上传。
+UPLOAD_ERR_NO_FILE 值：4; 没有文件被上传。
+</code></pre><h5 id="文件的上传过程"><a href="#文件的上传过程" class="headerlink" title="文件的上传过程"></a>文件的上传过程</h5><p>文件被上传结束后，默认地被存储在了临时目录中，这时必须将它从临时目录中删除或移动到其它地方，如果没有，则会被删除。也就是不管是否上传成功，脚本执行完后临时目录里的文件肯定会被删除。所以在删除之前要用PHP的 copy()或者move_upload_file() 函数将它复制或者移动到其它位置，此时，才算完成了上传文件过程。</p>
+<p>用form上传文件时，一定要加上属性内容 enctype=”multipart/form-data”，否则用$_FILES[filename]获取文件信息时会报异常。</p>
+<pre><code>&gt; &lt;input name=&quot;myFile&quot; type=&quot;file&quot;&gt; &gt; &lt;input type=&quot;submit&quot; value=&quot;上传文件&quot;&gt; &gt;
+默认地，表单数据会编码为&quot;application/x-www-form-urlencoded&quot;。就是说，在发送到服务器之前，所有字符都会进行编码（空格转换为&quot;+&quot; 加号，特殊符号转换为 ASCII HEX 值）。
+</code></pre><p>application/x-www-form-urlencoded 在发送前编码所有字符（默认）</p>
+<p>multipart/form-data 不对字符编码。 在使用包含文件上传控件的表单时，必须使用该值。</p>
+<p>text/plain 空格转换为 “+” 加号，但不对特殊字符编码。</p>
+<h3 id="Pass-18-条件竞争"><a href="#Pass-18-条件竞争" class="headerlink" title="Pass-18 条件竞争"></a>Pass-18 条件竞争</h3><h4 id="服务端代码-9"><a href="#服务端代码-9" class="headerlink" title="服务端代码"></a>服务端代码</h4><pre><code>//index.php
+$is_upload = false;
+$msg = null;
+if (isset($_POST[&apos;submit&apos;]))
+{
+    require_once(&quot;./myupload.php&quot;);
+    $imgFileName =time();
+    $u = new MyUpload($_FILES[&apos;upload_file&apos;][&apos;name&apos;], $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], $_FILES[&apos;upload_file&apos;][&apos;size&apos;],$imgFileName);
+    $status_code = $u-&gt;upload(UPLOAD_PATH);
+    switch ($status_code) {
+        case 1:
+            $is_upload = true;
+            $img_path = $u-&gt;cls_upload_dir . $u-&gt;cls_file_rename_to;
+            break;
+        case 2:
+            $msg = &apos;文件已经被上传，但没有重命名。&apos;;
+            break; 
+        case -1:
+            $msg = &apos;这个文件不能上传到服务器的临时文件存储目录。&apos;;
+            break; 
+        case -2:
+            $msg = &apos;上传失败，上传目录不可写。&apos;;
+            break; 
+        case -3:
+            $msg = &apos;上传失败，无法上传该类型文件。&apos;;
+            break; 
+        case -4:
+            $msg = &apos;上传失败，上传的文件过大。&apos;;
+            break; 
+        case -5:
+            $msg = &apos;上传失败，服务器已经存在相同名称文件。&apos;;
+            break; 
+        case -6:
+            $msg = &apos;文件无法上传，文件不能复制到目标目录。&apos;;
+            break;      
+        default:
+            $msg = &apos;未知错误！&apos;;
+            break;
+    }
+}
+
+//myupload.php
+class MyUpload{
+......
+......
+...... 
+  var $cls_arr_ext_accepted = array(
+      &quot;.doc&quot;, &quot;.xls&quot;, &quot;.txt&quot;, &quot;.pdf&quot;, &quot;.gif&quot;, &quot;.jpg&quot;, &quot;.zip&quot;, &quot;.rar&quot;, &quot;.7z&quot;,&quot;.ppt&quot;,
+      &quot;.html&quot;, &quot;.xml&quot;, &quot;.tiff&quot;, &quot;.jpeg&quot;, &quot;.png&quot; );
+
+......
+......
+......  
+  /** upload()
+   **
+   ** Method to upload the file.
+   ** This is the only method to call outside the class.
+   ** @para String name of directory we upload to
+   ** @returns void
+  **/
+  function upload( $dir ){
+
+    $ret = $this-&gt;isUploadedFile();
+
+    if( $ret != 1 ){
+      return $this-&gt;resultUpload( $ret );
+    }
+
+    $ret = $this-&gt;setDir( $dir );
+    if( $ret != 1 ){
+      return $this-&gt;resultUpload( $ret );
+    }
+
+    $ret = $this-&gt;checkExtension();
+    if( $ret != 1 ){
+      return $this-&gt;resultUpload( $ret );
+    }
+
+    $ret = $this-&gt;checkSize();
+    if( $ret != 1 ){
+      return $this-&gt;resultUpload( $ret );    
+    }
+
+    // if flag to check if the file exists is set to 1
+
+    if( $this-&gt;cls_file_exists == 1 ){
+
+      $ret = $this-&gt;checkFileExists();
+      if( $ret != 1 ){
+        return $this-&gt;resultUpload( $ret );    
+      }
+    }
+
+    // if we are here, we are ready to move the file to destination
+
+    $ret = $this-&gt;move();
+    if( $ret != 1 ){
+      return $this-&gt;resultUpload( $ret );    
+    }
+
+    // check if we need to rename the file
+
+    if( $this-&gt;cls_rename_file == 1 ){
+      $ret = $this-&gt;renameFile();
+      if( $ret != 1 ){
+        return $this-&gt;resultUpload( $ret );    
+      }
+    }
+
+    // if we are here, everything worked as planned :)
+
+    return $this-&gt;resultUpload( &quot;SUCCESS&quot; );
+
+  }
+......
+......
+...... 
+};
+</code></pre><p>分析</p>
+<p>本关对文件后缀名做了白名单判断，然后会一步一步检查文件大小、文件是否存在等等，将文件上传后，对文件重新命名，同样存在条件竞争的漏洞。可以不断利用burp发送上传图片马的数据包，由于条件竞争，程序会出现来不及rename的问题，从而上传成功：</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1536069597/blog/upload-labs/pass-18-01.png" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/File-Upload/" rel="tag"># File_Upload</a>
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/30/Google-Hacking/" rel="next" title="Google-Hacking">
+                <i class="fa fa-chevron-left"></i> Google-Hacking
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ahodor</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#upload-labs"><span class="nav-number">1.</span> <span class="nav-text">upload-labs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞环境源码下载"><span class="nav-number">1.1.1.</span> <span class="nav-text">漏洞环境源码下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.1.2.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">1.1.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件上传思维导图"><span class="nav-number">1.1.4.</span> <span class="nav-text">文件上传思维导图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-01-客户端JS验证绕过"><span class="nav-number">1.2.</span> <span class="nav-text">Pass-01 客户端JS验证绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试"><span class="nav-number">1.2.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码分析（客户端js代码）"><span class="nav-number">1.2.2.</span> <span class="nav-text">源代码分析（客户端js代码）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload"><span class="nav-number">1.2.3.</span> <span class="nav-text">Payload</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、burpsuit抓包改包"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1、burpsuit抓包改包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、更改本地js上传或者直接禁用JS"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2、更改本地js上传或者直接禁用JS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、上传图片马"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">3、上传图片马</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-02-绕过MIME检查（白名单）"><span class="nav-number">1.3.</span> <span class="nav-text">Pass-02 绕过MIME检查（白名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步尝试"><span class="nav-number">1.3.1.</span> <span class="nav-text">初步尝试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看源代码"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">Payload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点之-MIME"><span class="nav-number">1.3.4.</span> <span class="nav-text">知识点之 MIME</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MIME简介"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">MIME简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分类（独立请求和Multipart-类型）"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">分类（独立请求和Multipart 类型）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#独立请求"><span class="nav-number">1.3.4.2.1.</span> <span class="nav-text">独立请求</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Multipart-类型"><span class="nav-number">1.3.4.2.2.</span> <span class="nav-text">Multipart 类型</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常见类型"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">常见类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#图片类型"><span class="nav-number">1.3.4.3.1.</span> <span class="nav-text">图片类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#application-octet-stream"><span class="nav-number">1.3.4.3.2.</span> <span class="nav-text">application/octet-stream</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#text-plain"><span class="nav-number">1.3.4.3.3.</span> <span class="nav-text">text/plain</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#text-css"><span class="nav-number">1.3.4.3.4.</span> <span class="nav-text">text/css</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#text-html"><span class="nav-number">1.3.4.3.5.</span> <span class="nav-text">text/html</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#multipart-form-data"><span class="nav-number">1.3.4.3.6.</span> <span class="nav-text">multipart/form-data</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#参考-1"><span class="nav-number">1.3.4.3.7.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-03-上传特殊可解析后缀文件（黑名单）"><span class="nav-number">1.4.</span> <span class="nav-text">Pass-03 上传特殊可解析后缀文件（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码分析"><span class="nav-number">1.4.2.</span> <span class="nav-text">服务端代码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.4.3.</span> <span class="nav-text">总结:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-04-上传-htaccess绕过（黑名单）"><span class="nav-number">1.5.</span> <span class="nav-text">Pass-04 上传.htaccess绕过（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试过程"><span class="nav-number">1.5.1.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码"><span class="nav-number">1.5.2.</span> <span class="nav-text">服务端代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点之-htaccess文件"><span class="nav-number">1.5.3.</span> <span class="nav-text">知识点之 .htaccess文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简介-1"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启用方式"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">启用方式:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-05-后缀大小写绕过（黑名单）"><span class="nav-number">1.6.</span> <span class="nav-text">Pass-05 后缀大小写绕过（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试过程-1"><span class="nav-number">1.6.1.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码分析-1"><span class="nav-number">1.6.2.</span> <span class="nav-text">服务端代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-06-后缀加空格绕过（黑名单）"><span class="nav-number">1.7.</span> <span class="nav-text">Pass-06 后缀加空格绕过（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试过程-2"><span class="nav-number">1.7.1.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-1"><span class="nav-number">1.7.2.</span> <span class="nav-text">服务端代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pass-07-后缀加点绕过-黑名单"><span class="nav-number">1.7.3.</span> <span class="nav-text">Pass-07 后缀加点绕过(黑名单)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初步测试过程"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">初步测试过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务端代码-2"><span class="nav-number">1.7.3.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-08-DATA绕过（黑名单）"><span class="nav-number">1.8.</span> <span class="nav-text">Pass-08 ::$DATA绕过（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试过程-1"><span class="nav-number">1.8.1.</span> <span class="nav-text">初步测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端源代码"><span class="nav-number">1.8.2.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Payload-2"><span class="nav-number">1.8.3.</span> <span class="nav-text">Payload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点之-NTFS-ADS简介"><span class="nav-number">1.8.4.</span> <span class="nav-text">知识点之 NTFS ADS简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NTFS-ADS简介"><span class="nav-number">1.8.4.1.</span> <span class="nav-text">NTFS ADS简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ADS实列"><span class="nav-number">1.8.4.2.</span> <span class="nav-text">ADS实列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-09"><span class="nav-number">1.9.</span> <span class="nav-text">Pass-09</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试过程-3"><span class="nav-number">1.9.1.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#白盒测试"><span class="nav-number">1.9.2.</span> <span class="nav-text">白盒测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-10-双写绕过（黑名单）"><span class="nav-number">1.10.</span> <span class="nav-text">Pass-10 双写绕过（黑名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-2"><span class="nav-number">1.10.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-3"><span class="nav-number">1.10.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-11-00截断绕过-（白名单）"><span class="nav-number">1.11.</span> <span class="nav-text">Pass-11 %00截断绕过 （白名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-3"><span class="nav-number">1.11.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-4"><span class="nav-number">1.11.2.</span> <span class="nav-text">服务端代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点之00截断"><span class="nav-number">1.11.3.</span> <span class="nav-text">知识点之00截断</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、简介"><span class="nav-number">1.11.3.1.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、影响"><span class="nav-number">1.11.3.2.</span> <span class="nav-text">二、影响</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-PHP"><span class="nav-number">1.11.3.2.1.</span> <span class="nav-text">2.1 PHP</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2-ASP"><span class="nav-number">1.11.3.2.2.</span> <span class="nav-text">2.2 ASP</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3-JSP"><span class="nav-number">1.11.3.2.3.</span> <span class="nav-text">2.3 JSP</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-12-0x00截断（白名单）"><span class="nav-number">1.12.</span> <span class="nav-text">Pass-12 0x00截断（白名单）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-4"><span class="nav-number">1.12.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端"><span class="nav-number">1.12.2.</span> <span class="nav-text">服务端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pass-13-文件头检查绕过（检查内容）"><span class="nav-number">1.13.</span> <span class="nav-text">pass-13 文件头检查绕过（检查内容）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-5"><span class="nav-number">1.13.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-5"><span class="nav-number">1.13.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pass-14-突破getimagesize-检查内容）"><span class="nav-number">1.14.</span> <span class="nav-text">pass-14 突破getimagesize() (检查内容）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-6"><span class="nav-number">1.14.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-6"><span class="nav-number">1.14.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-15-突破exif-imagetype-检查内容"><span class="nav-number">1.15.</span> <span class="nav-text">Pass-15 突破exif_imagetype() (检查内容)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-7"><span class="nav-number">1.15.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-7"><span class="nav-number">1.15.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-16-二次渲染（检查内容）"><span class="nav-number">1.16.</span> <span class="nav-text">Pass-16 二次渲染（检查内容）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步测试-8"><span class="nav-number">1.16.1.</span> <span class="nav-text">初步测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-8"><span class="nav-number">1.16.2.</span> <span class="nav-text">服务端代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-17"><span class="nav-number">1.17.</span> <span class="nav-text">Pass-17</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端源代码-1"><span class="nav-number">1.17.1.</span> <span class="nav-text">服务端源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.17.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点之php中-FILES变量的用法"><span class="nav-number">1.17.3.</span> <span class="nav-text">知识点之php中$_FILES变量的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FILES变量简介"><span class="nav-number">1.17.3.1.</span> <span class="nav-text">$_FILES变量简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FILES数组内容"><span class="nav-number">1.17.3.2.</span> <span class="nav-text">$_FILES数组内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件的上传过程"><span class="nav-number">1.17.3.3.</span> <span class="nav-text">文件的上传过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-18-条件竞争"><span class="nav-number">1.18.</span> <span class="nav-text">Pass-18 条件竞争</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端代码-9"><span class="nav-number">1.18.1.</span> <span class="nav-text">服务端代码</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ahodor</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
