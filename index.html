@@ -283,6 +283,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/01-无检测-IIS-PUT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/17/01-无检测-IIS-PUT/" itemprop="url">01-无检测_IIS_PUT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T10:47:31+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一、环境设置"><a href="#一、环境设置" class="headerlink" title="一、环境设置"></a>一、环境设置</h2><p>IIS 6.0 默认网站 服务器自身问题</p>
+<p>如下界面：</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740051/blog/file_upload_and_root/pic01.png" alt="image"></p>
+<h2 id="二、测试过程"><a href="#二、测试过程" class="headerlink" title="二、测试过程"></a>二、测试过程</h2><h3 id="1、使用burp抓包测试"><a href="#1、使用burp抓包测试" class="headerlink" title="1、使用burp抓包测试"></a>1、使用burp抓包测试</h3><p>将GET 改为 OPTIONS，发现几乎所有的HTTP方法都可用，尤其是使用put方法</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740055/blog/file_upload_and_root/pic02.png" alt="image"></p>
+<h3 id="2、使用IIS-PUT-Scaner扫描"><a href="#2、使用IIS-PUT-Scaner扫描" class="headerlink" title="2、使用IIS PUT Scaner扫描"></a>2、使用IIS PUT Scaner扫描</h3><p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740059/blog/file_upload_and_root/pic03.png" alt="image"></p>
+<h3 id="3、使用isswrite工具写写入一句话"><a href="#3、使用isswrite工具写写入一句话" class="headerlink" title="3、使用isswrite工具写写入一句话"></a>3、使用isswrite工具写写入一句话</h3><p>3.1下面出了个问题，写入文件失败：显示未授权</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740062/blog/file_upload_and_root/pic04.png" alt="image"></p>
+<p>3.2将文件目录权限更改后可成功上传（主要是练习使用）</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740088/blog/file_upload_and_root/pic05.png" alt="image"></p>
+<p>上传成功</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539740090/blog/file_upload_and_root/pic06.png" alt="image"></p>
+<h3 id="4、使用move方法更改文件后缀"><a href="#4、使用move方法更改文件后缀" class="headerlink" title="4、使用move方法更改文件后缀"></a>4、使用move方法更改文件后缀</h3><p>更改刚刚提交的txt位asp，将文件变成可执行的脚本文件。</p>
+<p><img src="https://res.cloudinary.com/dzuzgilky/image/upload/v1539742000/blog/file_upload_and_root/pic07.png" alt="image"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/17/01-无检测-IIS-PUT/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/ upload-labs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -493,6 +630,139 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/30/Google-Hacking/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/Python-基础-01-类型与运算-数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ahodor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ahodor'Via">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/09/Python-基础-01-类型与运算-数字/" itemprop="url">Python基础之类型与运算-数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T13:34:38+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Python的类型与运算-数字"><a href="#Python的类型与运算-数字" class="headerlink" title="Python的类型与运算-数字"></a>Python的类型与运算-数字</h2><h3 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>在Python 2.x版本中整数分为一般整数和长整数。 </p>
+<pre><code>&gt;&gt;&gt; 2**63
+9223372036854775808L
+&gt;&gt;&gt; 2**62-1+2**62
+9223372036854775807L
+</code></pre><p>这个是在Python 2.7.15版本的结果。每个版本会有一些不同。 </p>
+<p>在这个版本中一般整数是64bit的（符号位占1bit）。 </p>
+<p>当超过64bit，会在后面加L </p>
+<p>之前的一些版本 有可能是32bit，这个看具体的版本。 </p>
+<p>但是在Python 3.x就没有这种区分，整数只有一个类型。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/09/Python-基础-01-类型与运算-数字/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -771,139 +1041,6 @@ HTTP(S) 代理支持
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/09/Python-基础-00-使用入门/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/Python-基础-01-类型与运算-数字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/09/Python-基础-01-类型与运算-数字/" itemprop="url">Python基础之类型与运算-数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T13:34:38+08:00">
-                2018-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Python的类型与运算-数字"><a href="#Python的类型与运算-数字" class="headerlink" title="Python的类型与运算-数字"></a>Python的类型与运算-数字</h2><h3 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>在Python 2.x版本中整数分为一般整数和长整数。 </p>
-<pre><code>&gt;&gt;&gt; 2**63
-9223372036854775808L
-&gt;&gt;&gt; 2**62-1+2**62
-9223372036854775807L
-</code></pre><p>这个是在Python 2.7.15版本的结果。每个版本会有一些不同。 </p>
-<p>在这个版本中一般整数是64bit的（符号位占1bit）。 </p>
-<p>当超过64bit，会在后面加L </p>
-<p>之前的一些版本 有可能是32bit，这个看具体的版本。 </p>
-<p>但是在Python 3.x就没有这种区分，整数只有一个类型。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/09/Python-基础-01-类型与运算-数字/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1476,145 +1613,6 @@ MIME类型检测绕过
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/DVWA-File_Inclusion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ahodor">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ahodor'Via">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/29/DVWA-File_Inclusion/" itemprop="url">DVWA-File_Inclusion</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-29T10:48:48+08:00">
-                2018-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Vulnerability-File-Inclusion"><a href="#Vulnerability-File-Inclusion" class="headerlink" title="Vulnerability: File Inclusion"></a>Vulnerability: File Inclusion</h2><h3 id="Intruduce"><a href="#Intruduce" class="headerlink" title="Intruduce"></a>Intruduce</h3><p>File Inclusion，意思是文件包含（漏洞）：</p>
-<h4 id="产生原因："><a href="#产生原因：" class="headerlink" title="产生原因："></a>产生原因：</h4><p>由于开发人员编写源码时，要将重复使用的代码插入到单个的文件中，并在需要时调用这段代码；而由于并未对代码中存在文件包含的函数入口做过滤，导致客户端可以提交恶意代码到服务器并执行。</p>
-<p>文件包含漏洞是“代码注入”的一种，其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。“代码注入”的典型代表就是文件包含，文件包含漏洞可能出现在JSP、PHP、ASP等语言中。</p>
-<h4 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h4><p>若要成功利用文件包含漏洞进行攻击，需要满足以下两个条件：<br>Web应用采用include/require()等文件包含函数通过动态变量的方式引入需要包含的文件</p>
-<p>用户能够控制该动态变量</p>
-<h5 id="本地文件包含（利用前提）"><a href="#本地文件包含（利用前提）" class="headerlink" title="本地文件包含（利用前提）"></a>本地文件包含（利用前提）</h5><pre><code>1、相关函数内的参数可控
-</code></pre><h5 id="远程文件包含（利用前提）"><a href="#远程文件包含（利用前提）" class="headerlink" title="远程文件包含（利用前提）"></a>远程文件包含（利用前提）</h5><pre><code>1、相关函数内的参数可控
-2、allow_url_fopen = On
-</code></pre><p>当服务器开启allow_url_include选项时，就可以通过php的某些特性函数（include()，require()和include_once()，require_once()）利用url去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。文件包含漏洞分为本地文件包含漏洞与远程文件包含漏洞，远程文件包含漏洞是因为开启了php配置中的allow_url_fopen选项（选项开启之后，服务器允许包含一个远程的文件）。</p>
-<h4 id="常见利用方式"><a href="#常见利用方式" class="headerlink" title="常见利用方式"></a>常见利用方式</h4><pre><code>PHP包含漏洞结合上传漏洞；
-PHP包含读文件；
-PHP包含写文件；
-PHP包含日志文件；
-PHP截断包含；
-PHP内置伪协议利用。
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/DVWA-File_Inclusion/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1665,7 +1663,7 @@ PHP内置伪协议利用。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1678,7 +1676,7 @@ PHP内置伪协议利用。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
